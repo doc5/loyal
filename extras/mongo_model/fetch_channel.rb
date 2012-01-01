@@ -14,7 +14,9 @@ module MongoModel
     key :fetch_count, Integer, :default => 0
     key :position, Integer, :default => 0
     
-    key :xpath, String
+    key :path_method, String
+    key :type_method, Integer
+    
     key :type_fetch, Integer, :default => TYPE_FETCH_DEFAULT
       
     key :uri, String
