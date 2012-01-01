@@ -20,7 +20,7 @@ module MongoModel
     key :uri, String
     key :name, String
     key :introduction, String
-    key :pubish_date, Date
+    key :publish_date, Date
       
     key :link, String
     key :title, String
@@ -50,6 +50,41 @@ module MongoModel
     
     belongs_to :fetch_catelog, :class_name => "MongoModel::FetchCatelog"
     many :fetch_items, :class_name => "MongoModel::FetchItem"
+    
+    def do_fetch!
+      rss_spider = March::Fetch::RssSpider.new(:uri => self.uri)
+      if rss_spider.save
+        feed = rss_spider.feed        
+        
+        self.link        = feed.channel.link
+        self.description = feed.channel.description
+        self.title       = feed.channel.title
+      
+        self.category        = feed.channel.category
+        self.copyright       = feed.channel.copyright
+        self.docs            = feed.channel.docs
+        self.generator       = feed.channel.generator
+        self.image           = feed.channel.image
+        self.language        = feed.channel.language
+        self.last_build_date   = feed.channel.lastBuildDate
+        self.managing_editor  = feed.channel.managingEditor
+        self.publish_date         = feed.channel.pubDate
+        self.rating          = feed.channel.rating
+        self.skip_days        = feed.channel.skipDays
+        self.skip_hours       = feed.channel.skipHours
+        self.text_input       = feed.channel.textInput
+        self.ttl             = feed.channel.ttl
+        self.web_master       = feed.channel.webMaster
+          
+        self.image_title     = "#{feed.channel.image.title unless feed.channel.image.nil?}"
+        self.image_link      = "#{feed.channel.image.link unless feed.channel.image.nil?}"
+        self.image_url       = "#{feed.channel.image.url unless feed.channel.image.nil?}"
+          
+        self.save!
+        
+        MongoModel::FetchItem.feed_items(self, feed.channel.items)
+      end
+    end
   end
 end
 

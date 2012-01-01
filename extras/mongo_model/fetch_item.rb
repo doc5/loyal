@@ -36,6 +36,29 @@ module MongoModel
     scope :referred, :order => "hot_count desc", :referral_open => true, :status_open => true
       
     belongs_to :rss_channel, :class_name => "MongoModel::FetchChannel"
+    
+    def self.feed_items(channel, items)
+      items.each do |item|
+        puts "item------#{item.link} - #{channel.id}"
+          
+        guid = "#{item.link unless item.link.blank?}"
+        itm = MongoModel::FetchItem.find_by_guid(guid) || 
+          MongoModel::FetchItem.new(:guid => guid, :link => item.link)
+          
+        itm.rss_channel_id = channel.id
+        itm.guid = guid
+        itm.title = item.title
+        itm.link = item.link
+        itm.description = item.description
+        itm.category = item.category
+        itm.author = item.author
+        itm.publish_date = item.pubDate
+        itm.source = item.source
+        itm.enclosure = item.enclosure
+          
+        itm.save           
+      end
+    end
   end
 end
 
