@@ -1,0 +1,2 @@
+SubdomainFeeds = "feeds"
+SubdomainWWW   = "www"
