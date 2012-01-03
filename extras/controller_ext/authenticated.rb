@@ -9,26 +9,29 @@ module ControllerExt
       @current_user ||= (login_from_session || login_from_cookie || login_from_basic_auth || false)
     end
 
-    def current_user=(new_user)
+    def user_login(new_user)
       session[:user_id] = (new_user.nil? || new_user.is_a?(Symbol)) ? nil : new_user.id
+      
+      Rails.logger.debug "#{session[:user_id]} ====================================> "
       @current_user = new_user || nil
     end
+    
     def login_required
       logged_in? || access_denied
     end
 
     #   登录的超链接
     def sign_in_url    
-#      from = params[:from]
-#      from = URI.escape(request.fullpath) if from.blank?
-      "#{login_path}"
+      #      from = params[:from]
+      #      from = URI.escape(request.fullpath) if from.blank?
+      "#{blank_route(login_path)}"
     end
 
     def access_denied
       respond_to do |format|
         format.html do
           store_location
-          redirect_to sign_in_url
+          redirect_to sign_in_url, :notice => "Require Sign in!"
         end
 
         format.any(:js, :xml) do
@@ -38,7 +41,7 @@ module ControllerExt
     end
 
     def store_location
-      session[:return_to] = request.request_uri
+      #session[:return_to] = request.path
     end
 
     def redirect_back_or_default(default, options={})
@@ -47,14 +50,14 @@ module ControllerExt
     end
 
     def login_from_session
-      self.current_user = User.find(session[:user_id]) if session[:user_id]
+      user_login(User.find(session[:user_id])) if session[:user_id]
     rescue ActiveRecord::RecordNotFound 
       nil
     end
 
     def login_from_basic_auth
       authenticate_with_http_basic do |email, password|
-        self.current_user = User.authenticate(email, password)
+        user_login User.authenticate(email, password)
       end
     end
 
@@ -63,7 +66,7 @@ module ControllerExt
       if user && user.remember_token?
         user.remember_me
         cookies[:auth_token] = { :value => user.remember_token, :expires => user.remember_token_expires_at }
-        self.current_user = user
+        user_login user
       end
     end
     

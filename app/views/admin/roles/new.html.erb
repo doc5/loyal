@@ -1,0 +1,9 @@
+<h1>填写角色信息</h1>
+
+<div><%= link_to "返回列表", admin_roles_path %></div>
+
+<%= form_for(@role, :as => :role, :html => { :multipart => true }, 
+  :url => admin_route(admin_roles_path())) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+<% end %>
+<div><%= link_to "返回列表", admin_roles_path %></div>

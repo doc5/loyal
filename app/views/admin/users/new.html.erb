@@ -1,0 +1,27 @@
+<h1>填写用户信息</h1>
+<%= form_for(@user, :as => :user, :html => { :multipart => true }, 
+  :url => admin_route(admin_users_path())) do |f| %>
+
+  <% if @user.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @user.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <%= render :partial => 'form', :locals => {:f => f} %>
+
+<% end %>

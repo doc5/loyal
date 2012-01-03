@@ -15,9 +15,9 @@ class SessionsController < ApplicationController
   
   def create  
     @user_session = UserSession.new(params[:user_session])
-    current_user = @user_session.authenticate 
+    user_login @user_session.authenticate 
     respond_to do |format|
-      if current_user
+      if logged_in?
         format.html { redirect_back_or_default root_path, :notice => "Session Created!" }
       else
         flash[:error] = "Email Or Password Error"

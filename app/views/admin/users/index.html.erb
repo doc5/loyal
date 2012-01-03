@@ -1,0 +1,50 @@
+<div><%= link_to "new", new_admin_user_path %></div>
+<%= will_paginate @users %>
+  <% if @users.any? %>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>性别</th>
+        <th>
+          注册时间
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>身份</th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= user.id %>
+          </td>
+          <td>					
+            <%= user.email %>
+          </td>
+          <td>
+            <%= user.sex %>
+          </td>
+          <td>
+            <%= user.created_at %>
+          </td>
+          <td>
+            <%= link_to "查看", admin_route(admin_user_path(user)) %>
+          </td>
+          <td>
+            <%= link_to "编辑", admin_route(edit_admin_user_path(user)) %>
+          </td>
+          <td>
+            <%= link_to '删除', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete %>
+          </td>
+          <td>
+            <%= user.roles_to_s %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    用户为空
+  <% end %>
+<%= will_paginate @users %>
+<div><%= link_to "new", new_admin_user_path %></div>

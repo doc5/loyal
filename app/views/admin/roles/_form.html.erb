@@ -1,0 +1,32 @@
+
+
+<% if @role.errors.any? %>
+  <div class="error_messages">
+    <h2>Form is invalid</h2>
+    <ul>
+      <% for message in @role.errors.full_messages %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="field">
+  Name<br />
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  Remark<br />
+  <%= f.text_field :remark %>
+</div>
+<div class="field">
+  available<br />
+  <%= f.check_box :available %>
+</div>
+<div class="field">
+  Remark<br />
+  <%= f.text_area :description %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>

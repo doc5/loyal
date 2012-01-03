@@ -29,8 +29,10 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :avatar_file_size
       t.datetime :avatar_updated_at
       
+      t.datetime :deleted_at
+      
       t.timestamps
     end
-    add_index :users, :email
+    add_index :users, [:email, :deleted_at], :name => "users_email_deleted_at"
   end
 end

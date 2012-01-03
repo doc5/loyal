@@ -1,0 +1,12 @@
+<h2>编辑用户</h2>
+
+<%= link_to "取消编辑", admin_role_path(@role) %>
+<%= link_to "返回列表", admin_roles_path %>
+
+<%= form_for(@role, :as => :role, :html => { :multipart => true }, 
+  :url => admin_route(admin_role_path(@role))) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+<% end %>
+
+<%= link_to "取消编辑", admin_role_path(@role) %>
+<%= link_to "返回列表", admin_roles_path %>

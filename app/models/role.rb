@@ -8,7 +8,7 @@ class Role < ActiveRecord::Base
   has_many :users, :through => :assignments
   
   validates_presence_of :name, :remark
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :case_sensitive => false
   
   
   def display_with_remark

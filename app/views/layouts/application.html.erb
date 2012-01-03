@@ -7,7 +7,14 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-
+    <div>
+      <% if logged_in? %>
+        <%= current_user.email %>
+      <% else %>
+        <%= link_to "Login", sign_in_url %>
+      <% end %>
+    </div>
+    
     <div id="page-messages-contain">
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>

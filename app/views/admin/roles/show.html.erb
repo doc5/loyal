@@ -1,0 +1,23 @@
+<p>
+  <%= link_to "编辑", edit_admin_role_path(@role) %>	
+  <%= link_to "返回列表", admin_roles_path %>	
+</p>
+<table>
+  <tr>
+    <td>名称</td>
+    <td><%= @role.name %></td>
+  </tr>
+  <tr>
+    <td>备注</td>
+    <td><%= @role.remark %></td>
+  </tr>
+  <tr>
+    <td>描述</td>
+    <td><%= @role.description %></td>
+  </tr>
+</table>
+
+<p>
+  <%= link_to "编辑", edit_admin_role_path(@role) %>	
+  <%= link_to "返回列表", admin_roles_path %>	
+</p>

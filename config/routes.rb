@@ -1,20 +1,28 @@
 Loyal::Application.routes.draw do
-  root :to => "home#index"
+#  root :to => "home#index"
   
-  namespace :admin do
-    resources :users
-  end
-  
-  resources :users, :only => [:new, :create] do
-    collection  do 
-      get "password_edit"
-      post "password_update"
+  constraints :subdomain => "#{SubdomainAdmin}", :domain => 'uusoso.com' do      
+    scope :module => "admin", :as => "admin" do
+      root :to => "home#index"
+      resources :users
+      resources :roles
     end
   end
   
-  resources :sessions, :only => [:new, :create, :destroy]
-  
-  match "login" => "sessions#new", :as => :login
+  constraints :subdomain => "", :domain => 'uusoso.com' do   
+    root :to => "home#index"
+    
+    resources :users, :only => [:new, :create] do
+      collection  do 
+        get "password_edit"
+        post "password_update"
+      end
+    end
+
+    resources :sessions, :only => [:new, :create, :destroy]
+
+    match "login" => "sessions#new", :as => :login
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

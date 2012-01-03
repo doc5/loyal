@@ -1,6 +1,10 @@
 
 require 'digest/sha1'
 class User < ActiveRecord::Base
+  acts_as_paranoid
+  
+  has_many :assignments
+  has_many :roles, :through => :assignments
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password, :remember_me
@@ -12,6 +16,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :if => :password_required?
   validates_length_of :email, :within => 3..100
   validates_uniqueness_of :email, :case_sensitive => false
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/
   before_save :encrypt_password
 
   # Authenticates a user by their login name and unencrypted password. Returns the user or nil.
@@ -64,7 +69,7 @@ class User < ActiveRecord::Base
   end
   
   
-  
+  public
   
   #=> 角色相关
   # in models/user.rb

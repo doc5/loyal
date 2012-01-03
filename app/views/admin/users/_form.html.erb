@@ -1,0 +1,15 @@
+<% for role in Role.all %>
+  <div>
+    <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+    <%=h role.name.humanize %>
+  </div>
+<% end %>
+
+<div class="field">
+  Nick Name<br />
+  <%= f.text_field :nick_name %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
