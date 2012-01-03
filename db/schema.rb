@@ -10,11 +10,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120101182253) do
+ActiveRecord::Schema.define(:version => 20120102162258) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "book_categories", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "book_comments", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "book_items", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "book_notes", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "book_writers", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,17 +72,34 @@ ActiveRecord::Schema.define(:version => 20120101182253) do
     t.string "name"
   end
 
+  create_table "user_remembers", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.string   "expired_at"
+    t.string   "created_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_remembers", ["user_id", "token"], :name => "user_remembers_token"
+
   create_table "users", :force => true do |t|
-    t.string   "account"
-    t.string   "email"
+    t.string   "email",                                  :null => false
+    t.string   "crypted_password",                       :null => false
+    t.string   "password_salt",                          :null => false
+    t.integer  "login_count",         :default => 0,     :null => false
+    t.integer  "failed_login_count",  :default => 0,     :null => false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+    t.string   "created_ip"
     t.string   "nick_name"
-    t.string   "password_hash"
-    t.string   "password_salt"
     t.boolean  "sex"
     t.date     "birthday"
     t.boolean  "birthday_lunar",      :default => false
     t.integer  "status"
-    t.string   "created_ip"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -66,7 +108,6 @@ ActiveRecord::Schema.define(:version => 20120101182253) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["account"], :name => "index_users_on_account", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email"
 
 end

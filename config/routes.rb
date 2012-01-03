@@ -1,4 +1,21 @@
 Loyal::Application.routes.draw do
+  root :to => "home#index"
+  
+  namespace :admin do
+    resources :users
+  end
+  
+  resources :users, :only => [:new, :create] do
+    collection  do 
+      get "password_edit"
+      post "password_update"
+    end
+  end
+  
+  resources :sessions, :only => [:new, :create, :destroy]
+  
+  match "login" => "sessions#new", :as => :login
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -38,6 +38,9 @@ GEM
       jk-ferret (>= 0.11.8)
       rails (>= 3.0)
     arel (2.2.1)
+    authlogic (3.1.0)
+      activerecord (>= 3.0.7)
+      activerecord (>= 3.0.7)
     awesome_nested_set (2.0.1)
       activerecord (>= 3.0.0)
     bson (1.5.2)
@@ -186,6 +189,7 @@ DEPENDENCIES
   SystemTimer
   acts-as-taggable-on
   acts_as_ferret (>= 0.5)
+  authlogic
   awesome_nested_set
   bson_ext
   cancan (>= 1.6.7)

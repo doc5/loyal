@@ -33,6 +33,7 @@ gem 'jquery-rails'
 
 
 # add by happy
+gem "authlogic"
 gem 'omniauth', '= 1.0.1'
 gem 'cancan', '>= 1.6.7'
 gem "magic_encoding"
