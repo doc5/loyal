@@ -1,5 +1,10 @@
 Loyal::Application.routes.draw do
 #  root :to => "home#index"
+  constraints :subdomain => "#{SubdomainBook}", :domain => 'uusoso.com' do
+    scope :module => "book", :as => "book" do
+      root :to => "home#index"
+    end
+  end
   
   constraints :subdomain => "#{SubdomainAdmin}", :domain => 'uusoso.com' do      
     scope :module => "admin", :as => "admin" do
@@ -18,9 +23,7 @@ Loyal::Application.routes.draw do
         post "password_update"
       end
     end
-
     resources :sessions, :only => [:new, :create, :destroy]
-
     match "login" => "sessions#new", :as => :login
   end
 

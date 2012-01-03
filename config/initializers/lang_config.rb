@@ -1,5 +1,12 @@
-module LangConfig
-  Langs = {
+module LangConfig 
+  LANG_KEYS = {
+    :zh_cn => "zh-cn", 
+    :en => "en"
+  }  
+  
+  DEFAULT_LANG = LANG_KEYS[:zh_cn]
+  
+  LANGS = {
     'af' => '南非荷兰语',
     'sq' => '阿尔巴尼亚语',  
     'ar-sa' => '阿拉伯语(沙特阿拉伯)', 'ar-iq' => '阿拉伯语(伊拉克)',

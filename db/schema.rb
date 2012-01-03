@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120102162258) do
+ActiveRecord::Schema.define(:version => 20120103140141) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -54,6 +54,13 @@ ActiveRecord::Schema.define(:version => 20120102162258) do
   end
 
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "ship_book_items_and_book_categories", :id => false, :force => true do |t|
+    t.integer "item_id"
+    t.integer "category_id"
+  end
+
+  add_index "ship_book_items_and_book_categories", ["item_id", "category_id"], :name => "book_item_category_ship_index"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

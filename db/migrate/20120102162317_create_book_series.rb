@@ -1,13 +1,12 @@
-class CreateBookWriters < ActiveRecord::Migration
+class CreateBookSeries < ActiveRecord::Migration
   def change
-    create_table :book_writers do |t|
-      t.string :uuid
+    create_table :book_series do |t|
+
       t.string :name
-      t.text   :description
+      t.string :name_en
       
       t.integer :book_items_count, :default => 0
-      
-      t.string :uri_baidu_baike
+      t.text :description
       
       t.string :avatar_file_name
       t.string :avatar_content_type
