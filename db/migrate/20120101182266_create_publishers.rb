@@ -1,6 +1,6 @@
-class CreateArtists < ActiveRecord::Migration
+class CreatePublishers < ActiveRecord::Migration
   def change
-    create_table :artists do |t|
+    create_table :publishers do |t|
       t.string :uuid
       t.string :name
       t.text   :description      
@@ -13,10 +13,8 @@ class CreateArtists < ActiveRecord::Migration
       t.string :avatar_content_type
       t.integer :avatar_file_size
       t.datetime :avatar_updated_at
-
+      
       t.timestamps
     end
-    
-    add_index :artists, [:uuid]
   end
 end
