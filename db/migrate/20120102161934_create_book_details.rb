@@ -6,8 +6,7 @@ class CreateBookDetails < ActiveRecord::Migration
       
       t.string :title
       t.string :subtitle
-      t.string :original_title
-      
+      t.string :original_title      
       
       t.string :published_by
       t.date   :published_at

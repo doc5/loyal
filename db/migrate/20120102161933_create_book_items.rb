@@ -1,6 +1,8 @@
 class CreateBookItems < ActiveRecord::Migration
   def change
     create_table :book_items do |t|
+      t.string :uuid
+      
       t.string :isbn
       t.string :isbn_other
       
@@ -20,7 +22,14 @@ class CreateBookItems < ActiveRecord::Migration
       t.integer :book_interests_wish_count,    :default => 0
       t.integer :book_interests_collect_count, :default => 0      
       
-      t.integer :average_score, :default => 0
+      t.integer :total_score, :default => 0
+      t.integer :scores_count, :default => 0
+      t.integer :scores_a_count, :default => 0 #1星
+      t.integer :scores_b_count, :default => 0 #2星
+      t.integer :scores_c_count, :default => 0 #3星
+      t.integer :scores_d_count, :default => 0 #4星
+      t.integer :scores_e_count, :default => 0 #5星
+      
       t.integer :pages_count, :default => 0
       
       t.integer :binding  #包装类型
@@ -40,6 +49,7 @@ class CreateBookItems < ActiveRecord::Migration
       t.timestamps
     end
     
+    add_index :book_items, [:uuid]
     add_index :book_items, [:isbn]
     add_index :book_items, [:isbn_other]    
   end

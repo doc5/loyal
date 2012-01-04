@@ -14,6 +14,7 @@ class CreateArtists < ActiveRecord::Migration
       t.integer :avatar_file_size
       t.datetime :avatar_updated_at
 
+      t.string :fetch_duwenzhang_id
       t.timestamps
     end
     

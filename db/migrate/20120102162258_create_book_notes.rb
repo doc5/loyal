@@ -16,6 +16,8 @@ class CreateBookNotes < ActiveRecord::Migration
       t.integer :permission_type
       t.text    :permission_text
       
+      t.integer :book_comments_count, :default => 0
+      
       t.datetime :deleted_at
       t.timestamps
     end
