@@ -4,7 +4,7 @@ class CreateBookItems < ActiveRecord::Migration
       t.string :isbn
       t.string :isbn_other
       
-      t.integer :series_id
+      t.integer :series_id #系列id
       
       t.string :published_by
       t.date   :published_at
@@ -20,7 +20,7 @@ class CreateBookItems < ActiveRecord::Migration
       t.integer :book_favorites_wish_count,    :default => 0
       t.integer :book_favorites_collect_count, :default => 0      
       
-      t.integer :average_score, :default => 0      
+      t.integer :average_score, :default => 0
       t.integer :pages_count, :default => 0
       
       t.integer :binding  #包装类型
@@ -29,6 +29,13 @@ class CreateBookItems < ActiveRecord::Migration
       t.string :avatar_content_type
       t.integer :avatar_file_size
       t.datetime :avatar_updated_at
+      
+      t.string :fetch_tushucheng_id
+      t.string :fetch_dangdang_id
+      t.string :fetch_douban_id
+      t.string :fetch_amazon_cn_id
+      t.string :fetch_360buy_id
+      t.string :fetch_baidu_wiki_id
       
       t.timestamps
     end
