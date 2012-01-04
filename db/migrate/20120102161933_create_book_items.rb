@@ -16,9 +16,9 @@ class CreateBookItems < ActiveRecord::Migration
       t.integer :book_scores_count,    :default => 0
       t.integer :book_favorites_count, :default => 0
       
-      t.integer :book_favorites_doing_count,   :default => 0
-      t.integer :book_favorites_wish_count,    :default => 0
-      t.integer :book_favorites_collect_count, :default => 0      
+      t.integer :book_interests_doing_count,   :default => 0
+      t.integer :book_interests_wish_count,    :default => 0
+      t.integer :book_interests_collect_count, :default => 0      
       
       t.integer :average_score, :default => 0
       t.integer :pages_count, :default => 0
