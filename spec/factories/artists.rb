@@ -1,6 +1,6 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :book_writer do
+  factory :artist do
   end
 end
