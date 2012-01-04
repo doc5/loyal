@@ -1,23 +1,23 @@
 module MongoModel
-  class FetchChannel
+  class RssChannel
     include MongoMapper::Document
       
     key :minutes_interval, Integer, :default => 10
       
     key :status_open, Boolean, :default => true
-    key :fetch_open, Boolean, :default => true
+    key :rss_open, Boolean, :default => true
     key :referral_open, Boolean, :default => false
     key :catelog_open, Boolean, :default => false  #分类页面显示
       
     key :retry_count, Integer, :default => 0
     key :try_count, Integer, :default => 0
-    key :fetch_count, Integer, :default => 0
+    key :rss_count, Integer, :default => 0
     key :position, Integer, :default => 0
     
     key :path_method, String
     key :type_method, Integer
     
-    key :type_fetch, Integer, :default => TYPE_FETCH_DEFAULT
+    key :type_rss, Integer, :default => TYPE_FETCH_DEFAULT
       
     key :uri, String
     key :name, String
@@ -50,10 +50,10 @@ module MongoModel
       
     timestamps!
     
-    belongs_to :fetch_catelog, :class_name => "MongoModel::FetchCatelog"
-    many :fetch_items, :class_name => "MongoModel::FetchItem"
+    belongs_to :rss_catelog, :class_name => "MongoModel::RssCatelog"
+    many :rss_items, :class_name => "MongoModel::RssItem"
     
-    def do_fetch!
+    def do_rss!
       rss_spider = March::Fetch::RssSpider.new(:uri => self.uri)
       if rss_spider.save
         feed = rss_spider.feed        
@@ -84,7 +84,7 @@ module MongoModel
           
         self.save!
         
-        MongoModel::FetchItem.feed_items(self, feed.channel.items)
+        MongoModel::RssItem.feed_items(self, feed.channel.items)
       end
     end
   end

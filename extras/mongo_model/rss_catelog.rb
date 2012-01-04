@@ -1,5 +1,5 @@
 module MongoModel
-  class FetchCatelog
+  class RssCatelog
     include MongoMapper::Document
     include ActsMethods::ActsAsHuabanerMongoMapper::Tree
     acts_as_huabaner_mongo_mapper_tree
@@ -17,6 +17,6 @@ module MongoModel
       
     timestamps! # HECK YES
     
-    many :fetch_channels, :class_name => "MongoModel::FetchChannel"
+    many :rss_channels, :class_name => "MongoModel::RssChannel"
   end
 end

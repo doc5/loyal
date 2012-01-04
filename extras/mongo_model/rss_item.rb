@@ -1,5 +1,5 @@
 module MongoModel
-  class FetchItem    
+  class RssItem    
     include MongoMapper::Document
     
     key :status_open, Boolean, :default => true
@@ -35,15 +35,15 @@ module MongoModel
     
     scope :referred, :order => "hot_count desc", :referral_open => true, :status_open => true
       
-    belongs_to :rss_channel, :class_name => "MongoModel::FetchChannel"
+    belongs_to :rss_channel, :class_name => "MongoModel::RssChannel"
     
     def self.feed_items(channel, items)
       items.each do |item|
         puts "item------#{item.link} - #{channel.id}"
           
         guid = "#{item.link unless item.link.blank?}"
-        itm = MongoModel::FetchItem.find_by_guid(guid) || 
-          MongoModel::FetchItem.new(:guid => guid, :link => item.link)
+        itm = MongoModel::RssItem.find_by_guid(guid) || 
+          MongoModel::RssItem.new(:guid => guid, :link => item.link)
           
         itm.rss_channel_id = channel.id
         itm.guid = guid
