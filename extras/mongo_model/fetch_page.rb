@@ -39,8 +39,7 @@ module MongoModel
 #          puts str.content_type
 #          puts str.charset
 #          puts str.content_encoding
-#          puts str.last_modified 
-          
+#          puts str.last_modified           
 #        end          
         
         if fetch_page.nil? || force          
@@ -58,3 +57,12 @@ module MongoModel
     end
   end
 end
+
+#http://ruby-doc.org/stdlib-1.9.3/libdoc/net/http/rdoc/Net/HTTP.html
+#
+#uri = URI('http://example.com/index.html')
+#params = { :limit => 10, :page => 3 }
+#uri.query = URI.encode_www_form(params)
+#
+#res = Net::HTTP.get_response(uri)
+#puts res.body if res.is_a?(Net::HTTPSuccess)
