@@ -1,12 +1,12 @@
 class CreateBookSeries < ActiveRecord::Migration
   def change
     create_table :book_series do |t|
-
       t.string :name
       t.string :name_en
       
       t.integer :book_items_count, :default => 0
-      t.text :description
+      t.string :title
+      t.text   :description
       
       t.string :avatar_file_name
       t.string :avatar_content_type

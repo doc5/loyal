@@ -11,6 +11,13 @@ Loyal::Application.routes.draw do
       root :to => "home#index"
       resources :users
       resources :roles
+      
+      namespace :book do
+        root :to => "home#index"
+        
+        resources :categories
+        resources :items
+      end
     end
   end
   

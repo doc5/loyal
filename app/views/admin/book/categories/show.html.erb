@@ -1,0 +1,42 @@
+<%= render :partial => "/admin/book/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>【图书分类】： <%= @book_category.name %></h1>
+
+  <div class="main-options">
+    <%= link_to "返回分类列表", admin_route(admin_book_categories_path) %>
+    <%= link_to "编辑分类", admin_route(edit_admin_book_category_path(@book_category)) %>
+    <%= link_to "新建图书分类", admin_route(new_admin_book_category_path) %>
+  </div>
+
+  <div class="main-content">
+    <p>
+      <b>名称</b><br/>
+      <%= @book_category.name %>
+    </p>
+    <p>
+      <b>标题</b><br/>
+      <%= @book_category.title %>
+    </p>
+    <p>
+      <b>URL-NAME</b><br/>
+      <%= @book_category.url_name %>
+    </p>
+    <p>
+      <b>position</b><br/>
+      <%= @book_category.position %>
+    </p>
+    <p>
+      <b>lang</b><br/>
+      <%= @book_category.lang %>
+    </p>
+    <p>
+      <b>introduction</b><br/>
+      <%= @book_category.introduction %>
+    </p>
+    <p>
+      <b>description</b><br/>
+      <%= @book_category.description %>
+    </p>
+  </div>
+</div>

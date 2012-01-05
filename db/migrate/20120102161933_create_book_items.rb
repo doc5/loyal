@@ -17,6 +17,7 @@ class CreateBookItems < ActiveRecord::Migration
       t.integer :book_interests_count, :default => 0
       t.integer :book_scores_count,    :default => 0
       t.integer :book_favorites_count, :default => 0
+      t.integer :book_details_count, :default => 0
       
       t.integer :book_origins_count, :default => 0
       

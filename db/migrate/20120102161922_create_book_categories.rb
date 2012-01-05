@@ -6,13 +6,14 @@ class CreateBookCategories < ActiveRecord::Migration
       t.string :title
       
       t.string :url_name
+      t.integer :position, :default => 0
       
       t.string :lang, :default => LangConfig::DEFAULT_LANG
       
       t.string :introduction
       t.text :description
       
-      t.integer :permission, :default => WebsiteConfig::Permission::Public
+      t.integer :permission, :default => WebsiteConfig::PERMMISSION_PUBLIC
       t.text :permission_text
       
       t.integer :created_by

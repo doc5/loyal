@@ -37,7 +37,7 @@ module ActsMethods
           
         #          根节点
         def root_categories(limit=nil)
-          find_all_by_parent_id(nil, :order => "root_position desc", :limit => limit)
+          find_all_by_parent_id(nil, :order => "position desc", :limit => limit)
         end
           
         #          当前项目从根节点到所有子节点

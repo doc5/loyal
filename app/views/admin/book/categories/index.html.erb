@@ -1,0 +1,30 @@
+<%= render :partial => "/admin/book/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>图书分类列表</h1>
+
+  <div class="main-options">
+    <%= link_to "新建分类", admin_route(new_admin_book_category_path) %>
+  </div>
+
+  <div class="main-content">
+    <div class="list">
+      <% if @book_categories.any? %>
+        <% @book_categories.each do |category| %>
+      <div class="item">
+        <div class="operate">
+          <%= link_to "编辑", admin_route(edit_admin_book_category_path(category)) %>
+        </div>        
+        <%= link_to "#{category.level_with_name}", admin_route(admin_book_category_path(category)) %>
+      </div>
+        <% end %>
+      <% else %>
+        暂无分类
+      <% end %>
+    </div>    
+  </div>
+
+  <div class="main-options">
+    <%= link_to "新建分类", admin_route(new_admin_book_category_path) %>
+  </div>
+</div>

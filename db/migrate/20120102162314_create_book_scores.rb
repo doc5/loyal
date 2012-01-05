@@ -11,5 +11,7 @@ class CreateBookScores < ActiveRecord::Migration
       
       t.timestamps
     end
+    
+    add_index :book_scores, [:resource_type, :resource_id], :name => 'book_scores_res_index'
   end
 end
