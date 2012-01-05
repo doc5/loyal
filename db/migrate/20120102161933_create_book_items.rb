@@ -18,6 +18,8 @@ class CreateBookItems < ActiveRecord::Migration
       t.integer :book_scores_count,    :default => 0
       t.integer :book_favorites_count, :default => 0
       
+      t.integer :book_origins_count, :default => 0
+      
       t.integer :book_interests_doing_count,   :default => 0
       t.integer :book_interests_wish_count,    :default => 0
       t.integer :book_interests_collect_count, :default => 0      
@@ -38,13 +40,6 @@ class CreateBookItems < ActiveRecord::Migration
       t.string :avatar_content_type
       t.integer :avatar_file_size
       t.datetime :avatar_updated_at
-      
-      t.string :fetch_tushucheng_id
-      t.string :fetch_dangdang_id
-      t.string :fetch_douban_id
-      t.string :fetch_amazon_cn_id
-      t.string :fetch_360buy_id
-      t.string :fetch_baidu_wiki_id
       
       t.timestamps
     end
