@@ -6,6 +6,18 @@
  *= require_tree ./admin
 */
 
+body{
+    color: #555555;
+}
+
+a {
+    color: #555555;
+    
+    &:hover {
+        color: red;
+    }   
+}
+
 #header{
     background-color: #893450;
     padding: 5px;
