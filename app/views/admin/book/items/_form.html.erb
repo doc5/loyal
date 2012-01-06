@@ -1,8 +1,8 @@
-<% if @book_category.errors.any? %>
+<% if @book_item.errors.any? %>
   <div id="error_explanation">
-    <h2 id="errorExplanationHeader"><%= t('activerecord.errors.template.header', :count => @book_category.errors.count) %></h2>	
+    <h2 id="errorExplanationHeader"><%= t('activerecord.errors.template.header', :count => @book_item.errors.count) %></h2>	
     <ul>
-      <% @book_category.errors.full_messages.each do |msg| %>
+      <% @book_item.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
@@ -37,7 +37,7 @@
 <div class="field">
   <%= f.label :parent_id %><br />	
   <%= f.select :parent_id, 
-    nested_set_options(BookCategory, @book_category) {|i| "#{'-' * i.level} #{i.name}" }, 
+    nested_set_options(BookCategory, @book_item) {|i| "#{'-' * i.level} #{i.name}" }, 
     {:include_blank => I18n.t('please_select_for_tag')} %>
 </div>
 
