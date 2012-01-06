@@ -1,0 +1,17 @@
+<%= render :partial => "/admin/book/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>编辑图书分类</h1>
+
+  <div class="main-options">
+    <%= link_to "返回分类列表", admin_route(admin_book_categories_path) %>
+    <%= link_to "返回分类", admin_route(admin_book_category_path(@book_category)) %>
+    <%= link_to "新建图书分类", admin_route(new_admin_book_category_path) %>
+  </div>
+
+  <div class="main-content">
+    <%= form_for([:admin, @book_category], :html => { :multipart => true }) do |f| %>
+      <%= render :partial => 'form', :locals => {:f => f} %>
+    <% end %>
+  </div>
+</div>

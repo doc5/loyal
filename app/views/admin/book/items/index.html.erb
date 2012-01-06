@@ -1,0 +1,17 @@
+<%= render :partial => "/admin/book/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>图书列表</h1>
+
+  <div class="main-options">
+    <%= link_to "新建图书", admin_route(new_admin_book_item_path) %>
+  </div>
+
+  <div class="main-content">
+    <%= render :partial => "/admin/book/items/list", :locals => {:book_items => @book_items} %>
+  </div>
+
+  <div class="main-options">
+    <%= link_to "新建图书", admin_route(new_admin_book_item_path) %>
+  </div>
+</div>
