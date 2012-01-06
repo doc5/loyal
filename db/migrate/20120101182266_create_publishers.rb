@@ -2,6 +2,7 @@ class CreatePublishers < ActiveRecord::Migration
   def change
     create_table :publishers do |t|
       t.string :uuid
+      t.integer :role_type #出版社？
       t.string :name
       t.text   :description      
       
@@ -16,5 +17,7 @@ class CreatePublishers < ActiveRecord::Migration
       
       t.timestamps
     end
+    
+    add_index :publishers, [:name]
   end
 end
