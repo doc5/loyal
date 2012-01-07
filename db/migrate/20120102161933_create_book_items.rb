@@ -10,7 +10,6 @@ class CreateBookItems < ActiveRecord::Migration
       
       t.string :published_by
       t.date   :published_at
-      t.string :price
       
       t.integer :book_comments_count,  :default => 0
       t.integer :book_notes_count    , :default => 0
@@ -32,15 +31,6 @@ class CreateBookItems < ActiveRecord::Migration
       t.integer :scores_c_count, :default => 0 #3星
       t.integer :scores_d_count, :default => 0 #4星
       t.integer :scores_e_count, :default => 0 #5星
-      
-      t.integer :pages_count, :default => 0
-      
-      t.integer :binding  #包装类型
-      
-      t.string :avatar_file_name
-      t.string :avatar_content_type
-      t.integer :avatar_file_size
-      t.datetime :avatar_updated_at
       
       t.timestamps
     end

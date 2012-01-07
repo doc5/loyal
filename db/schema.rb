@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120104150715) do
+ActiveRecord::Schema.define(:version => 20120107154634) do
 
   create_table "artists", :force => true do |t|
     t.string   "uuid"
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(:version => 20120104150715) do
 
   add_index "book_categories", ["url_name", "lang"], :name => "book_categories_url_name"
 
+  create_table "book_categories_fetch_book_category_links", :id => false, :force => true do |t|
+    t.integer  "book_category_id"
+    t.integer  "fetch_book_category_link_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "book_categories_fetch_book_category_links", ["book_category_id", "fetch_book_category_link_id"], :name => "book_categories_fetch_book_category_links_index"
+
   create_table "book_comments", :force => true do |t|
     t.string   "resource_type"
     t.integer  "resource_id"
@@ -101,23 +110,39 @@ ActiveRecord::Schema.define(:version => 20120104150715) do
 
   create_table "book_details", :force => true do |t|
     t.integer  "item_id"
-    t.string   "lang",            :default => "zh-cn"
+    t.string   "lang",                :default => "zh-cn"
+    t.integer  "from_type"
+    t.string   "from_uri"
+    t.integer  "position",            :default => 0
+    t.integer  "publisher_id"
+    t.string   "isbn"
     t.string   "title"
     t.string   "subtitle"
     t.string   "original_title"
+    t.integer  "revision"
+    t.string   "price"
+    t.string   "price_shop"
+    t.string   "production_number"
+    t.string   "paper_type"
+    t.integer  "print_count",         :default => 0
+    t.string   "lang_tag"
     t.string   "published_by"
     t.date     "published_at"
-    t.string   "price"
     t.text     "content_outline"
     t.text     "content_author"
     t.text     "content_editor"
     t.text     "content_catelog"
     t.text     "content_note"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "book_details", ["item_id", "lang"], :name => "book_details_item_lang_index"
+  add_index "book_details", ["item_id", "lang", "from_type", "from_uri", "position"], :name => "book_details_item_pos_index"
+  add_index "book_details", ["item_id", "lang", "from_type", "from_uri"], :name => "book_details_item_lang_index"
 
   create_table "book_favorites", :force => true do |t|
     t.integer  "item_id"
@@ -167,12 +192,6 @@ ActiveRecord::Schema.define(:version => 20120104150715) do
     t.integer  "scores_c_count",               :default => 0
     t.integer  "scores_d_count",               :default => 0
     t.integer  "scores_e_count",               :default => 0
-    t.integer  "pages_count",                  :default => 0
-    t.integer  "binding"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -198,16 +217,6 @@ ActiveRecord::Schema.define(:version => 20120104150715) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "book_origins", :force => true do |t|
-    t.integer  "item_id"
-    t.string   "from_type"
-    t.string   "from_uri"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "book_origins", ["item_id", "from_type", "from_uri"], :name => "book_origins_from_index"
 
   create_table "book_scores", :force => true do |t|
     t.string   "resource_type"
@@ -243,8 +252,20 @@ ActiveRecord::Schema.define(:version => 20120104150715) do
     t.datetime "updated_at"
   end
 
+  create_table "fetch_book_category_links", :force => true do |t|
+    t.string   "url"
+    t.string   "name"
+    t.integer  "site_type"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "publishers", :force => true do |t|
     t.string   "uuid"
+    t.integer  "role_type"
     t.string   "name"
     t.text     "description"
     t.integer  "book_items_count",    :default => 0
@@ -257,6 +278,8 @@ ActiveRecord::Schema.define(:version => 20120104150715) do
     t.datetime "updated_at"
   end
 
+  add_index "publishers", ["name"], :name => "index_publishers_on_name"
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.string   "remark"
@@ -267,6 +290,15 @@ ActiveRecord::Schema.define(:version => 20120104150715) do
   end
 
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "ship_book_categories_and_fetch_book_category_links", :id => false, :force => true do |t|
+    t.integer  "book_category_id"
+    t.integer  "fetch_book_category_link_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ship_book_categories_and_fetch_book_category_links", ["book_category_id", "fetch_book_category_link_id"], :name => "ship_book_categories_and_fetch_book_category_links_index"
 
   create_table "ship_book_items_and_book_categories", :id => false, :force => true do |t|
     t.integer "item_id"
