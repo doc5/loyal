@@ -58,4 +58,8 @@ class Admin::Book::CategoriesController < AdminController
       end
     end
   end
+  
+  def fetches
+    
+  end
 end

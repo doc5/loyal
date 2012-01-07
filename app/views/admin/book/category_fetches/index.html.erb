@@ -1,0 +1,35 @@
+<%= render :partial => "/admin/book/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>图书分类抓取列表</h1>
+
+  <div class="main-options">
+    <% BookCategoryFetch::CATEGORY_CONFIGS.each do |type, config| %>
+      <%= link_to "#{config[:name]}", admin_book_category_fetches_path(:site_type => type) %>
+    <% end %>
+  </div>
+
+  <div class="main-content">
+    <div class="list">
+      <% if @root_book_category_fetches.any? %>
+        <% @root_book_category_fetches.each do |category| %>
+      <div class="item">
+        <div class="title">          
+          <div class="operate">
+
+          </div>        
+          <b><%= link_to "#{category.level_with_name}", admin_route(admin_book_category_fetch_path(category)) %></b>
+        </div>
+        <div class="content">
+          <% category.descendants.each do |cate| %>
+            <%= link_to "#{cate.level_with_name}", admin_route(admin_book_category_fetch_path(cate)) %>
+          <% end %>
+        </div>
+      </div>
+        <% end %>
+      <% else %>
+        暂无分类
+      <% end %>
+    </div>    
+  </div>
+</div>

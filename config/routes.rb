@@ -15,7 +15,10 @@ Loyal::Application.routes.draw do
       namespace :book do
         root :to => "home#index"
         
-        resources :categories
+        resources :categories do  
+          
+        end
+        resources :category_fetches, :only => [:index, :show]
         resources :items
       end
     end

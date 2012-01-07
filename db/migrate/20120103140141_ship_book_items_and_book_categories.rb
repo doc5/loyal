@@ -5,6 +5,5 @@ class ShipBookItemsAndBookCategories < ActiveRecord::Migration
       t.integer :category_id
     end
     
-    add_index :ship_book_items_and_book_categories, [:item_id, :category_id], :name => "ship_book_items_and_book_categories_index"
   end  
 end

@@ -2,7 +2,7 @@ require 'open-uri'
 require 'iconv'
 require 'sanitize'
 
-class FetchBookCategoryLink < ActiveRecord::Base
+class BookCategoryFetch < ActiveRecord::Base
   include ActsMethods::ActsAsHuabanerModel::TreeExtends
   acts_as_huabaner_tree
   
@@ -10,15 +10,17 @@ class FetchBookCategoryLink < ActiveRecord::Base
   
   validates_uniqueness_of :url
   
-  JINGDONG = 0
+  TYPE_JINGDONG = 0
+  
+  TYPE_DEFAULT = TYPE_JINGDONG
   
   CATEGORY_CONFIGS = {
-    JINGDONG => {:url => "http://www.360buy.com/book/booksort.aspx", :name => "京东商城图书"}
+    TYPE_JINGDONG => {:url => "http://www.360buy.com/book/booksort.aspx", :name => "京东商城图书"}
   }
   
   class << self
     def fetch_360buy(force=false)
-      category_url = CATEGORY_CONFIGS[JINGDONG][:url]
+      category_url = CATEGORY_CONFIGS[TYPE_JINGDONG][:url]
       uri_open = URI.parse(category_url)
       result_str = uri_open.read
       
@@ -33,11 +35,11 @@ class FetchBookCategoryLink < ActiveRecord::Base
         fetch_name = dt_node.css("a").text
         fetch_url = dt_node.css("a").attr("href").to_s
         
-        linker = FetchBookCategoryLink.find_by_url(fetch_url) || FetchBookCategoryLink.new
+        linker = BookCategoryFetch.find_by_url(fetch_url) || BookCategoryFetch.new
         
         linker.url = fetch_url
         linker.name = fetch_name
-        linker.site_type = JINGDONG
+        linker.site_type = TYPE_JINGDONG
         linker.parent_id = nil
         
         linker.save
@@ -50,10 +52,10 @@ class FetchBookCategoryLink < ActiveRecord::Base
           node_name = node.text
           node_url = node.attr("href").to_s
           
-          new_linker = FetchBookCategoryLink.find_by_url(node_url) || FetchBookCategoryLink.new
+          new_linker = BookCategoryFetch.find_by_url(node_url) || BookCategoryFetch.new
           new_linker.url = node_url
           new_linker.name = node_name
-          new_linker.site_type = JINGDONG
+          new_linker.site_type = TYPE_JINGDONG
           new_linker.parent_id = linker.id
           new_linker.save
           

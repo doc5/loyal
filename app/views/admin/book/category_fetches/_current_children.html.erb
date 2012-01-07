@@ -1,0 +1,5 @@
+<div class="main-children">
+  <% (with_self ? category.self_and_children : category.children).each do |cate| %>
+    <%= link_to "#{cate.level_with_name}", admin_route(admin_book_category_fetch_path(cate)) %>
+  <% end %>
+</div>

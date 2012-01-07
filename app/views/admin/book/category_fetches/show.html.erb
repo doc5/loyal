@@ -1,0 +1,21 @@
+<%= render :partial => "/admin/book/partials/side_panel" %>
+
+<div id="main-panel">
+  <%= render :partial => "/admin/book/category_fetches/current_path", :locals => {:category => @book_category_fetch, :with_self => false} %>
+  <h1>[图书分类抓取]<%= @book_category_fetch.name %></h1>
+  <%= render :partial => "/admin/book/category_fetches/current_children", :locals => {:category => @book_category_fetch, :with_self => false} %>
+  <div class="main-options">
+    <%= link_to "返回列表", admin_route(admin_book_category_fetches_path(:site_type => @book_category_fetch.site_type)) %>
+  </div>
+
+  <div class="main-content">
+    <p>
+      <b>名称</b><br/>
+      <%= @book_category_fetch.name %>
+    </p>
+    <p>
+      <b>URL</b><br/>
+      <%= @book_category_fetch.url %>
+    </p>   
+  </div>
+</div>

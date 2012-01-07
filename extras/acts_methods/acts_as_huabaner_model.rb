@@ -36,8 +36,8 @@ module ActsMethods
         end
           
         #          根节点
-        def root_categories(limit=nil)
-          find_all_by_parent_id(nil, :order => "position desc", :limit => limit)
+        def root_categories(conditions={}, limit=nil)
+          find_all_by_parent_id(nil, :order => "position desc", :limit => limit, :conditions => conditions)
         end
           
         #          当前项目从根节点到所有子节点
@@ -70,6 +70,10 @@ module ActsMethods
       module InstanceMethods          
         def level_with_name
           "#{'- ' * level} #{name}"
+        end
+                
+        def self_and_children
+          [self] + self.children
         end
       end
       module SingletonMethods

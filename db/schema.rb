@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120107154634) do
+ActiveRecord::Schema.define(:version => 20120107174155) do
 
   create_table "artists", :force => true do |t|
     t.string   "uuid"
@@ -83,14 +83,26 @@ ActiveRecord::Schema.define(:version => 20120107154634) do
 
   add_index "book_categories", ["url_name", "lang"], :name => "book_categories_url_name"
 
-  create_table "book_categories_fetch_book_category_links", :id => false, :force => true do |t|
+  create_table "book_categories_book_category_fetches", :id => false, :force => true do |t|
     t.integer  "book_category_id"
     t.integer  "fetch_book_category_link_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "book_categories_fetch_book_category_links", ["book_category_id", "fetch_book_category_link_id"], :name => "book_categories_fetch_book_category_links_index"
+  create_table "book_category_fetches", :force => true do |t|
+    t.string   "url"
+    t.string   "name"
+    t.integer  "site_type"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "book_category_fetches", ["site_type"], :name => "index_book_category_fetches_on_site_type"
+  add_index "book_category_fetches", ["url"], :name => "index_book_category_fetches_on_url"
 
   create_table "book_comments", :force => true do |t|
     t.string   "resource_type"
@@ -174,7 +186,6 @@ ActiveRecord::Schema.define(:version => 20120107154634) do
     t.integer  "series_id"
     t.string   "published_by"
     t.date     "published_at"
-    t.string   "price"
     t.integer  "book_comments_count",          :default => 0
     t.integer  "book_notes_count",             :default => 0
     t.integer  "book_interests_count",         :default => 0
@@ -252,17 +263,6 @@ ActiveRecord::Schema.define(:version => 20120107154634) do
     t.datetime "updated_at"
   end
 
-  create_table "fetch_book_category_links", :force => true do |t|
-    t.string   "url"
-    t.string   "name"
-    t.integer  "site_type"
-    t.integer  "parent_id"
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "publishers", :force => true do |t|
     t.string   "uuid"
     t.integer  "role_type"
@@ -290,15 +290,6 @@ ActiveRecord::Schema.define(:version => 20120107154634) do
   end
 
   add_index "roles", ["name"], :name => "index_roles_on_name"
-
-  create_table "ship_book_categories_and_fetch_book_category_links", :id => false, :force => true do |t|
-    t.integer  "book_category_id"
-    t.integer  "fetch_book_category_link_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "ship_book_categories_and_fetch_book_category_links", ["book_category_id", "fetch_book_category_link_id"], :name => "ship_book_categories_and_fetch_book_category_links_index"
 
   create_table "ship_book_items_and_book_categories", :id => false, :force => true do |t|
     t.integer "item_id"
