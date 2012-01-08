@@ -3,6 +3,7 @@ class CreateBookDetails < ActiveRecord::Migration
     create_table :book_details do |t|
       t.integer :item_id
       t.string :lang, :default => LangConfig::DEFAULT_LANG
+      
       t.integer :from_type  #京东？当当？淘宝？亚马逊？豆瓣？？
       t.string :from_uri
       t.integer :position, :default => 0
@@ -19,10 +20,10 @@ class CreateBookDetails < ActiveRecord::Migration
       t.string :production_number #商品编号
       t.string :paper_type #纸张类型
       t.integer :print_count, :default => 0 #印刷次数
-      t.string :lang_tag #语种      
+      t.string :lang_tag #语种    
+      t.date   :published_at #出版日期
       
       t.string :published_by
-      t.date   :published_at
       
       t.text :content_outline #内容提要
       t.text :content_author  #作者简介

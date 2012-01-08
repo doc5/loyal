@@ -6,7 +6,7 @@ class BookCategoryFetch < ActiveRecord::Base
   include ActsMethods::ActsAsHuabanerModel::TreeExtends
   acts_as_huabaner_tree
   
-  has_and_belongs_to_many :book_categories
+  belongs_to :book_category
   
   validates_uniqueness_of :url
   
@@ -38,6 +38,7 @@ class BookCategoryFetch < ActiveRecord::Base
         linker = BookCategoryFetch.find_by_url(fetch_url) || BookCategoryFetch.new
         
         linker.url = fetch_url
+        linker.position = i
         linker.name = fetch_name
         linker.site_type = TYPE_JINGDONG
         linker.parent_id = nil
@@ -48,12 +49,13 @@ class BookCategoryFetch < ActiveRecord::Base
         Rails.logger.debug "name====> #{fetch_name}"
         Rails.logger.debug "parent_id====> #{linker.parent_id}"
         
-        dd_node.css("em a").each do |node|
+        dd_node.css("em a").each_with_index do |node, ii|
           node_name = node.text
           node_url = node.attr("href").to_s
           
           new_linker = BookCategoryFetch.find_by_url(node_url) || BookCategoryFetch.new
           new_linker.url = node_url
+          new_linker.position = ii
           new_linker.name = node_name
           new_linker.site_type = TYPE_JINGDONG
           new_linker.parent_id = linker.id

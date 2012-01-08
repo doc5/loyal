@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120107174155) do
+ActiveRecord::Schema.define(:version => 20120108054928) do
 
   create_table "artists", :force => true do |t|
     t.string   "uuid"
@@ -83,20 +83,16 @@ ActiveRecord::Schema.define(:version => 20120107174155) do
 
   add_index "book_categories", ["url_name", "lang"], :name => "book_categories_url_name"
 
-  create_table "book_categories_book_category_fetches", :id => false, :force => true do |t|
-    t.integer  "book_category_id"
-    t.integer  "fetch_book_category_link_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "book_category_fetches", :force => true do |t|
     t.string   "url"
     t.string   "name"
     t.integer  "site_type"
+    t.integer  "book_category_id"
+    t.integer  "status"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
+    t.integer  "position",         :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -138,8 +134,8 @@ ActiveRecord::Schema.define(:version => 20120107174155) do
     t.string   "paper_type"
     t.integer  "print_count",         :default => 0
     t.string   "lang_tag"
-    t.string   "published_by"
     t.date     "published_at"
+    t.string   "published_by"
     t.text     "content_outline"
     t.text     "content_author"
     t.text     "content_editor"
@@ -167,6 +163,17 @@ ActiveRecord::Schema.define(:version => 20120107174155) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "book_fetch_urls", :force => true do |t|
+    t.string   "resource_type"
+    t.string   "resource_id"
+    t.integer  "site_type"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "book_fetch_urls", ["resource_id", "resource_type", "site_type"], :name => "book_fetch_urls_res_index"
 
   create_table "book_interests", :force => true do |t|
     t.integer  "item_id"
@@ -264,12 +271,10 @@ ActiveRecord::Schema.define(:version => 20120107174155) do
   end
 
   create_table "publishers", :force => true do |t|
-    t.string   "uuid"
     t.integer  "role_type"
     t.string   "name"
     t.text     "description"
     t.integer  "book_items_count",    :default => 0
-    t.string   "fetch_baidu_wiki_id"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -278,7 +283,7 @@ ActiveRecord::Schema.define(:version => 20120107174155) do
     t.datetime "updated_at"
   end
 
-  add_index "publishers", ["name"], :name => "index_publishers_on_name"
+  add_index "publishers", ["name", "role_type"], :name => "index_publishers_on_name_and_role_type"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -296,21 +301,15 @@ ActiveRecord::Schema.define(:version => 20120107174155) do
     t.integer "category_id"
   end
 
-  add_index "ship_book_items_and_book_categories", ["item_id", "category_id"], :name => "ship_book_items_and_book_categories_index"
-
   create_table "ship_book_items_and_book_tags", :id => false, :force => true do |t|
     t.integer "item_id"
     t.integer "tag_id"
   end
 
-  add_index "ship_book_items_and_book_tags", ["item_id", "tag_id"], :name => "ship_book_items_and_book_tags_index"
-
   create_table "ship_users_and_book_tags", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "tag_id"
   end
-
-  add_index "ship_users_and_book_tags", ["user_id", "tag_id"], :name => "ship_users_and_book_tags_index"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

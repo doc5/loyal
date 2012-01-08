@@ -4,6 +4,7 @@ class CreateBookCategoryFetches < ActiveRecord::Migration
       t.string :url
       t.string :name
       t.integer :site_type
+      t.integer :book_category_id
       
       t.integer :status
       
