@@ -3,6 +3,7 @@ class CreateBookNotes < ActiveRecord::Migration
     create_table :book_notes do |t|
       t.integer :item_id
       t.integer :score_id
+      t.integer :detail_id
       
       t.string  :lang
       t.string  :title

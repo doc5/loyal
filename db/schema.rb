@@ -16,17 +16,17 @@ ActiveRecord::Schema.define(:version => 20120108054928) do
     t.string   "uuid"
     t.string   "name"
     t.text     "description"
+    t.integer  "poly_type",           :default => 0
     t.integer  "book_items_count",    :default => 0
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "fetch_duwenzhang_id"
-    t.string   "fetch_baidu_wiki_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "artists", ["name"], :name => "index_artists_on_name"
   add_index "artists", ["uuid"], :name => "index_artists_on_uuid"
 
   create_table "assignments", :force => true do |t|
@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(:version => 20120108054928) do
 
   create_table "book_authors", :force => true do |t|
     t.integer  "artist_id"
-    t.integer  "book_item_id"
+    t.integer  "book_detail_id"
     t.integer  "role_type"
-    t.integer  "position",     :default => 0
+    t.integer  "position",       :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -127,13 +127,16 @@ ActiveRecord::Schema.define(:version => 20120108054928) do
     t.string   "title"
     t.string   "subtitle"
     t.string   "original_title"
+    t.string   "cn_title"
     t.integer  "revision"
     t.string   "price"
     t.string   "price_shop"
     t.string   "production_number"
     t.string   "paper_type"
+    t.integer  "paper_count",         :default => 0
     t.integer  "print_count",         :default => 0
     t.string   "lang_tag"
+    t.string   "format_tag"
     t.date     "published_at"
     t.string   "published_by"
     t.text     "content_outline"
@@ -221,6 +224,7 @@ ActiveRecord::Schema.define(:version => 20120108054928) do
   create_table "book_notes", :force => true do |t|
     t.integer  "item_id"
     t.integer  "score_id"
+    t.integer  "detail_id"
     t.string   "lang"
     t.string   "title"
     t.integer  "chapter_page"
