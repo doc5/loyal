@@ -12,7 +12,8 @@ class CreateBookDetails < ActiveRecord::Migration
       
       t.integer :publisher_id
       
-      t.string :isbn      
+      t.string :isbn   
+      t.string :isbn_other      
       t.string :title #标题
       t.string :subtitle #副标题
       t.string :original_title #原始标题  
@@ -34,6 +35,7 @@ class CreateBookDetails < ActiveRecord::Migration
       t.text :content_author  #作者简介
       t.text :content_editor  #编辑推荐
       t.text :content_catelog #目录
+      t.text :content_media_comment #媒体评论
       t.text :content_note    #书摘      
       
       t.string :avatar_file_name
@@ -43,7 +45,6 @@ class CreateBookDetails < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :book_details, [:item_id, :lang, :from_site, :from_uri], :name => "book_details_item_lang_index"
-    add_index :book_details, [:item_id, :lang, :from_site, :from_uri, :position], :name => "book_details_item_pos_index"
+    add_index :book_details, [:from_uri]
   end
 end

@@ -11,12 +11,10 @@ class BookCategoryFetch < ActiveRecord::Base
   
   validates_uniqueness_of :url
   
-  TYPE_JINGDONG = 0
-  
-  TYPE_DEFAULT = TYPE_JINGDONG
+  TYPE_DEFAULT = Website::BookConfig::SITE_360BUY
   
   CATEGORY_CONFIGS = {
-    TYPE_JINGDONG => {:url => "http://www.360buy.com/book/booksort.aspx", :name => "京东商城图书"}
+    Website::BookConfig::SITE_360BUY => {:url => "http://www.360buy.com/book/booksort.aspx", :name => "京东商城图书"}
   }
   
   def fetch_details
@@ -34,18 +32,18 @@ class BookCategoryFetch < ActiveRecord::Base
       detail_fetch = BookDetailFetch.find_by_url(fetch_url) || 
         BookDetailFetch.new(:url => fetch_url, :title => fetch_title)
       
+      detail_fetch.from_site = self.from_site      
       
       Rails.logger.debug "title===>#{fetch_title}"
       Rails.logger.debug "url===>#{fetch_url}\n"
       
       detail_fetch.save      
     end
-    nil
   end
   
   class << self
     def fetch_360buy_categories(force=false)
-      category_url = CATEGORY_CONFIGS[TYPE_JINGDONG][:url]
+      category_url = CATEGORY_CONFIGS[Website::BookConfig::SITE_360BUY][:url]
       uri_open = URI.parse(category_url)
       result_str = uri_open.read
       
@@ -65,7 +63,7 @@ class BookCategoryFetch < ActiveRecord::Base
         linker.url = fetch_url
         linker.position = i
         linker.name = fetch_name
-        linker.from_site = TYPE_JINGDONG
+        linker.from_site = Website::BookConfig::SITE_360BUY
         linker.parent_id = nil
         
         linker.save
@@ -82,7 +80,7 @@ class BookCategoryFetch < ActiveRecord::Base
           new_linker.url = node_url
           new_linker.position = ii
           new_linker.name = node_name
-          new_linker.from_site = TYPE_JINGDONG
+          new_linker.from_site = Website::BookConfig::SITE_360BUY
           new_linker.parent_id = linker.id
           new_linker.save
           

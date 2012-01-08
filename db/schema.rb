@@ -134,11 +134,11 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
 
   create_table "book_details", :force => true do |t|
     t.integer  "item_id"
-    t.string   "lang",                 :default => "zh-cn"
+    t.string   "lang",                  :default => "zh-cn"
     t.integer  "book_detail_fetch_id"
     t.integer  "from_site"
     t.string   "from_uri"
-    t.integer  "position",             :default => 0
+    t.integer  "position",              :default => 0
     t.integer  "publisher_id"
     t.string   "isbn"
     t.string   "title"
@@ -150,8 +150,8 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.string   "price_shop"
     t.string   "production_number"
     t.string   "paper_type"
-    t.integer  "paper_count",          :default => 0
-    t.integer  "print_count",          :default => 0
+    t.integer  "paper_count",           :default => 0
+    t.integer  "print_count",           :default => 0
     t.string   "lang_tag"
     t.string   "format_tag"
     t.date     "published_at"
@@ -160,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.text     "content_author"
     t.text     "content_editor"
     t.text     "content_catelog"
+    t.text     "content_media_comment"
     t.text     "content_note"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
@@ -169,8 +170,7 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.datetime "updated_at"
   end
 
-  add_index "book_details", ["item_id", "lang", "from_site", "from_uri", "position"], :name => "book_details_item_pos_index"
-  add_index "book_details", ["item_id", "lang", "from_site", "from_uri"], :name => "book_details_item_lang_index"
+  add_index "book_details", ["from_uri"], :name => "index_book_details_on_from_uri"
 
   create_table "book_favorites", :force => true do |t|
     t.integer  "item_id"
