@@ -86,6 +86,9 @@ class BookDetailFetch < ActiveRecord::Base
       Rails.logger.debug "=========>#{fetch_price}"
     end    
     
+    title_node = doc.css("html body#book div.w div.crumb a").last
+    
+    book_detail.title = title_node.text.strip
     book_detail.isbn = fetch_isbn
     book_detail.published_at = fetch_published_at
     
