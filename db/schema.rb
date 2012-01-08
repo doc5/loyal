@@ -86,18 +86,19 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
   create_table "book_category_fetches", :force => true do |t|
     t.string   "url"
     t.string   "name"
-    t.integer  "site_type"
+    t.integer  "from_site"
     t.integer  "book_category_id"
+    t.integer  "book_details_count", :default => 0
     t.integer  "status"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "position",         :default => 0
+    t.integer  "position",           :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "book_category_fetches", ["site_type"], :name => "index_book_category_fetches_on_site_type"
+  add_index "book_category_fetches", ["from_site"], :name => "index_book_category_fetches_on_from_site"
   add_index "book_category_fetches", ["url"], :name => "index_book_category_fetches_on_url"
 
   create_table "book_category_fetches_book_details", :id => false, :force => true do |t|
@@ -124,15 +125,18 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
   create_table "book_detail_fetches", :force => true do |t|
     t.string   "url"
     t.string   "title"
+    t.integer  "from_site"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "book_detail_fetches", ["url"], :name => "index_book_detail_fetches_on_url"
 
   create_table "book_details", :force => true do |t|
     t.integer  "item_id"
     t.string   "lang",                 :default => "zh-cn"
     t.integer  "book_detail_fetch_id"
-    t.integer  "from_type"
+    t.integer  "from_site"
     t.string   "from_uri"
     t.integer  "position",             :default => 0
     t.integer  "publisher_id"
@@ -165,8 +169,8 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.datetime "updated_at"
   end
 
-  add_index "book_details", ["item_id", "lang", "from_type", "from_uri", "position"], :name => "book_details_item_pos_index"
-  add_index "book_details", ["item_id", "lang", "from_type", "from_uri"], :name => "book_details_item_lang_index"
+  add_index "book_details", ["item_id", "lang", "from_site", "from_uri", "position"], :name => "book_details_item_pos_index"
+  add_index "book_details", ["item_id", "lang", "from_site", "from_uri"], :name => "book_details_item_lang_index"
 
   create_table "book_favorites", :force => true do |t|
     t.integer  "item_id"
@@ -183,13 +187,13 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
   create_table "book_fetch_urls", :force => true do |t|
     t.string   "resource_type"
     t.string   "resource_id"
-    t.integer  "site_type"
+    t.integer  "from_site"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "book_fetch_urls", ["resource_id", "resource_type", "site_type"], :name => "book_fetch_urls_res_index"
+  add_index "book_fetch_urls", ["resource_id", "resource_type", "from_site"], :name => "book_fetch_urls_res_index"
 
   create_table "book_interests", :force => true do |t|
     t.integer  "item_id"

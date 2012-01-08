@@ -4,6 +4,6 @@ class BookCategory < ActiveRecord::Base
   
   has_many :book_category_fetches
   
-  validates_presence_of :name, :url_name
-  validates_uniqueness_of :url_name
+  validates_presence_of :from_site
+  validates_uniqueness_of :from_uri
 end

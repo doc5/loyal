@@ -3,6 +3,7 @@ class CreateBookDetailFetches < ActiveRecord::Migration
     create_table :book_detail_fetches do |t|
       t.string :url
       t.string :title
+      t.integer :from_site
       
       t.timestamps
     end

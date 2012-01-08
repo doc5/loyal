@@ -5,7 +5,7 @@
 
   <div class="main-options">
     <% BookCategoryFetch::CATEGORY_CONFIGS.each do |type, config| %>
-      <%= link_to "#{config[:name]}", admin_book_category_fetches_path(:site_type => type) %>
+      <%= link_to "#{config[:name]}", admin_book_category_fetches_path(:from_site => type) %>
     <% end %>
   </div>
 

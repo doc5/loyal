@@ -4,6 +4,6 @@ class BookDetailFetch < ActiveRecord::Base
   validates_uniqueness_of :url
   
   def fetch_detail
-    
+    book_detail ||= BookDetail.new(:book_detail_fetch_id => self.id)
   end
 end

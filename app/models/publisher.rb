@@ -1,7 +1,7 @@
 require "uri"
 
 class Publisher < ActiveRecord::Base
-  has_one :book_fetch_url_360buy, :class_name => "BookFetchUrl", :as => :resource, :conditions => ["site_type=?", Website::BookConfig::SITE_360BUY]
+  has_one :book_fetch_url_360buy, :class_name => "BookFetchUrl", :as => :resource, :conditions => ["from_site=?", Website::BookConfig::SITE_360BUY]
 
   ROLE_TYPE_BOOK = 0 #图书出版社
   
@@ -13,7 +13,7 @@ class Publisher < ActiveRecord::Base
       
       publisher.save if publisher.new_record?
       
-      case options[:site_type]
+      case options[:from_site]
       when Website::BookConfig::SITE_360BUY
         url = "http://www.360buy.com/publish/#{URI.encode(options[:name])}_1.html"
         
@@ -24,7 +24,7 @@ class Publisher < ActiveRecord::Base
           :resource_type => "Publisher", 
           :resource_id => publisher.id, 
           :url => url,
-          :site_type => options[:site_type]
+          :from_site => options[:from_site]
         })
       
       fetch_url.save

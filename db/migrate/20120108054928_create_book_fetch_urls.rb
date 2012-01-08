@@ -4,13 +4,13 @@ class CreateBookFetchUrls < ActiveRecord::Migration
       t.string :resource_type
       t.string :resource_id
       
-      t.integer :site_type
+      t.integer :from_site
       
       t.string :url
       
       t.timestamps
     end
     
-    add_index :book_fetch_urls, [:resource_id, :resource_type, :site_type], :name => "book_fetch_urls_res_index"
+    add_index :book_fetch_urls, [:resource_id, :resource_type, :from_site], :name => "book_fetch_urls_res_index"
   end
 end

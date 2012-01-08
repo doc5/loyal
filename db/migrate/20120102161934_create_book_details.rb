@@ -6,7 +6,7 @@ class CreateBookDetails < ActiveRecord::Migration
       
       t.integer :book_detail_fetch_id
       
-      t.integer :from_type  #京东？当当？淘宝？亚马逊？豆瓣？？
+      t.integer :from_site  #京东？当当？淘宝？亚马逊？豆瓣？？
       t.string :from_uri
       t.integer :position, :default => 0
       
@@ -43,7 +43,7 @@ class CreateBookDetails < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index :book_details, [:item_id, :lang, :from_type, :from_uri], :name => "book_details_item_lang_index"
-    add_index :book_details, [:item_id, :lang, :from_type, :from_uri, :position], :name => "book_details_item_pos_index"
+    add_index :book_details, [:item_id, :lang, :from_site, :from_uri], :name => "book_details_item_lang_index"
+    add_index :book_details, [:item_id, :lang, :from_site, :from_uri, :position], :name => "book_details_item_pos_index"
   end
 end

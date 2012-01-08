@@ -1,6 +1,6 @@
 <div class="main-path">
-  <% config = BookCategoryFetch::CATEGORY_CONFIGS[category.site_type] %>
-  <%= link_to "#{config[:name]}", admin_book_category_fetches_path(:site_type => category.site_type) %>
+  <% config = BookCategoryFetch::CATEGORY_CONFIGS[category.from_site] %>
+  <%= link_to "#{config[:name]}", admin_book_category_fetches_path(:from_site => category.from_site) %>
   >>
   <% (with_self ? category.self_and_ancestors : category.ancestors).each do |cate| %>
     <%= link_to "#{cate.level_with_name}", admin_route(admin_book_category_fetch_path(cate)) %>

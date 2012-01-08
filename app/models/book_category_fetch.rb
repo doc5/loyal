@@ -65,7 +65,7 @@ class BookCategoryFetch < ActiveRecord::Base
         linker.url = fetch_url
         linker.position = i
         linker.name = fetch_name
-        linker.site_type = TYPE_JINGDONG
+        linker.from_site = TYPE_JINGDONG
         linker.parent_id = nil
         
         linker.save
@@ -82,7 +82,7 @@ class BookCategoryFetch < ActiveRecord::Base
           new_linker.url = node_url
           new_linker.position = ii
           new_linker.name = node_name
-          new_linker.site_type = TYPE_JINGDONG
+          new_linker.from_site = TYPE_JINGDONG
           new_linker.parent_id = linker.id
           new_linker.save
           
