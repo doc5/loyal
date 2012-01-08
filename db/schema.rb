@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120108054928) do
+ActiveRecord::Schema.define(:version => 20120108090823) do
 
   create_table "artists", :force => true do |t|
     t.string   "uuid"
@@ -100,6 +100,11 @@ ActiveRecord::Schema.define(:version => 20120108054928) do
   add_index "book_category_fetches", ["site_type"], :name => "index_book_category_fetches_on_site_type"
   add_index "book_category_fetches", ["url"], :name => "index_book_category_fetches_on_url"
 
+  create_table "book_category_fetches_book_details", :id => false, :force => true do |t|
+    t.integer "book_detail_id"
+    t.integer "book_category_fetch_id"
+  end
+
   create_table "book_comments", :force => true do |t|
     t.string   "resource_type"
     t.integer  "resource_id"
@@ -116,12 +121,20 @@ ActiveRecord::Schema.define(:version => 20120108054928) do
 
   add_index "book_comments", ["resource_type", "resource_id"], :name => "book_comments_resource_index"
 
+  create_table "book_detail_fetches", :force => true do |t|
+    t.string   "url"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "book_details", :force => true do |t|
     t.integer  "item_id"
-    t.string   "lang",                :default => "zh-cn"
+    t.string   "lang",                 :default => "zh-cn"
+    t.integer  "book_detail_fetch_id"
     t.integer  "from_type"
     t.string   "from_uri"
-    t.integer  "position",            :default => 0
+    t.integer  "position",             :default => 0
     t.integer  "publisher_id"
     t.string   "isbn"
     t.string   "title"
@@ -133,8 +146,8 @@ ActiveRecord::Schema.define(:version => 20120108054928) do
     t.string   "price_shop"
     t.string   "production_number"
     t.string   "paper_type"
-    t.integer  "paper_count",         :default => 0
-    t.integer  "print_count",         :default => 0
+    t.integer  "paper_count",          :default => 0
+    t.integer  "print_count",          :default => 0
     t.string   "lang_tag"
     t.string   "format_tag"
     t.date     "published_at"

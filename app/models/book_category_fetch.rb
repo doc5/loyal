@@ -7,6 +7,7 @@ class BookCategoryFetch < ActiveRecord::Base
   acts_as_huabaner_tree
   
   belongs_to :book_category
+  has_and_belongs_to_many :book_details
   
   validates_uniqueness_of :url
   
@@ -18,8 +19,32 @@ class BookCategoryFetch < ActiveRecord::Base
     TYPE_JINGDONG => {:url => "http://www.360buy.com/book/booksort.aspx", :name => "京东商城图书"}
   }
   
+  def fetch_details
+    uri_open = URI.parse(self.url)
+    result_str = uri_open.read
+      
+    doc = Nokogiri::HTML(result_str)
+    
+    item_nodes = doc.css("html body#book div.w div.right-extra div#plist.m div.item")
+    item_nodes.each do |item_node|
+      title_node = item_node.css("dl dt.p-name a")
+      fetch_title = title_node.first.text
+      fetch_url = title_node.first.attr("href")
+      
+      detail_fetch = BookDetailFetch.find_by_url(fetch_url) || 
+        BookDetailFetch.new(:url => fetch_url, :title => fetch_title)
+      
+      
+      Rails.logger.debug "title===>#{fetch_title}"
+      Rails.logger.debug "url===>#{fetch_url}\n"
+      
+      detail_fetch.save      
+    end
+    nil
+  end
+  
   class << self
-    def fetch_360buy(force=false)
+    def fetch_360buy_categories(force=false)
       category_url = CATEGORY_CONFIGS[TYPE_JINGDONG][:url]
       uri_open = URI.parse(category_url)
       result_str = uri_open.read

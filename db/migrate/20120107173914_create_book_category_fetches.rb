@@ -6,6 +6,8 @@ class CreateBookCategoryFetches < ActiveRecord::Migration
       t.integer :site_type
       t.integer :book_category_id
       
+      t.integer :book_details_count, :default => 0
+      
       t.integer :status
       
       # for tree 
