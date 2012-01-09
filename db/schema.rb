@@ -134,11 +134,11 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
 
   create_table "book_details", :force => true do |t|
     t.integer  "item_id"
-    t.string   "lang",                  :default => "zh-cn"
+    t.string   "lang",                 :default => "zh-cn"
     t.integer  "book_detail_fetch_id"
     t.integer  "from_site"
     t.string   "from_uri"
-    t.integer  "position",              :default => 0
+    t.integer  "position",             :default => 0
     t.integer  "publisher_id"
     t.string   "isbn"
     t.string   "isbn_other"
@@ -151,19 +151,14 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.string   "price_shop"
     t.string   "production_number"
     t.string   "paper_type"
-    t.integer  "paper_count",           :default => 0
-    t.integer  "print_count",           :default => 0
+    t.integer  "paper_count",          :default => 0
+    t.integer  "print_count",          :default => 0
     t.string   "lang_tag"
     t.string   "format_tag"
     t.string   "format_paper"
     t.date     "published_at"
     t.string   "published_by"
-    t.text     "content_outline"
-    t.text     "content_author"
-    t.text     "content_editor"
-    t.text     "content_catelog"
-    t.text     "content_media_comment"
-    t.text     "content_note"
+    t.text     "content_encode"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

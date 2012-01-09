@@ -20,6 +20,8 @@ Loyal::Application.routes.draw do
         end
         resources :category_fetches, :only => [:index, :show]
         resources :items
+        resources :details
+        resources :detail_fetches
       end
     end
   end

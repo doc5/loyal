@@ -5,7 +5,8 @@ require 'sanitize'
 class BookDetailFetch < ActiveRecord::Base
   has_one :book_detail, :foreign_key => :from_uri, :primary_key => :url
   
-  validates_uniqueness_of :url
+  validates_presence_of :from_site
+  validates_uniqueness_of :url  
   
   def self.conv_text(text, encoding)
     Iconv.conv('UTF-8//IGNORE',encoding.upcase!, text)
@@ -26,10 +27,7 @@ class BookDetailFetch < ActiveRecord::Base
     fetch_format_paper = nil
     fetch_publisher_name = nil
     fetch_revision = nil
-    fetch_content_outline = nil
-    fetch_content_author  = nil
-    fetch_content_catelog = nil
-    fetch_content_media_comment = nil
+    fetch_content_hash = {}
     
     case book_detail.from_site
       #      =======================================> SITE_360BUY
@@ -57,7 +55,7 @@ class BookDetailFetch < ActiveRecord::Base
             when "ＩＳＢＮ："
               fetch_isbn = node_content_text            
             when "出版时间："
-              fetch_published_at = Date.parse(node_content_text)
+              fetch_published_at = Date.parse(node_content_text) unless node_content_text.blank?
             when "版　　次："
               fetch_revision = node_content_text
             when "装　　帧："
@@ -85,13 +83,17 @@ class BookDetailFetch < ActiveRecord::Base
           node_content_html = BookDetailFetch.conv_text(node_content.first.inner_html, result_str.charset)
           case node_title.first.text.strip
           when "内容简介"
-            fetch_content_outline = node_content_html
+            fetch_content_hash[BookDetail::CONTENT_OUTLINE]       = node_content_html
           when "作者简介"
-            fetch_content_author = node_content_html
+            fetch_content_hash[BookDetail::CONTENT_AUTHOR]        = node_content_html
           when "媒体评论"
-            fetch_content_media_comment = node_content_html
+            fetch_content_hash[BookDetail::CONTENT_MEDIA_COMMENT] = node_content_html
           when "目录"
-            fetch_content_catelog = node_content_html  
+            fetch_content_hash[BookDetail::CONTENT_CATELOG]       = node_content_html
+          when "精彩书摘"            
+            fetch_content_hash[BookDetail::CONTENT_NICE_PICK]     = node_content_html
+          when "前言"            
+            fetch_content_hash[BookDetail::CONTENT_FOREWORD]      = node_content_html
           end
         end
       end
@@ -115,13 +117,10 @@ class BookDetailFetch < ActiveRecord::Base
         :from_site => book_detail.from_site
       )
       book_detail.publisher_id = publisher.id unless publisher.nil?
-      Publisher.reset_counters(publisher.id, :book_details)
+#      Publisher.reset_counters(publisher.id, :book_details)
     end
     
-    book_detail.content_outline = fetch_content_outline
-    book_detail.content_author = fetch_content_author
-    book_detail.content_catelog = fetch_content_catelog
-    book_detail.content_media_comment = fetch_content_media_comment
+    book_detail.content_hash = fetch_content_hash    
     book_detail.price = fetch_price
     book_detail.save
   end

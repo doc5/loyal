@@ -1,0 +1,63 @@
+<%= render :partial => "/admin/book/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>【图书】： <%= @book_detail.title %></h1>
+
+  <div class="main-options">
+    <%= link_to "返回列表", admin_route(admin_book_details_path) %>
+  </div>
+
+  <div class="main-content">
+    <p>
+      <b>ISBN</b><br/>
+      <%= @book_detail.isbn %>
+    </p>
+    <% unless @book_detail.isbn_other.blank? %>
+      <p>
+        <b>isbn_other</b><br/>
+        <%= @book_detail.isbn_other %>
+      </p>
+    <% end %>
+    <% unless @book_detail.price.blank? %>
+      <p>
+        <b>price</b><br/>
+        <%= @book_detail.price %>
+      </p>
+    <% end %>
+      
+    <% unless @book_detail.price_shop.blank? %>
+      <p>
+        <b>price_shop</b><br/>
+        <%= @book_detail.price_shop %>
+      </p>
+    <% end %>
+      
+    <% unless @book_detail.format_tag.blank? %>
+      <p>
+        <b>format_tag</b><br/>
+        <%= @book_detail.format_tag %>
+      </p>
+    <% end %>
+      
+    <% unless @book_detail.format_paper.blank? %>
+      <p>
+        <b>format_paper</b><br/>
+        <%= @book_detail.format_paper %>
+      </p>
+    <% end %>
+      
+    <% unless @book_detail.published_at.blank? %>
+      <p>
+        <b>published_at</b><br/>
+        <%= @book_detail.published_at %>
+      </p>
+    <% end %>
+    
+    <% @book_detail.content_hash.each do |key, content| %>
+      <p>
+        <b><%= BookDetail::CONTENT_DESCS[key] %></b><br/>
+        <%= raw content %>
+      </p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<%= render :partial => "/admin/book/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>图书详情抓取</h1>
+
+  <div class="main-options">
+    
+  </div>
+
+  <div class="main-content">
+    <%= render :partial => "/admin/book/details/list", :locals => {:book_details => @book_details} %> 
+  </div>
+</div>

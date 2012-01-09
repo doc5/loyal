@@ -32,12 +32,7 @@ class CreateBookDetails < ActiveRecord::Migration
       
       t.string :published_by
       
-      t.text :content_outline #内容提要
-      t.text :content_author  #作者简介
-      t.text :content_editor  #编辑推荐
-      t.text :content_catelog #目录
-      t.text :content_media_comment #媒体评论
-      t.text :content_note    #书摘      
+      t.text :content_encode    
       
       t.string :avatar_file_name
       t.string :avatar_content_type
