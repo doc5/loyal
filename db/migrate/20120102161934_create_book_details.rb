@@ -27,6 +27,7 @@ class CreateBookDetails < ActiveRecord::Migration
       t.integer :print_count, :default => 0 #印刷次数
       t.string :lang_tag #语种    
       t.string :format_tag #装帧
+      t.string :format_paper #开本
       t.date   :published_at #出版日期
       
       t.string :published_by

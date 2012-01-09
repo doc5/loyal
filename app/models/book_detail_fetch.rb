@@ -1,4 +1,6 @@
+require 'open-uri'
 require 'iconv'
+require 'sanitize'
 
 class BookDetailFetch < ActiveRecord::Base
   has_one :book_detail, :foreign_key => :from_uri, :primary_key => :url
@@ -20,6 +22,10 @@ class BookDetailFetch < ActiveRecord::Base
     
     fetch_isbn = nil
     fetch_published_at = nil
+    fetch_format_tag = nil
+    fetch_format_paper = nil
+    fetch_publisher_name = nil
+    fetch_revision = nil
     fetch_content_outline = nil
     fetch_content_author  = nil
     fetch_content_catelog = nil
@@ -35,25 +41,32 @@ class BookDetailFetch < ActiveRecord::Base
         if !node_name_span.nil? && node_name_span.any?
           node_name = node_name_span.first.text.strip
           node_text = node.text
+          node_html = node.inner_html
           
-          node_content = node_text.sub(node_name, "").strip
-          Rails.logger.debug "-------------------->#{node_content}"
+          node_content_text = node_text.sub(node_name, "").strip
+          Rails.logger.debug "-#{node_name}------------------->#{node_content_text}"
+#          Rails.logger.debug "-#{node_name.}------------------->#{}"
           
-          case node_name
-          when "作　　者："
-            
-          when "ＩＳＢＮ："
-            fetch_isbn = node_content            
-          when "出版时间："
-            fetch_published_at = Time.parse(node_content)
-          when "版　　次："
-            
-          when "装　　帧："
-            
-          when "开　　本："
-            
-          when "所属分类："
-            
+          unless node_name.blank?
+            case node_name
+#            when "作　　者："
+
+            when /出\s*版\s*社：/
+              Rails.logger.debug "#{node_content_text}************************"
+              fetch_publisher_name = node_content_text
+            when "ＩＳＢＮ："
+              fetch_isbn = node_content_text            
+            when "出版时间："
+              fetch_published_at = Date.parse(node_content_text)
+            when "版　　次："
+              fetch_revision = node_content_text
+            when "装　　帧："
+              fetch_format_tag = node_content_text
+            when "开　　本："
+              fetch_format_paper = node_content_text
+            when "所属分类："
+
+            end
           end
         end
       end
@@ -91,6 +104,19 @@ class BookDetailFetch < ActiveRecord::Base
     book_detail.title = title_node.text.strip
     book_detail.isbn = fetch_isbn
     book_detail.published_at = fetch_published_at
+    book_detail.format_tag = fetch_format_tag
+    book_detail.format_paper = fetch_format_paper
+    book_detail.revision = fetch_revision
+    
+    unless fetch_publisher_name.nil?
+      publisher = Publisher.fetch_touch(
+        :role_type => Publisher::ROLE_TYPE_BOOK, 
+        :name => fetch_publisher_name,
+        :from_site => book_detail.from_site
+      )
+      book_detail.publisher_id = publisher.id unless publisher.nil?
+      Publisher.reset_counters(publisher.id, :book_details)
+    end
     
     book_detail.content_outline = fetch_content_outline
     book_detail.content_author = fetch_content_author

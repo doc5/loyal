@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.integer  "position",              :default => 0
     t.integer  "publisher_id"
     t.string   "isbn"
+    t.string   "isbn_other"
     t.string   "title"
     t.string   "subtitle"
     t.string   "original_title"
@@ -154,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.integer  "print_count",           :default => 0
     t.string   "lang_tag"
     t.string   "format_tag"
+    t.string   "format_paper"
     t.date     "published_at"
     t.string   "published_by"
     t.text     "content_outline"
@@ -296,6 +298,7 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.string   "name"
     t.text     "description"
     t.integer  "book_items_count",    :default => 0
+    t.integer  "book_details_count",  :default => 0
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

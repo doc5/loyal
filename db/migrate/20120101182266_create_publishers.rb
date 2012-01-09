@@ -6,6 +6,7 @@ class CreatePublishers < ActiveRecord::Migration
       t.text   :description      
       
       t.integer :book_items_count, :default => 0
+      t.integer :book_details_count, :default => 0
       
       t.string :avatar_file_name
       t.string :avatar_content_type
