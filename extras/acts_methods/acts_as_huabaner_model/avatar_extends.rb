@@ -37,11 +37,26 @@ module ActsMethods
         protected
         
         def impl_file_download
-          extend_name = self.from_uri[/\.[^\.]+$/]
+#          extend_name = self.from_uri[/\.[^\.]+$/]
+#          
+#          self.avatar = open(self.from_uri){|f|
+#            f.read
+#          }  
+
+          _local_fullpath = "#{Rails.root}/tmp/tmp_downloads/#{UUIDTools::UUID.random_create.to_s}#{File.extname(URI.parse(self.from_uri).path)}"
+                
+         
+          Rails.logger.debug "下载到临时目录:#{_local_fullpath}"
+          open(self.from_uri) { |f|                       
+            file = File.open("#{_local_fullpath}","wb")            
+            file.puts f.read                    
+            file.close
+          }    
           
-          self.avatar = open(self.from_uri){|f|
-            f.read
-          }              
+          File.open("#{_local_fullpath}", "r") do |f|     
+            self.avatar = f
+            File.delete(_local_fullpath) if File.exists?(_local_fullpath)
+          end
         end
       end
       
