@@ -9,7 +9,7 @@ class BookDetailFetch < ActiveRecord::Base
   validates_uniqueness_of :url  
   
   def self.conv_text(text, encoding)
-    Iconv.conv('UTF-8//IGNORE',encoding.upcase!, text)
+    Iconv.conv('UTF-8//IGNORE', encoding.upcase!, text)
   end
   
   def fetch_detail

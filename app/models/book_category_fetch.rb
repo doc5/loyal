@@ -9,8 +9,7 @@ class BookCategoryFetch < ActiveRecord::Base
   belongs_to :book_category
   has_and_belongs_to_many :book_details
   
-  validates_uniqueness_of :url  
-  
+  validates_uniqueness_of :url    
   validates_presence_of :from_site
   
   TYPE_DEFAULT = Website::BookConfig::SITE_360BUY
