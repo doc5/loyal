@@ -8,8 +8,8 @@ class CreateBookItems < ActiveRecord::Migration
       
       t.integer :series_id #系列id
       
-      t.string :published_by
-      t.date   :published_at
+#      t.string :published_by
+#      t.date   :published_at
       
       t.integer :book_comments_count,  :default => 0
       t.integer :book_notes_count    , :default => 0

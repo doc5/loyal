@@ -39,6 +39,14 @@ class BookDetail < ActiveRecord::Base
     end
   end
   
+#  同步项目
+  def sync_item
+    book_item = self.item || BookItem.new
+    book_item.isbn = self.isbn
+    book_item.isbn_other = self.isbn_other
+    book_item.save
+  end
+  
   before_save do |r|
     r.impl_content_encode 
   end
