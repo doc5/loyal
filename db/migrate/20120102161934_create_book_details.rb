@@ -12,6 +12,8 @@ class CreateBookDetails < ActiveRecord::Migration
       
       t.integer :publisher_id
       
+      t.string :author_info
+      
       t.string :isbn   
       t.string :isbn_other      
       t.string :title #标题

@@ -18,6 +18,12 @@
         <%= @book_detail.isbn_other %>
       </p>
     <% end %>
+    <% unless @book_detail.author_info.blank? %>
+      <p>
+        <b>author_info</b><br/>
+        <%= @book_detail.author_info %>
+      </p>
+    <% end %>
     <% unless @book_detail.price.blank? %>
       <p>
         <b>price</b><br/>
@@ -50,6 +56,16 @@
       <p>
         <b>published_at</b><br/>
         <%= @book_detail.published_at %>
+      </p>
+    <% end %>
+      
+    <% unless @book_detail.book_category_fetches.empty? %>
+      <p>
+        <b>categories</b><br/>
+        <% @book_detail.book_category_fetches.each do |category| %>
+          <%= render :partial => "/admin/book/category_fetches/inner_current_path", 
+            :locals => {:category => category} %>
+        <% end %>
       </p>
     <% end %>
     

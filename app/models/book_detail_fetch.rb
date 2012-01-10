@@ -25,9 +25,11 @@ class BookDetailFetch < ActiveRecord::Base
     fetch_published_at = nil
     fetch_format_tag = nil
     fetch_format_paper = nil
+    fetch_author_info = nil
     fetch_publisher_name = nil
     fetch_revision = nil
     fetch_content_hash = {}
+    fetch_category_ids_array = Array.new
     
     case book_detail.from_site
       #      =======================================> SITE_360BUY
@@ -39,18 +41,16 @@ class BookDetailFetch < ActiveRecord::Base
         if !node_name_span.nil? && node_name_span.any?
           node_name = node_name_span.first.text.strip
           node_text = node.text
-          node_html = node.inner_html
+#          node_html = node.inner_html
           
           node_content_text = node_text.sub(node_name, "").strip
           Rails.logger.debug "-#{node_name}------------------->#{node_content_text}"
-#          Rails.logger.debug "-#{node_name.}------------------->#{}"
           
           unless node_name.blank?
             case node_name
-#            when "作　　者："
-
+            when "作　　者："
+              fetch_author_info = node_content_text
             when /出\s*版\s*社：/
-              Rails.logger.debug "#{node_content_text}************************"
               fetch_publisher_name = node_content_text
             when "ＩＳＢＮ："
               fetch_isbn = node_content_text            
@@ -63,7 +63,13 @@ class BookDetailFetch < ActiveRecord::Base
             when "开　　本："
               fetch_format_paper = node_content_text
             when "所属分类："
-
+              cate_doc = Nokogiri::HTML(BookDetailFetch.conv_text(node.inner_html, result_str.charset))
+              cate_doc.css("a").each_with_index do |node, i|
+                if i % 3 == 2
+                  cate = BookCategoryFetch.find_by_url(node.attr("href"))
+                  fetch_category_ids_array << cate.id unless cate.nil?
+                end
+              end              
             end
           end
         end
@@ -71,7 +77,7 @@ class BookDetailFetch < ActiveRecord::Base
     
       #      价格抓取
       prices_node = doc.css("#book-price li")    
-      fetch_price = prices_node.first.css("del").first.text.strip
+      fetch_price = prices_node.first.css("del").first.text.strip if prices_node.any?
       
       #      正文抓取
       doc.css("html body#book div.w div.right-extra div.m").each do |node|
@@ -105,10 +111,12 @@ class BookDetailFetch < ActiveRecord::Base
     
     book_detail.title = title_node.text.strip
     book_detail.isbn = fetch_isbn
+    book_detail.author_info = fetch_author_info
     book_detail.published_at = fetch_published_at
     book_detail.format_tag = fetch_format_tag
     book_detail.format_paper = fetch_format_paper
     book_detail.revision = fetch_revision
+    book_detail.book_category_fetch_ids = fetch_category_ids_array
     
     unless fetch_publisher_name.nil?
       publisher = Publisher.fetch_touch(
@@ -116,10 +124,13 @@ class BookDetailFetch < ActiveRecord::Base
         :name => fetch_publisher_name,
         :from_site => book_detail.from_site
       )
+      
+      Rails.logger.debug "*********==================>#{publisher.name}|#{publisher.id}"
+      
       book_detail.publisher_id = publisher.id unless publisher.nil?
 #      Publisher.reset_counters(publisher.id, :book_details)
     end
-    
+      
     book_detail.content_hash = fetch_content_hash    
     book_detail.price = fetch_price
     book_detail.save

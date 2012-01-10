@@ -18,7 +18,7 @@ class BookCategoryFetch < ActiveRecord::Base
     Website::BookConfig::SITE_360BUY => {:url => "http://www.360buy.com/book/booksort.aspx", :name => "京东商城图书"}
   }
   
-  def fetch_details
+  def fetch_details(options={})
     uri_open = URI.parse(self.url)
     result_str = uri_open.read
       
@@ -38,7 +38,9 @@ class BookCategoryFetch < ActiveRecord::Base
       Rails.logger.debug "title===>#{fetch_title}"
       Rails.logger.debug "url===>#{fetch_url}\n"
       
-      detail_fetch.save      
+      detail_fetch.save   
+      
+      detail_fetch.fetch_detail if options[:fetch_detail]
     end
   end
   

@@ -8,7 +8,9 @@
   </div>
 
   <div class="main-content">
+    <%= will_paginate @book_items %>
     <%= render :partial => "/admin/book/items/list", :locals => {:book_items => @book_items} %>
+    <%= will_paginate @book_items %>
   </div>
 
   <div class="main-options">

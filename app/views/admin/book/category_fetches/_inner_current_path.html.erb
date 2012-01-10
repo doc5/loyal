@@ -1,0 +1,6 @@
+<%= link_to "#{BookCategoryFetch::CATEGORY_CONFIGS[category.from_site] [:name]}", 
+  admin_book_category_fetches_path(:from_site => category.from_site) %>
+>>
+<% ((defined?(with_self) && with_self) ? category.self_and_ancestors : category.ancestors).each do |cate| %>
+  <%= link_to "#{cate.level_with_name}", admin_route(admin_book_category_fetch_path(cate)) %>
+<% end %>

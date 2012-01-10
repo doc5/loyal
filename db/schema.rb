@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.string   "from_uri"
     t.integer  "position",             :default => 0
     t.integer  "publisher_id"
+    t.string   "author_info"
     t.string   "isbn"
     t.string   "isbn_other"
     t.string   "title"
