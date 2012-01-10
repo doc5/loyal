@@ -55,8 +55,9 @@ module ActsMethods
           
           File.open("#{_local_fullpath}", "r") do |f|     
             self.avatar = f
-            File.delete(_local_fullpath) if File.exists?(_local_fullpath)
           end
+          
+          File.delete(_local_fullpath) if File.exists?(_local_fullpath)
         end
       end
       
