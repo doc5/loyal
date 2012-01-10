@@ -33,7 +33,8 @@ module ActsMethods
       
       
       
-      module InstanceMethods
+      module InstanceMethods        
+        protected
         
         def impl_file_download
           extend_name = self.from_uri[/\.[^\.]+$/]
