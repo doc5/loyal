@@ -5,12 +5,21 @@ class BookDetail < ActiveRecord::Base
   has_and_belongs_to_many :book_category_fetches
   has_one :book_detail_fetch, :foreign_key => :url, :primary_key => :from_uri
   belongs_to :publisher, :counter_cache => true
+  has_many :overall_avatars, :as => :resource
   
   validates_presence_of :from_site, :from_uri
   validates_uniqueness_of :from_uri
   
   def after_initialize
     self.impl_content_decode
+  end  
+  
+  before_save do |r|
+    r.impl_content_encode 
+  end
+  
+  after_find do |r|
+    r.impl_content_decode
   end
   
   CONTENT_OUTLINE         = "outline"
@@ -33,26 +42,31 @@ class BookDetail < ActiveRecord::Base
     CONTENT_FOREWORD        => "前言"
   }
   
+  def from_site_name
+    BookCategoryFetch::CATEGORY_CONFIGS[self.from_site][:name]
+  end
+  
   def fetch
     unless book_detail_fetch.nil?
       book_detail_fetch.fetch_detail
     end
   end
   
+  def sync_image
+    case self.from_site
+    when Website::BookConfig::SITE_360BUY
+#      抓取360buy的图书图片信息
+    end
+  end
+  
 #  同步项目
-  def sync_item
+  def sync_item_by_isbn
     book_item = self.item || BookItem.new
     book_item.isbn = self.isbn
     book_item.isbn_other = self.isbn_other
     book_item.save
-  end
-  
-  before_save do |r|
-    r.impl_content_encode 
-  end
-  
-  after_find do |r|
-    r.impl_content_decode
+    
+    self.item_id = book_item.id
   end
   
   protected

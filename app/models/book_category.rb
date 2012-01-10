@@ -3,4 +3,6 @@ class BookCategory < ActiveRecord::Base
   acts_as_huabaner_tree
   
   has_many :book_category_fetches
+  
+  validates_uniqueness_of :url_name
 end

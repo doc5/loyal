@@ -7,12 +7,9 @@ module ActsMethods
       def acts_as_huabaner_uuid(options = {})            
         validates_uniqueness_of :uuid, :message => "必须唯一"
           
-        before_create do |r|
-          # 随机创建UUID
-            
-          if r.uuid.nil?
-            r.uuid = UUIDTools::UUID.random_create.to_s
-          end
+        before_save do |r|
+          # 随机创建UUID          
+          r.uuid = UUIDTools::UUID.random_create.to_s if r.uuid.nil?
         end 
       end
     end

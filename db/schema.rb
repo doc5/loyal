@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120108090823) do
+ActiveRecord::Schema.define(:version => 20120110151436) do
 
   create_table "artists", :force => true do |t|
     t.string   "uuid"
@@ -285,6 +285,21 @@ ActiveRecord::Schema.define(:version => 20120108090823) do
     t.string   "name"
     t.integer  "book_items_count", :default => 0
     t.integer  "users_count",      :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "overall_avatars", :force => true do |t|
+    t.string   "from_uri"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.string   "title"
+    t.string   "alt"
+    t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

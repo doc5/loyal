@@ -8,6 +8,7 @@ class BookCategoryFetch < ActiveRecord::Base
   
   belongs_to :book_category
   has_and_belongs_to_many :book_details
+  has_many :overall_avatars, :as => :resource
   
   validates_uniqueness_of :url    
   validates_presence_of :from_site
@@ -17,6 +18,10 @@ class BookCategoryFetch < ActiveRecord::Base
   CATEGORY_CONFIGS = {
     Website::BookConfig::SITE_360BUY => {:url => "http://www.360buy.com/book/booksort.aspx", :name => "京东商城图书"}
   }
+  
+  def from_site_name
+    CATEGORY_CONFIGS[self.from_site][:name]
+  end
   
   def fetch_details(options={})
     uri_open = URI.parse(self.url)

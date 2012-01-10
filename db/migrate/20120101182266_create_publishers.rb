@@ -8,10 +8,7 @@ class CreatePublishers < ActiveRecord::Migration
       t.integer :book_items_count, :default => 0
       t.integer :book_details_count, :default => 0
       
-      t.string :avatar_file_name
-      t.string :avatar_content_type
-      t.integer :avatar_file_size
-      t.datetime :avatar_updated_at
+      t.integer :overall_avatars_count, :default => 0
       
       t.timestamps
     end

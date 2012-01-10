@@ -6,8 +6,11 @@
   <div class="main-options">
     <%= link_to "返回列表", admin_route(admin_book_details_path) %>
   </div>
-
+  
   <div class="main-content">
+    <p>
+      <%= "@#{@book_detail.from_site_name}" %>
+    </p>
     <p>
       <b>ISBN</b><br/>
       <%= @book_detail.isbn %>
@@ -64,7 +67,7 @@
         <b>categories</b><br/>
         <% @book_detail.book_category_fetches.each do |category| %>
           <%= render :partial => "/admin/book/category_fetches/inner_current_path", 
-            :locals => {:category => category} %>
+            :locals => {:category => category, :with_self => true} %>;
         <% end %>
       </p>
     <% end %>

@@ -1,8 +1,9 @@
 require "uri"
 
 class Publisher < ActiveRecord::Base
-  has_one :book_fetch_url_360buy, :class_name => "BookFetchUrl", :as => :resource, :conditions => ["from_site=?", Website::BookConfig::SITE_360BUY]
-  has_many :book_details
+  has_one :book_fetch_url_360buy, :class_name => "BookFetchUrl", :as => :resource, 
+    :conditions => ["from_site=?", Website::BookConfig::SITE_360BUY]
+  has_many :overall_avatars, :as => :resource
   
   validates_presence_of :name, :role_type
   validates_uniqueness_of :name, :scope => [:name, :role_type]

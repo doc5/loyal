@@ -5,7 +5,7 @@
         <div class="operate">
           <%= link_to "编辑", admin_route(edit_admin_book_item_path(item)) %>
         </div>        
-        <%= link_to "#{item.name}", admin_route(admin_book_item_path(item)) %>
+        <%= link_to "#{item.name_display}", admin_route(admin_book_item_path(item)) %>
       </div>
     <% end %>
   <% else %>

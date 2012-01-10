@@ -1,11 +1,11 @@
 <%= render :partial => "/admin/book/partials/side_panel" %>
 
 <div id="main-panel">
-  <h1>【图书】： <%= @book_item.name %></h1>
+  <h1>【图书】： <%= @book_item.name_display %></h1>
 
   <div class="main-options">
     <%= link_to "返回列表", admin_route(admin_book_items_path) %>
-    <%= link_to "编辑分类", admin_route(edit_admin_book_item_path(@book_item)) %>
+    <%= link_to "编辑图书", admin_route(edit_admin_book_item_path(@book_item)) %>
     <%= link_to "新建图书", admin_route(new_admin_book_item_path) %>
   </div>
 
