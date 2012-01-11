@@ -5,6 +5,7 @@ class CreateOverallAvatars < ActiveRecord::Migration
       
       t.string :resource_type
       t.integer :resource_id
+      t.integer :position, :default => 0
       
       t.string :title
       t.string :alt

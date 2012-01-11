@@ -134,6 +134,7 @@ class BookDetailFetch < ActiveRecord::Base
     book_detail.content_hash = fetch_content_hash    
     book_detail.price = fetch_price
     book_detail.sync_item_by_isbn
+    book_detail.sync_avatars
     book_detail.save
-  end
+  end 
 end

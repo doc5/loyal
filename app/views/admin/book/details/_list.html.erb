@@ -4,7 +4,8 @@
       <div class="item">
         <div class="operate">
           <%= link_to "编辑", admin_route(edit_admin_book_detail_path(detail)) %>
-        </div>        
+        </div> 
+        <%= image_tag detail.first_avatar_url(:face)%>
         <%= link_to "#{detail.title}", admin_route(admin_book_detail_path(detail)) %>
       </div>
     <% end %>
