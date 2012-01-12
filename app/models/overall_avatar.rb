@@ -12,8 +12,8 @@ class OverallAvatar < ActiveRecord::Base
   }, 
   :default_style => :normal,
   :default_url => "/assets/avatar/miss/:style_#{to_s}.gif",
-    :url => "/uploads/images/#{to_s}/:attachment/:id.:style.:extension",
-    :path => ":rails_root/public/uploads/images/#{to_s}/:attachment/:id.:style.:extension"
+    :url => "/uploads/images/#{to_s}/:attachment/:id_partition_:style.:extension",
+    :path => ":rails_root/public/uploads/images/#{to_s}/:attachment/:id_partition_:style.:extension"
   #          :path => ":rails_root/uploads/images/:class/:attachment/:id_partition/:id_:style.:extension"   
 
   # validates_attachment_presence :avatar
