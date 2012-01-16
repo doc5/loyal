@@ -10,24 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120110151436) do
+ActiveRecord::Schema.define(:version => 20120101182253) do
 
-  create_table "artists", :force => true do |t|
+  create_table "archives_items", :force => true do |t|
     t.string   "uuid"
-    t.string   "name"
-    t.text     "description"
-    t.integer  "poly_type",           :default => 0
-    t.integer  "book_items_count",    :default => 0
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.string   "title"
+    t.string   "refer_unique"
+    t.integer  "created_by"
+    t.string   "created_ip"
+    t.integer  "content_way",   :default => 0
+    t.text     "content"
+    t.text     "virtue_encode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "artists", ["name"], :name => "index_artists_on_name"
-  add_index "artists", ["uuid"], :name => "index_artists_on_uuid"
+  create_table "archives_items_and_overall_categories", :id => false, :force => true do |t|
+    t.integer "archives_item_id"
+    t.integer "overall_category_id"
+  end
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -36,31 +37,28 @@ ActiveRecord::Schema.define(:version => 20120110151436) do
     t.datetime "updated_at"
   end
 
-  create_table "book_authors", :force => true do |t|
-    t.integer  "artist_id"
-    t.integer  "book_detail_id"
-    t.integer  "role_type"
-    t.integer  "position",       :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "book_boxes", :force => true do |t|
-    t.integer  "created_by"
-    t.string   "created_ip"
+  create_table "overall_avatars", :force => true do |t|
+    t.string   "from_uri"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.integer  "position",            :default => 0
     t.string   "title"
-    t.text     "description"
-    t.integer  "book_items_count",    :default => 0
-    t.integer  "book_comments_count", :default => 0
+    t.string   "alt"
+    t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "book_categories", :force => true do |t|
+  create_table "overall_categories", :force => true do |t|
     t.string   "name"
     t.string   "title"
     t.string   "url_name"
     t.integer  "position",            :default => 0
+    t.string   "flag_name"
     t.string   "lang",                :default => "zh-cn"
     t.string   "introduction"
     t.text     "description"
@@ -81,245 +79,6 @@ ActiveRecord::Schema.define(:version => 20120110151436) do
     t.datetime "updated_at"
   end
 
-  add_index "book_categories", ["url_name", "lang"], :name => "book_categories_url_name"
-
-  create_table "book_category_fetches", :force => true do |t|
-    t.string   "url"
-    t.string   "name"
-    t.integer  "from_site"
-    t.integer  "book_category_id"
-    t.integer  "book_details_count", :default => 0
-    t.integer  "status"
-    t.integer  "parent_id"
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.integer  "position",           :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "book_category_fetches", ["from_site"], :name => "index_book_category_fetches_on_from_site"
-  add_index "book_category_fetches", ["url"], :name => "index_book_category_fetches_on_url"
-
-  create_table "book_category_fetches_book_details", :id => false, :force => true do |t|
-    t.integer "book_detail_id"
-    t.integer "book_category_fetch_id"
-  end
-
-  create_table "book_comments", :force => true do |t|
-    t.string   "resource_type"
-    t.integer  "resource_id"
-    t.integer  "score_id"
-    t.string   "lang"
-    t.string   "title"
-    t.text     "content"
-    t.integer  "created_by"
-    t.string   "created_ip"
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "book_comments", ["resource_type", "resource_id"], :name => "book_comments_resource_index"
-
-  create_table "book_detail_fetches", :force => true do |t|
-    t.string   "url"
-    t.string   "title"
-    t.integer  "from_site"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "book_detail_fetches", ["url"], :name => "index_book_detail_fetches_on_url"
-
-  create_table "book_details", :force => true do |t|
-    t.integer  "item_id"
-    t.string   "lang",                 :default => "zh-cn"
-    t.integer  "book_detail_fetch_id"
-    t.integer  "from_site"
-    t.string   "from_uri"
-    t.integer  "position",             :default => 0
-    t.integer  "publisher_id"
-    t.string   "author_info"
-    t.string   "isbn"
-    t.string   "isbn_other"
-    t.string   "title"
-    t.string   "subtitle"
-    t.string   "original_title"
-    t.string   "cn_title"
-    t.integer  "revision"
-    t.string   "price"
-    t.string   "price_shop"
-    t.string   "production_number"
-    t.string   "paper_type"
-    t.integer  "paper_count",          :default => 0
-    t.integer  "print_count",          :default => 0
-    t.string   "lang_tag"
-    t.string   "format_tag"
-    t.string   "format_paper"
-    t.date     "published_at"
-    t.string   "published_by"
-    t.text     "content_encode"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "book_details", ["from_uri"], :name => "index_book_details_on_from_uri"
-
-  create_table "book_favorites", :force => true do |t|
-    t.integer  "item_id"
-    t.string   "lang"
-    t.integer  "created_by"
-    t.string   "created_ip"
-    t.string   "title"
-    t.text     "description"
-    t.integer  "position",    :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "book_fetch_urls", :force => true do |t|
-    t.string   "resource_type"
-    t.string   "resource_id"
-    t.integer  "from_site"
-    t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "book_fetch_urls", ["resource_id", "resource_type", "from_site"], :name => "book_fetch_urls_res_index"
-
-  create_table "book_interests", :force => true do |t|
-    t.integer  "item_id"
-    t.integer  "score_id"
-    t.integer  "status_type"
-    t.text     "content"
-    t.integer  "permission_type"
-    t.text     "permission_text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "book_items", :force => true do |t|
-    t.string   "uuid"
-    t.string   "isbn"
-    t.string   "isbn_other"
-    t.integer  "series_id"
-    t.string   "published_by"
-    t.date     "published_at"
-    t.integer  "book_comments_count",          :default => 0
-    t.integer  "book_notes_count",             :default => 0
-    t.integer  "book_interests_count",         :default => 0
-    t.integer  "book_scores_count",            :default => 0
-    t.integer  "book_favorites_count",         :default => 0
-    t.integer  "book_details_count",           :default => 0
-    t.integer  "book_origins_count",           :default => 0
-    t.integer  "book_interests_doing_count",   :default => 0
-    t.integer  "book_interests_wish_count",    :default => 0
-    t.integer  "book_interests_collect_count", :default => 0
-    t.integer  "total_score",                  :default => 0
-    t.integer  "scores_count",                 :default => 0
-    t.integer  "scores_a_count",               :default => 0
-    t.integer  "scores_b_count",               :default => 0
-    t.integer  "scores_c_count",               :default => 0
-    t.integer  "scores_d_count",               :default => 0
-    t.integer  "scores_e_count",               :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "book_items", ["isbn"], :name => "index_book_items_on_isbn"
-  add_index "book_items", ["isbn_other"], :name => "index_book_items_on_isbn_other"
-  add_index "book_items", ["uuid"], :name => "index_book_items_on_uuid"
-
-  create_table "book_notes", :force => true do |t|
-    t.integer  "item_id"
-    t.integer  "score_id"
-    t.integer  "detail_id"
-    t.string   "lang"
-    t.string   "title"
-    t.integer  "chapter_page"
-    t.integer  "chapter_title"
-    t.text     "content"
-    t.integer  "created_by"
-    t.string   "created_ip"
-    t.integer  "permission_type"
-    t.text     "permission_text"
-    t.integer  "book_comments_count", :default => 0
-    t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "book_scores", :force => true do |t|
-    t.string   "resource_type"
-    t.integer  "resource_id"
-    t.integer  "created_by"
-    t.string   "created_ip"
-    t.integer  "point"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "book_scores", ["resource_type", "resource_id"], :name => "book_scores_res_index"
-
-  create_table "book_series", :force => true do |t|
-    t.string   "name"
-    t.string   "name_en"
-    t.integer  "book_items_count",    :default => 0
-    t.string   "title"
-    t.text     "description"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "book_tags", :force => true do |t|
-    t.string   "name"
-    t.integer  "book_items_count", :default => 0
-    t.integer  "users_count",      :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "overall_avatars", :force => true do |t|
-    t.string   "from_uri"
-    t.string   "resource_type"
-    t.integer  "resource_id"
-    t.string   "title"
-    t.string   "alt"
-    t.string   "name"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "publishers", :force => true do |t|
-    t.integer  "role_type"
-    t.string   "name"
-    t.text     "description"
-    t.integer  "book_items_count",    :default => 0
-    t.integer  "book_details_count",  :default => 0
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "publishers", ["name", "role_type"], :name => "index_publishers_on_name_and_role_type"
-
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.string   "remark"
@@ -330,21 +89,6 @@ ActiveRecord::Schema.define(:version => 20120110151436) do
   end
 
   add_index "roles", ["name"], :name => "index_roles_on_name"
-
-  create_table "ship_book_items_and_book_categories", :id => false, :force => true do |t|
-    t.integer "item_id"
-    t.integer "category_id"
-  end
-
-  create_table "ship_book_items_and_book_tags", :id => false, :force => true do |t|
-    t.integer "item_id"
-    t.integer "tag_id"
-  end
-
-  create_table "ship_users_and_book_tags", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "tag_id"
-  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

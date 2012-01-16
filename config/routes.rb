@@ -1,5 +1,7 @@
 Loyal::Application.routes.draw do
   
+  get "home/index"
+
 #  =============================================================================
 #  blogsoso.com
   constraints :subdomain => "", :domain => 'blogsoso.com' do   
@@ -24,6 +26,13 @@ Loyal::Application.routes.draw do
       root :to => "home#index"
       resources :users
       resources :roles
+      
+      namespace :overall do
+        root :to => "home#index"
+        resources :categories do 
+        
+        end
+      end
       
       namespace :book do
         root :to => "home#index"

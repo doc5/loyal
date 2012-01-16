@@ -5,9 +5,9 @@ class CreateArtists < ActiveRecord::Migration
       
       t.string :name
       t.text   :description  
-      t.integer :poly_type, :default => 0  
-      
-      t.integer :book_items_count, :default => 0
+#      t.integer :poly_type, :default => 0  
+#      
+#      t.integer :book_items_count, :default => 0
       
       t.string :avatar_file_name
       t.string :avatar_content_type

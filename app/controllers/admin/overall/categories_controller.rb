@@ -1,4 +1,4 @@
-class Admin::Overall::CategoriesController < ApplicationController
+class Admin::Overall::CategoriesController < AdminController
   def index
     @overall_categories = OverallCategory.total_tree_struct
     
