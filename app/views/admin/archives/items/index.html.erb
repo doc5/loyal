@@ -15,7 +15,7 @@
         <div class="operate">
           <%= link_to "编辑", admin_route(edit_admin_archives_item_path(item)) %>
         </div>        
-        <%= link_to "#{item.level_with_name}", admin_route(admin_archives_item_path(item)) %>
+        <%= link_to "#{item.title}", admin_route(admin_archives_item_path(item)) %>
       </div>
         <% end %>
       <% else %>
