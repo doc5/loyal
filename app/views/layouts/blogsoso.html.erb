@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test</title>
+    <%= stylesheet_link_tag    "blogsoso" %>
+    <%= javascript_include_tag "blogsoso" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>   
+    <% if false %>
+      <div id="page-messages-contain">
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <%= yield %>
+
+  </body>
+</html>

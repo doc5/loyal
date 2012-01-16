@@ -1,0 +1,2 @@
+module Blogsoso::HomeHelper
+end

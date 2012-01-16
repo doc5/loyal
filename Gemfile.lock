@@ -1,5 +1,5 @@
 GEM
-  remote: http://www.doc5.com:8808/
+  remote: http://rubygems.org/
   specs:
     RedCloth (4.2.8)
     SystemTimer (1.2.3)
