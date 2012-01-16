@@ -1,0 +1,15 @@
+<div id="side-panel">
+  <h2>
+    <%= link_to "文档管理", admin_route(admin_archives_root_path) %>
+  </h2>
+  
+  <h4>文档管理</h4>
+  <ul>
+    <li>
+      <%= link_to "文档列表", admin_route(admin_archives_items_path) %>
+    </li>
+    <li>
+      <%= link_to "新建文档", admin_route(new_admin_archives_item_path) %>
+    </li>
+  </ul>
+</div>

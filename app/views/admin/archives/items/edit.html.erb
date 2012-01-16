@@ -1,0 +1,17 @@
+<%= render :partial => "/admin/archives/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>编辑文档</h1>
+
+  <div class="main-options">
+    <%= link_to "返回文档列表", admin_route(admin_archives_items_path) %>
+    <%= link_to "返回文档", admin_route(admin_archives_item_path(@archives_item)) %>
+    <%= link_to "新建文档", admin_route(new_admin_archives_item_path) %>
+  </div>
+
+  <div class="main-content">
+    <%= form_for([:admin, @archives_item], :html => { :multipart => true }) do |f| %>
+      <%= render :partial => 'form', :locals => {:f => f} %>
+    <% end %>
+  </div>
+</div>

@@ -29,8 +29,13 @@ Loyal::Application.routes.draw do
       
       namespace :overall do
         root :to => "home#index"
-        resources :categories do 
-        
+        resources :categories do         
+        end
+      end
+      
+      namespace :archives do
+        root :to => "home#index"
+        resources :items do         
         end
       end
       
