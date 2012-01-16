@@ -6,7 +6,11 @@ module ControllerExt
     
     def book_route(path='')
       subdomain_route(SubdomainBook, path)
-    end 
+    end
+    
+    def apps_route(path='')
+      subdomain_route(SubdomainApps, path)
+    end
     
     def www_route(path='')
       subdomain_route(SubdomainWWW, path)

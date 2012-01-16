@@ -1,0 +1,276 @@
+/*
+ *= require_self
+*/
+
+.kandyTabs{margin:0;padding:2px;border:1px solid #DDD;background:#f5f5f5;overflow:hidden;zoom:1}
+.kandyTabs .tabtitle{margin:0;padding:0;line-height:22px;border-bottom:1px solid #DDD}
+.kandyTabs .tabtitle .tabbtn{margin:0 4px 0 0;padding:0 5px;display:inline-block;background:#e5e5e5;border:1px solid #DDD;border-width:1px 1px 0;}
+.kandyTabs .tabtitle .tabcur{line-height:23px;background:#FFF;border-bottom:1px solid #FFF;font-weight:bold;color:#F00;margin-bottom:-2px}
+.kandyTabs .tabbody{padding:5px;background:#FFF;border:1px solid #DDD;border-width:0 1px 1px;overflow:hidden;zoom:1;margin:0}
+.kandyTabs .tabbody .tabcont{background:#FFF}
+.kandyTabs .tabbody .tabroll .tabcont{margin:5px 0 0}
+
+.tabnav,.tabctrl,.tabpage{zoom:1}
+.tabnav em,tabctrl b{cursor:pointer;}
+.tabpage *{cursor:default;font-weight:normal}
+.tabprevno,.tabnextno{cursor:default!important}
+.tabprocess{height:5px;overflow:hidden;}
+
+.kandyFold{border:3px double #DDD;overflow:hidden;zoom:1}
+.kandyFold .tabbtn{border-top:1px solid #DDD;display:block;margin:-1px 0 0;padding:0 10px;line-height:24px;background:#EEE;zoom:1}
+.kandyFold .tabcur{background:#FFF;border-bottom:1px dashed #EEE;font-weight:bold;color:#F00;}
+.kandyFold .tabon{background:#F5F5F5;font-weight:bold}
+.kandyFold .tabcont{display:block;margin:0;padding:5px;}
+
+.kandySlide{position:relative;zoom:1;}
+.kandySlide .tabtitle{position:absolute;bottom:8px;right:8px;z-index:10}
+.kandySlide .tabtitle .tabbtn{float:left;background:#000;color:#FFF;padding:0 4px;font:bold 12px/16px Arial;margin:0 0 0 5px;filter:alpha(opacity=50);opacity:.5;-moz-border-radius:8px}
+.kandySlide .tabtitle .tabcur{background:#F30;padding:0 6px;filter:alpha(opacity=70);opacity:.7;font-size:13px}
+.kandySlide .tabcont img{vertical-align:text-bottom;display:block;background:#FFF url(loading.gif) center no-repeat}
+
+.kandyLoop{position:relative;zoom:1;border:1px solid #DDD;padding:2px;background:#EEE;}
+.kandyLoop .tabtitle{float:right;padding:3px 5px 5px;}
+.kandyLoop .tabtitle .tabbtn{margin:0 0 0 5px;font-size:10px;display:inline-block;width:8px;height:8px;overflow:hidden;text-indent:-30px;background:#CCC;-moz-border-radius:4px;zoom:1}
+.kandyLoop .tabtitle .tabcur{background:#F30}
+.kandyLoop .tabbody{border:1px solid #DDD;background:#FFF;clear:both}
+.kandyLoop .tabcont{zoom:1}
+.kandyLoop .tabcont img{vertical-align:text-bottom;background:#FFF url(loading.gif) center no-repeat}
+
+.tabbtn{cursor: pointer;}
+/***************************************************************************************kany Tab End*/
+
+
+#header {
+    background: url("images/front-header-bk.jpg?v=2") no-repeat scroll 0 0 #fff;
+    color: MediumVioletRed;
+/*    text-transform: uppercase;*/
+    width: 100%;
+    z-index: 1;    
+}
+
+#header .menu-bar{
+    
+}
+
+#header, #content, #navigation {
+    overflow: visible;
+    word-wrap: break-word;
+}
+
+#header .logo {
+    
+}
+
+#header .description{
+    height: 160px;
+}
+
+#header .description h1 {
+    padding: 20px 0px 0px 0px;
+}
+
+#header .description h1 a {
+    color: #6D9D30;
+    font-size: 48px;
+    text-decoration: none;
+    text-shadow: 0 2px 3px #777777;
+}
+
+#header .description h2 {
+    width: 620px;
+    overflow: hidden;
+    font-size: 16px;
+    padding: 30px 5px 5px;
+    text-indent: 2em;
+}
+
+#header .description h2 a{
+    color: MediumVioletRed;
+}
+
+#header .navigation{
+    background-color: PaleVioletRed;
+    height: 20px;
+    padding: 8px;
+}
+
+#header .navigation a {
+    border-bottom: 1px dotted #FFFFFF;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin: 0px 5px;
+}
+
+#main{
+    margin: 5px auto;
+    padding: 5px;
+    
+    background-color: #F7F3ED;
+    color: #333333;
+    font-family: Verdana,Helvetica,Arial,sans-serif;
+/*    font-size: 0.8em;*/
+}
+
+#main .sider {
+    width: 240px;
+    float: right;
+    background: none repeat scroll 0 0 #FFEBE8;
+    overflow: hidden;
+}
+
+#main .sider h3{
+    font-size: 15px;
+}
+
+#main .sider ul {
+    font-size: 12px;
+    padding: 2px;
+}
+
+#main .sider ul li {
+    margin: 2px;
+}
+
+#main .sider .box {
+    margin: 5px;
+}
+
+#main .content {
+    padding-right: 250px;    
+    line-height: 1.5;    
+    color: #565656;
+}
+
+#main .content .post .title {
+    text-align: center;
+}
+
+#main .content .post-tip {
+    
+}
+
+#main .content .post .body {
+    font-size: 14px;
+}
+
+#main .content .pagination .post-count {
+    float: right;    
+}
+
+#main .content .title h1 {
+    font-size: 250%;
+}
+
+#main .content .post-list{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted gainsboro;
+}
+
+#main .content .post-list .title {
+    font-family: 'Folksolid';    
+    margin-bottom: 4px;
+/*    text-transform: none;*/
+}
+
+#main .content .post-list .title h1 {
+    font-size: 150%;
+}
+
+#main .content .post-list .meta{
+    line-height: 22px;
+    float: right;
+    font-weight: normal;
+    font-size: 12px;
+}
+#main .content .post-list .meta a {
+    color: #C34E02;
+}
+
+#main .content .post-list .outline {
+    font-size: 14px;
+}
+
+#main .content .post-list .more{
+    float: right;
+}
+#main .content .post-list .more a{
+    color: #C34E02;
+    text-decoration: none;
+}
+
+#main .content .post .body {
+    padding: 15px;
+    border-bottom: 2px dotted #ccddff;
+    border-top: 2px dotted #ccddff;
+}
+
+#main .content .post .body a{
+    color: cadetblue;
+}
+
+#main .content .post .body p {
+    text-indent: 2em;
+    line-height: 200%;
+}
+
+#main .content .next-prev{
+    padding: 2px;
+    text-align: center;
+}
+
+#main .content .next-prev a{
+    margin: 0px 5px;
+}
+
+#main .content .related {
+    margin: 5px 2px;
+}
+
+#main .content .related ul {
+    padding: 2px;
+    margin: 0px;
+}
+#main .content .related li{
+    width: 350px;
+    float: left;
+    overflow: hidden;    
+    list-style: square inside none;
+    padding-left: 5px;
+}
+
+#footer {
+    padding-bottom: 20px;
+}
+
+
+#footer a{
+    color: #AAA;
+}
+
+
+#footer .friend-links {
+}
+
+#footer .copyright, #footer .friend-links{    
+    text-align: center;
+    padding: 5px 10px;
+    color: #aaa;
+}
+
+#footer .footer-line{
+    border-bottom: 2px dotted #CCDDFF;    
+    margin-top: 20px;
+}
+
+a:hover {
+    color: red !important;
+}
+
+pre {
+    font-family: 'Menlo', 'Courier New', 'Terminal', monospace;
+    background-color: #232323;
+    color: #E6E0DB;
+    overflow: auto;
+    padding: 5px;
+}

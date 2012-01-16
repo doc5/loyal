@@ -1,0 +1,36 @@
+body {
+    padding: 0;
+    margin: 0;
+    font: 13px/1.231 arial,helvetica,clean,sans-serif;
+    font-family: 'UbuntuRegular',sans-serif;
+}
+
+body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #2A3B63;
+}
+
+ul {
+    list-style: none outside none;
+}
+
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.content-center {
+    margin: 0 auto;
+    width: 1024px;
+}
+
+.text-center{
+    text-align: center;
+}

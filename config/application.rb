@@ -11,6 +11,8 @@ end
 
 module Loyal
   class Application < Rails::Application
+    ASSETS_VERSION = '2.0'
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -47,7 +49,7 @@ module Loyal
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = ASSETS_VERSION
     
 #    config.logger = Logger.new(STDOUT)
 #    config.logger = Log4r::Logger.new("Application Log")
