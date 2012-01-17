@@ -7,6 +7,8 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <%= link_to "test", "http://www.baidu.com", :onclick => "return openAppWindow(this, {});", :target => "_blank" %>
+    
     <div>
       <% if logged_in? %>
         <%= current_user.email %>
