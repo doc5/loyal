@@ -1,0 +1,2 @@
+module Map::HomeHelper
+end

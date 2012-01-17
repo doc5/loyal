@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+    <title><%= @seo_title %></title>
+    <%= stylesheet_link_tag    "map" %>
+    <%= javascript_include_tag "map" %>
+    <%= csrf_meta_tags %>
+    
+    <% case map_adapter_type
+    when "baidu" %>
+      <script src="http://api.map.baidu.com/api?v=1.2" type="text/javascript"></script>
+    <% when "google" %>
+      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <% end %>   
+    
+    <%= javascript_include_tag "map/adapters/#{map_adapter_type}/impl-#{map_adapter_version}" %>
+    
+    <%= yield :header %>
+  </head>
+  <body>
+    <%#= link_to "test", "http://www.baidu.com", :onclick => "return openAppWindow(this, {});", :target => "_blank" %>
+    
+    <%= yield %>    
+  </body>
+</html>

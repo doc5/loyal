@@ -1,6 +1,14 @@
 Loyal::Application.routes.draw do
   
-  root :to => "home#index"
+#  root :to => "home#index"
+  constraints :subdomain => "#{SubdomainMap}", :domain => 'uusoso.com' do
+    root :to => "map/home#index"
+    scope :module => "map", :as => "map" do
+      
+    end
+  end
+
+#  root :to => "home#index"
 
 #  =============================================================================
 #  blogsoso.com

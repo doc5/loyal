@@ -7,4 +7,4 @@ Loyal = {
             return getNiceVal(v, null);
         }
     }
-}
+};
