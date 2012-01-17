@@ -10,7 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120101181956) do
+ActiveRecord::Schema.define(:version => 20120101182016) do
+
+  create_table "archives_item_fetches", :force => true do |t|
+    t.string   "uuid"
+    t.string   "title"
+    t.string   "refer_unique"
+    t.string   "url_name"
+    t.integer  "created_by"
+    t.string   "created_ip"
+    t.integer  "content_way",   :default => 0
+    t.text     "content"
+    t.text     "virtue_encode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "archives_items", :force => true do |t|
     t.string   "uuid"
@@ -29,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20120101181956) do
   create_table "archives_items_and_overall_categories", :id => false, :force => true do |t|
     t.integer "archives_item_id"
     t.integer "overall_category_id"
+  end
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "overall_avatars", :force => true do |t|
@@ -73,6 +94,23 @@ ActiveRecord::Schema.define(:version => 20120101181956) do
     t.datetime "updated_at"
   end
 
+  create_table "overall_taggings", :force => true do |t|
+    t.integer  "overall_tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.string   "context"
+    t.integer  "position",       :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "overall_taggings", ["overall_tag_id"], :name => "overall_taggings_tag_id"
+  add_index "overall_taggings", ["taggable_id", "taggable_type", "context"], :name => "overall_taggable_index"
+
+  create_table "overall_tags", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.string   "remark"
@@ -83,6 +121,23 @@ ActiveRecord::Schema.define(:version => 20120101181956) do
   end
 
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "user_remembers", :force => true do |t|
     t.integer  "user_id"
