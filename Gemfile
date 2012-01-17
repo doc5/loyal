@@ -69,6 +69,7 @@ gem "opml"
 gem 'sanitize'
 
 gem 'nokogiri'
+gem 'thin'
 
 #https://github.com/tomasc/mongo_mapper_acts_as_tree
 gem "mongo_mapper_acts_as_tree"
