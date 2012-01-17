@@ -3,11 +3,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
     <title><%= @seo_title %></title>
-    <%= stylesheet_link_tag    "apps" %>
-    <%= javascript_include_tag "apps" %>
+    <%= stylesheet_link_tag    "docfive" %>
+    <%= javascript_include_tag "docfive" %>
     <%= csrf_meta_tags %>
+    <%= yield :header %>
   </head>
-  <body>        
+  <body>    
+    
     <%= yield %>
+
   </body>
 </html>

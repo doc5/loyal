@@ -1,0 +1,2 @@
+class DocfiveController < ApplicationController
+end

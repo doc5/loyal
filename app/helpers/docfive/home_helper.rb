@@ -1,0 +1,2 @@
+module Docfive::HomeHelper
+end

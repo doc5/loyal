@@ -1,14 +1,22 @@
 Loyal::Application.routes.draw do
+  constraints :subdomain => "", :domain => 'doc5.com' do
+    root :to => "docfive/home#index"
+    
+  end
   
-#  root :to => "home#index"
+  constraints :subdomain => "#{SubdomainApps}", :domain => 'doc5.com' do
+    root :to => "apps/home#index"
+    scope :module => "apps", :as => "apps" do
+      match "items/reflect/:app_type/:app_flag", :to => "items#reflect", :as => :item_reflect
+    end
+  end
+  
   constraints :subdomain => "#{SubdomainMap}", :domain => 'uusoso.com' do
     root :to => "map/home#index"
     scope :module => "map", :as => "map" do
       
     end
   end
-
-#  root :to => "home#index"
 
 #  =============================================================================
 #  blogsoso.com

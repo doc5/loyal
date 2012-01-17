@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Apps::HomeController do
+describe Docfive::HomeController do
 
   describe "GET 'index'" do
     it "returns http success" do
