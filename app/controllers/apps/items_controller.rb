@@ -6,7 +6,12 @@ class Apps::ItemsController < AppsController
     app_flag = params[:app_flag]
     
     if app_type == 'music'
-      @seo_title = "Goolge正版音乐！" if app_flag == "google"
+      case app_flag
+      when "google"
+        @seo_title = "Goolge正版音乐！" 
+      when "soso"
+        @seo_title = "SOSO音乐播放器！" 
+      end
     end
     
     if app_type == 'radio'
