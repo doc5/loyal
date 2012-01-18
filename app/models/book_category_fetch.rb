@@ -8,7 +8,7 @@ class BookCategoryFetch < ActiveRecord::Base
   
   belongs_to :book_category
   has_and_belongs_to_many :book_details
-  has_many :overall_avatars, :as => :resource
+  has_many :avatars, :class_name => "OverallAvatar", :as => :resource
   
   validates_uniqueness_of :url    
   validates_presence_of :from_site
@@ -46,7 +46,7 @@ class BookCategoryFetch < ActiveRecord::Base
       
       detail_fetch.save   
       
-      detail_fetch.fetch_detail if options[:fetch_detail]
+      detail_fetch.fetch_detail # if options[:fetch_detail]
     end
   end
   

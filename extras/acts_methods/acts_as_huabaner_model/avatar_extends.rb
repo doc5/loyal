@@ -11,6 +11,7 @@ module ActsMethods
         include ActsMethods::ActsAsHuabanerModel::AvatarExtends::InstanceMethods
         extend  ActsMethods::ActsAsHuabanerModel::AvatarExtends::SingletonMethods  
         
+        validates_presence_of :from_uri, :resource_type, :resource_id
         before_save do |r|
           r.impl_file_download
         end

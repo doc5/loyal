@@ -5,6 +5,10 @@ require 'sanitize'
 class BookDetailFetch < ActiveRecord::Base
   has_one :book_detail, :foreign_key => :from_uri, :primary_key => :url
   
+  has_many :avatars, :class_name => "BookTmpAvatar", :as => :resource
+  has_one :first_avatar, :class_name => "BookTmpAvatar", :as => :resource, 
+    :order => "position ASC"
+  
   validates_presence_of :from_site
   validates_uniqueness_of :url  
   
@@ -12,7 +16,7 @@ class BookDetailFetch < ActiveRecord::Base
     Iconv.conv('UTF-8//IGNORE', encoding.upcase!, text)
   end
   
-  def fetch_detail
+  def fetch_detail(options={})
     book_detail = self.book_detail || BookDetail.new(:book_detail_fetch_id => self.id, 
       :from_uri => self.url, :from_site => self.from_site)
     
@@ -23,10 +27,12 @@ class BookDetailFetch < ActiveRecord::Base
     
     fetch_isbn = nil
     fetch_published_at = nil
+    fetch_lang_tag = nil #正文语种
     fetch_format_tag = nil
     fetch_format_paper = nil
     fetch_author_info = nil
     fetch_publisher_name = nil
+    fetch_cn_title = nil
     fetch_revision = nil
     fetch_content_hash = {}
     fetch_category_ids_array = Array.new
@@ -34,7 +40,9 @@ class BookDetailFetch < ActiveRecord::Base
     case book_detail.from_site
       #      =======================================> SITE_360BUY
     when Website::BookConfig::SITE_360BUY
-      summary_node = doc.css("#summary")
+#      summary-english    
+      Rails.logger.debug "===========================================???????????============>#{doc.css("#summary")}|||||"
+      summary_node = doc.css("#summary").to_s.strip != "" ? doc.css("#summary") : doc.css("#summary-english")
       summary_list_nodes = summary_node.css("li")
       summary_list_nodes.each do |node|  
         node_name_span = node.css("span")
@@ -48,21 +56,25 @@ class BookDetailFetch < ActiveRecord::Base
           
           unless node_name.blank?
             case node_name
-            when "作　　者："
+            when /作\s*者*/
               fetch_author_info = node_content_text
-            when /出\s*版\s*社：/
+            when /中文书名*/
+              fetch_cn_title = node_content_text
+            when /出\s*版\s*社*/
               fetch_publisher_name = node_content_text
-            when "ＩＳＢＮ："
+            when /ＩＳＢＮ*/
               fetch_isbn = node_content_text            
-            when "出版时间："
+            when /出版时间*/
               fetch_published_at = Date.parse(node_content_text) unless node_content_text.blank?
-            when "版　　次："
+            when /版\s*次*/
               fetch_revision = node_content_text
-            when "装　　帧："
+            when /装\s*帧*/
               fetch_format_tag = node_content_text
-            when "开　　本："
+            when /开\s*本*/
               fetch_format_paper = node_content_text
-            when "所属分类："
+            when /正文语种*/
+              fetch_lang_tag = node_content_text
+            when /所属分类*/
               cate_doc = Nokogiri::HTML(BookDetailFetch.conv_text(node.inner_html, result_str.charset))
               cate_doc.css("a").each_with_index do |node, i|
                 if i % 3 == 2
@@ -87,18 +99,21 @@ class BookDetailFetch < ActiveRecord::Base
         if !node_title.nil? && !node_content.nil? && node_title.any? && node_content.any?
           
           node_content_html = BookDetailFetch.conv_text(node_content.first.inner_html, result_str.charset)
+          
+          Rails.logger.debug "#{node_title}:=================>#{node_content_html}"
+          
           case node_title.first.text.strip
-          when "内容简介"
+          when /内容简介*/
             fetch_content_hash[BookDetail::CONTENT_OUTLINE]       = node_content_html
-          when "作者简介"
+          when /作者简介*/
             fetch_content_hash[BookDetail::CONTENT_AUTHOR]        = node_content_html
-          when "媒体评论"
+          when /媒体评论*/
             fetch_content_hash[BookDetail::CONTENT_MEDIA_COMMENT] = node_content_html
-          when "目录"
+          when /目录*/
             fetch_content_hash[BookDetail::CONTENT_CATELOG]       = node_content_html
-          when "精彩书摘"            
+          when /精彩书摘*/            
             fetch_content_hash[BookDetail::CONTENT_NICE_PICK]     = node_content_html
-          when "前言"            
+          when /前言*/            
             fetch_content_hash[BookDetail::CONTENT_FOREWORD]      = node_content_html
           end
         end
@@ -111,6 +126,8 @@ class BookDetailFetch < ActiveRecord::Base
     
     book_detail.title = title_node.text.strip
     book_detail.isbn = fetch_isbn
+    book_detail.lang_tag = fetch_lang_tag
+    book_detail.cn_title = fetch_cn_title
     book_detail.author_info = fetch_author_info
     book_detail.published_at = fetch_published_at
     book_detail.format_tag = fetch_format_tag
@@ -133,8 +150,8 @@ class BookDetailFetch < ActiveRecord::Base
       
     book_detail.content_hash = fetch_content_hash    
     book_detail.price = fetch_price
-    book_detail.sync_item_by_isbn
-    book_detail.sync_avatars
+    book_detail.sync_item_by_isbn if options[:sync_item] || true
     book_detail.save
+    book_detail.sync_avatars if options[:sync_avatars] || false
   end 
 end

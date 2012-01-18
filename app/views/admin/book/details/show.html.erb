@@ -18,6 +18,10 @@
       <b>ISBN</b><br/>
       <%= @book_detail.isbn %>
     </p>
+    <p>
+      <b>From URL</b><br/>
+      <%= @book_detail.from_uri %>
+    </p>
     <% unless @book_detail.isbn_other.blank? %>
       <p>
         <b>isbn_other</b><br/>

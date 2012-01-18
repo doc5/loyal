@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "url"
     t.string   "title"
     t.integer  "from_site"
+    t.integer  "status",     :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -167,6 +168,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   create_table "book_details", :force => true do |t|
     t.integer  "item_id"
     t.string   "lang",                  :default => "zh-cn"
+    t.integer  "status",                :default => 0
     t.integer  "book_detail_fetch_id"
     t.integer  "from_site"
     t.string   "from_uri"

@@ -1,4 +1,4 @@
-class OverallAvatar < ActiveRecord::Base
+class BookDetailAvatar < ActiveRecord::Base
   include ActsMethods::ActsAsHuabanerModel::AvatarExtends
   acts_as_huabaner_avatar  
           
@@ -20,7 +20,4 @@ class OverallAvatar < ActiveRecord::Base
   validates_attachment_size :avatar, :less_than => 5.megabytes, :message => "图片尺寸不得大于5M"
   validates_attachment_content_type :avatar, :content_type => ['image/gif', 'image/png', 'image/jpeg', 'image/bmp'], 
     :message => "图片类型必须是gif, png, jpg, bmp格式之一"
-          
-          
-  
 end

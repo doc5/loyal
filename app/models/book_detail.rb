@@ -9,8 +9,9 @@ class BookDetail < ActiveRecord::Base
   has_and_belongs_to_many :book_category_fetches
   has_one :book_detail_fetch, :foreign_key => :url, :primary_key => :from_uri
   belongs_to :publisher, :counter_cache => true
-  has_many :avatars, :class_name => "OverallAvatar", :as => :resource
-  has_one :first_avatar, :class_name => "OverallAvatar", :as => :resource, :order => "position ASC"
+  has_many :avatars, :class_name => "BookDetailAvatar", :as => :resource
+  has_one :first_avatar, :class_name => "BookDetailAvatar", :as => :resource, 
+    :order => "position ASC"
   
   validates_presence_of :from_site, :from_uri
   validates_uniqueness_of :from_uri
@@ -54,7 +55,7 @@ class BookDetail < ActiveRecord::Base
   end
   
   def first_avatar_url(format=nil)
-    first_avatar.avatar.url(format) unless first_avatar.nil?
+    self.first_avatar.avatar.url(format) unless self.first_avatar.nil?
   end
   
 #  抓取
@@ -80,8 +81,8 @@ class BookDetail < ActiveRecord::Base
       image_alt = first_image_node.attr("alt")
       Rails.logger.debug "Image Path=================>#{image_from_uri}"
       
-      book_detail_avatar = OverallAvatar.find_by_from_uri(image_from_uri) || 
-        OverallAvatar.new(:from_uri => image_from_uri)
+      book_detail_avatar = BookDetailAvatar.find_by_from_uri(image_from_uri) || 
+        BookDetailAvatar.new(:from_uri => image_from_uri)
       book_detail_avatar.alt = image_alt
       book_detail_avatar.resource_type = self.class.to_s
       book_detail_avatar.resource_id   = self.id
@@ -99,6 +100,7 @@ class BookDetail < ActiveRecord::Base
     book_item.save
     
     self.item_id = book_item.id
+    self.save
   end
   
   protected
