@@ -7,4 +7,15 @@ class Admin::Book::CategoryFetchesController < AdminController
   def show
     @book_category_fetch = BookCategoryFetch.find(params[:id])
   end
+  
+  def operate
+    @book_category_fetch = BookCategoryFetch.find(params[:id])
+    
+    case params[:behavior]
+    when "fetch_details"
+      @book_category_fetch.fetch_details
+    end
+    
+    render :js => "alert('ok');"
+  end
 end

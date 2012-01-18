@@ -23,6 +23,7 @@ class BookCategoryFetch < ActiveRecord::Base
     CATEGORY_CONFIGS[self.from_site][:name]
   end
   
+#  抓取详情
   def fetch_details(options={})
     uri_open = URI.parse(self.url)
     result_str = uri_open.read

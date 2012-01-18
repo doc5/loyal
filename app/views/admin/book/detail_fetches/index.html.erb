@@ -1,0 +1,11 @@
+<%= render :partial => "/admin/book/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>图书详情抓取</h1>
+
+  <div class="main-content">
+    <%= will_paginate @book_detail_fetches %>
+    <%= render :partial => "/admin/book/detail_fetches/list", :locals => {:book_detail_fetches => @book_detail_fetches} %> 
+    <%= will_paginate @book_detail_fetches %>
+  </div>
+</div>

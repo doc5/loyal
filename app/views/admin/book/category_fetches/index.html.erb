@@ -23,6 +23,8 @@
         <div class="content">
           <% category.descendants.each do |cate| %>
             <%= link_to "#{cate.level_with_name}", admin_route(admin_book_category_fetch_path(cate)) %>
+            <%= link_to "[Fetch]", admin_route(operate_admin_book_category_fetch_path(:id => cate.id, :behavior => "fetch_details")), 
+              :remote => true, :confirm => "确定吗？", :method => 'post', :style => "color: blue;" %>
           <% end %>
         </div>
       </div>

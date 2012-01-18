@@ -5,7 +5,7 @@ class CreateBookCategories < ActiveRecord::Migration
       t.string :name
       t.string :title
       
-      t.string :url_namem 
+      t.string :url_name
       t.integer :position, :default => 0
       t.string :flag_name
       

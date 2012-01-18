@@ -51,7 +51,7 @@ Loyal::Application.routes.draw do
       
       namespace :archives do
         root :to => "home#index"
-        resources :items do         
+        resources :items do
         end
       end
       
@@ -59,10 +59,14 @@ Loyal::Application.routes.draw do
         root :to => "home#index"
         
         resources :categories do 
-        
+          
         end
         
-        resources :category_fetches, :only => [:index, :show]
+        resources :category_fetches, :only => [:index, :show] do
+          member do
+            post 'operate'
+          end
+        end
         resources :items
         resources :details
         resources :detail_fetches
