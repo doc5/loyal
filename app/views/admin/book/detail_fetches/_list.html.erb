@@ -3,9 +3,9 @@
     <% book_detail_fetches.each do |detail| %>
       <div class="item">
         <div class="operate">
-          <%= link_to "编辑", admin_route(edit_admin_book_detail_path(detail)) %>
+          <%= link_to "编辑", admin_route(edit_admin_book_detail_fetch_path(detail)) %>
         </div> 
-        <%= link_to "#{detail.title}", admin_route(admin_book_detail_path(detail)) %>
+        <%= link_to "#{detail.title}", admin_route(admin_book_detail_fetch_path(detail)) %>
       </div>
     <% end %>
   <% else %>
