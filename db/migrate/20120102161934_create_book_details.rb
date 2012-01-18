@@ -4,6 +4,8 @@ class CreateBookDetails < ActiveRecord::Migration
       t.integer :item_id
       t.string :lang, :default => LangConfig::DEFAULT_LANG
       
+      t.integer :status, :default => 0
+      
       t.integer :book_detail_fetch_id
       
       t.integer :from_site  #京东？当当？淘宝？亚马逊？豆瓣？？

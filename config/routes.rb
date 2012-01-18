@@ -69,7 +69,11 @@ Loyal::Application.routes.draw do
         end
         resources :items
         resources :details
-        resources :detail_fetches
+        resources :detail_fetches, :only => [:index, :show, :edit] do
+          collection do 
+            post 'operate'
+          end
+        end
       end
     end
   end
