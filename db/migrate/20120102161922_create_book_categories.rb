@@ -15,7 +15,7 @@ class CreateBookCategories < ActiveRecord::Migration
       t.text :description
       
       t.integer :permission, :default => WebsiteConfig::PERMMISSION_PUBLIC
-      t.text :permission_text
+      t.text :permission_encode
       
       t.integer :created_by
       t.string :created_ip

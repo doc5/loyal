@@ -1,6 +1,6 @@
-class CreateOverallCategories < ActiveRecord::Migration
+class CreateTipCategories < ActiveRecord::Migration
   def change
-    create_table :overall_categories do |t|
+    create_table :tip_categories do |t|
       t.string :name
       t.string :title
       
@@ -31,7 +31,6 @@ class CreateOverallCategories < ActiveRecord::Migration
       t.string :avatar_content_type
       t.integer :avatar_file_size
       t.datetime :avatar_updated_at
-      
       t.timestamps
     end
   end

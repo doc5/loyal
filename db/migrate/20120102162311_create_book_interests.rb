@@ -8,7 +8,7 @@ class CreateBookInterests < ActiveRecord::Migration
       t.text    :content
       
       t.integer :permission_type
-      t.text    :permission_text
+      t.text    :permission_encode
       
       t.timestamps
     end

@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "introduction"
     t.text     "description"
     t.integer  "permission",          :default => 0
-    t.text     "permission_text"
+    t.text     "permission_encode"
     t.integer  "created_by"
     t.string   "created_ip"
     t.integer  "style_config_id"
@@ -153,6 +153,22 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   end
 
   add_index "book_comments", ["resource_type", "resource_id"], :name => "book_comments_resource_index"
+
+  create_table "book_detail_avatars", :force => true do |t|
+    t.string   "from_uri"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.integer  "position",            :default => 0
+    t.string   "title"
+    t.string   "alt"
+    t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "book_detail_fetches", :force => true do |t|
     t.string   "url"
@@ -230,7 +246,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "status_type"
     t.text     "content"
     t.integer  "permission_type"
-    t.text     "permission_text"
+    t.text     "permission_encode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -277,7 +293,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "created_by"
     t.string   "created_ip"
     t.integer  "permission_type"
-    t.text     "permission_text"
+    t.text     "permission_encode"
     t.integer  "book_comments_count", :default => 0
     t.datetime "deleted_at"
     t.datetime "created_at"
@@ -318,6 +334,22 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.datetime "updated_at"
   end
 
+  create_table "book_tmp_avatars", :force => true do |t|
+    t.string   "from_uri"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.integer  "position",            :default => 0
+    t.string   "title"
+    t.string   "alt"
+    t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "overall_avatars", :force => true do |t|
     t.string   "from_uri"
     t.string   "resource_type"
@@ -344,7 +376,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "introduction"
     t.text     "description"
     t.integer  "permission",          :default => 0
-    t.text     "permission_text"
+    t.text     "permission_encode"
     t.integer  "created_by"
     t.string   "created_ip"
     t.integer  "style_config_id"
@@ -361,21 +393,17 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   end
 
   create_table "overall_taggings", :force => true do |t|
-    t.integer  "overall_tag_id"
+    t.integer  "tag_id"
     t.integer  "taggable_id"
     t.string   "taggable_type"
+    t.integer  "position",      :default => 0
     t.string   "context"
-    t.integer  "position",       :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "overall_taggings", ["overall_tag_id"], :name => "overall_taggings_tag_id"
+  add_index "overall_taggings", ["tag_id"], :name => "tag_id"
   add_index "overall_taggings", ["taggable_id", "taggable_type", "context"], :name => "overall_taggable_index"
-
-  create_table "overall_tags", :force => true do |t|
-    t.string "name"
-  end
 
   create_table "publishers", :force => true do |t|
     t.integer  "role_type"
@@ -432,6 +460,88 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "tip_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "url_name"
+    t.integer  "position",            :default => 0
+    t.string   "flag_name"
+    t.string   "lang",                :default => "zh-cn"
+    t.string   "introduction"
+    t.text     "description"
+    t.integer  "permission",          :default => 0
+    t.text     "permission_encode"
+    t.integer  "created_by"
+    t.string   "created_ip"
+    t.integer  "style_config_id"
+    t.text     "style_config_text"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tip_categories_and_tip_posts", :id => false, :force => true do |t|
+    t.integer "tip_category_id"
+    t.integer "tip_post_id"
+  end
+
+  create_table "tip_comments", :force => true do |t|
+    t.string   "uuid"
+    t.integer  "post_id"
+    t.string   "content"
+    t.integer  "created_by"
+    t.string   "created_ip"
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tip_comments", ["uuid"], :name => "index_tip_comments_on_uuid"
+
+  create_table "tip_posts", :force => true do |t|
+    t.string   "uuid"
+    t.integer  "context_flag"
+    t.text     "content"
+    t.string   "lang",               :default => "zh-cn"
+    t.integer  "tip_comments_count", :default => 0
+    t.integer  "created_by"
+    t.string   "created_ip"
+    t.integer  "permission",         :default => 0
+    t.text     "permission_encode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tip_scores", :force => true do |t|
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.integer  "created_by"
+    t.string   "created_ip"
+    t.integer  "context_flag"
+    t.integer  "point"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tip_taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "position",      :default => 0
+    t.string   "context"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tip_taggings", ["tag_id"], :name => "tip_taggings_tag_id"
+  add_index "tip_taggings", ["taggable_id", "taggable_type", "context"], :name => "tip_taggable_index"
 
   create_table "user_remembers", :force => true do |t|
     t.integer  "user_id"

@@ -15,7 +15,7 @@ class CreateBookNotes < ActiveRecord::Migration
       t.string  :created_ip
       
       t.integer :permission_type
-      t.text    :permission_text
+      t.text    :permission_encode
       
       t.integer :book_comments_count, :default => 0
       
