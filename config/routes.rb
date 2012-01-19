@@ -22,13 +22,19 @@ Loyal::Application.routes.draw do
   
   constraints :subdomain => "#{SubdomainTip}", :domain => 'uusoso.com' do
     root :to => "tip/home#index"
-    scope :module => "tip", :as => "tip" do
+    scope :module => "tip", :as => "tip" do      
+      resources :categories
+      resources :posts
       
+      #      match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+      #      match 'categories/:url_name' => 'categories#show', :as => :category
+      #      match 'categories' => 'categories#index', :as => :categores        
+      #      resources :posts
     end
   end
 
-#  =============================================================================
-#  blogsoso.com
+  #  =============================================================================
+  #  blogsoso.com
   constraints :subdomain => "", :domain => 'blogsoso.com' do   
     root :to => "blogsoso/home#index"
     
@@ -36,10 +42,10 @@ Loyal::Application.routes.draw do
       
     end
   end  
-#  =============================================================================
+  #  =============================================================================
   
 
-#  root :to => "home#index"
+  #  root :to => "home#index"
   constraints :subdomain => "#{SubdomainBook}", :domain => 'uusoso.com' do
     scope :module => "book", :as => "book" do
       root :to => "home#index"
@@ -60,8 +66,9 @@ Loyal::Application.routes.draw do
       
       namespace :tip do
         root :to => "home#index"
-        resources :categories do         
-        end
+        resources :categories do       
+        end              
+        resources :posts
       end
       
       namespace :archives do

@@ -1,7 +1,7 @@
 class CreateTipTaggings < ActiveRecord::Migration
   def change
     create_table :tip_taggings do |t|
-      t.integer  "tag_id"
+      t.integer  :tag_id
       
       t.references :taggable, :polymorphic => true      
       t.integer :position, :default => 0
