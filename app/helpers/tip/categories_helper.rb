@@ -1,0 +1,2 @@
+module Tip::CategoriesHelper
+end

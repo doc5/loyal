@@ -7,7 +7,7 @@ class CreateTipTaggings < ActiveRecord::Migration
       t.integer :position, :default => 0
       t.string   "context"
       
-      t.datetime "created_at"      
+      t.datetime "created_at"
       t.timestamps
     end
     

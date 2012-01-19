@@ -1,6 +1,4 @@
 Loyal::Application.routes.draw do
-  get "home/index"
-
   constraints :subdomain => "", :domain => 'doc5.com' do
     root :to => "docfive/home#index"
     
@@ -22,9 +20,10 @@ Loyal::Application.routes.draw do
   
   constraints :subdomain => "#{SubdomainTip}", :domain => 'uusoso.com' do
     root :to => "tip/home#index"
-    scope :module => "tip", :as => "tip" do      
-      resources :categories
-      resources :posts
+    scope :module => "tip", :as => "tip" do    
+      resources :categories            
+      resources :posts, :only => [:show, :new, :destroy, :edit, :update, :create]
+      resources :comments          
       
       #      match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
       #      match 'categories/:url_name' => 'categories#show', :as => :category

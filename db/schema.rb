@@ -523,11 +523,6 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.datetime "updated_at"
   end
 
-  create_table "tip_categories_and_tip_posts", :id => false, :force => true do |t|
-    t.integer "tip_category_id"
-    t.integer "tip_post_id"
-  end
-
   create_table "tip_comments", :force => true do |t|
     t.string   "uuid"
     t.integer  "post_id"
@@ -544,9 +539,11 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   create_table "tip_posts", :force => true do |t|
     t.string   "uuid"
     t.integer  "context_flag"
+    t.string   "title"
     t.text     "content"
     t.string   "lang",               :default => "zh-cn"
     t.integer  "tip_comments_count", :default => 0
+    t.integer  "tip_category_id"
     t.integer  "created_by"
     t.string   "created_ip"
     t.datetime "deleted_at"

@@ -1,13 +1,19 @@
 <% if @tip_post.errors.any? %>
   <div id="error_explanation">
-    <h2 id="errorExplanationHeader"><%= t('activerecord.errors.template.header', :count => @tip_post.errors.count) %></h2>	
     <ul>
-      <% @tip_tip.errors.full_messages.each do |msg| %>
+      <% @tip_post.errors.messages.values.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ul>
   </div>
 <% end %>
+
+<div class="field">
+  <%= f.label :tip_category_id %><br />	
+  <%= f.select :tip_category_id, 
+    nested_set_options(TipCategory, @tip_category) {|i| "#{'-' * i.level} #{i.name}" }, 
+    {:include_blank => I18n.t('please_select_for_tag')} %>
+</div>
 
 <div class="field">
   <%= f.label :title %>*<br />

@@ -3,10 +3,6 @@ class Tip::PostsController < TipController
     @tip_post = TipPost.find(params[:id])
   end
   
-  def index
-    @tip_posts = TipPost.all
-  end
-  
   def new
     @tip_post = TipPost.new
   end

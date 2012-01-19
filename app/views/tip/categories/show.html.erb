@@ -1,0 +1,17 @@
+<div id="main-panel">
+  <h1><%= @tip_category.title %></h1>
+
+  <div class="main-options">
+    <%= link_to "返回分类列表", tip_categories_path %>
+  </div>
+
+  <div class="main-content">
+    <% if @tip_posts.any? %>
+    <div class="list">
+      <%= render :partial => "/tip/posts/list", :locals => {:tip_posts => @tip_posts} %>
+    </div>
+    <% else %>
+      本分类暂无条目
+    <% end %>
+  </div>
+</div>

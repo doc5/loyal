@@ -4,9 +4,12 @@ class CreateTipPosts < ActiveRecord::Migration
       t.string :uuid
       t.integer :context_flag
       
+      t.string :title
       t.text :content
       t.string :lang, :default => LangConfig::DEFAULT_LANG
       t.integer :tip_comments_count, :default => 0
+      
+      t.integer :tip_category_id
       
       t.integer :created_by
       t.string :created_ip
@@ -18,5 +21,7 @@ class CreateTipPosts < ActiveRecord::Migration
       
       t.timestamps
     end
+    
+    add_index :tip_posts, [:uuid]
   end
 end

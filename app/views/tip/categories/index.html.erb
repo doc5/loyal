@@ -1,3 +1,21 @@
-<% @tip_posts.each do |post| %>
-  
-<% end %>
+<div id="main-panel">
+  <h1>分类列表</h1>
+
+  <% if false %>
+    <div class="main-options">
+      <%= link_to "返回分类列表", tip_categories_path %>
+    </div>
+  <% end %>
+
+  <div class="main-content">
+    <% if @tip_categories.any? %>
+      <div class="list">
+        <% @tip_categories.each do |category| %>
+        <div class="item"><%= link_to "#{category.level_with_name}", tip_category_path(category) %></div>
+        <% end %>
+      </div>
+    <% else %>
+      暂时没有分类
+    <% end %>
+  </div>
+</div>

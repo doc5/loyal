@@ -4,4 +4,6 @@ class TipCategory < ActiveRecord::Base
         
   validates_uniqueness_of :url_name
   validates_uniqueness_of :flag_name
+  
+  has_many :tip_posts
 end

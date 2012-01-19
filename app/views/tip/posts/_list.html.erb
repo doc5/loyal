@@ -1,3 +1,6 @@
-<% @tip_posts.each do |post| %>
+<% tip_posts.each do |post| %>
+<div class="item">
   
+  <%= link_to post.title, tip_post_path(post) %>
+</div>
 <% end %>

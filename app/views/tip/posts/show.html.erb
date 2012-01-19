@@ -1,4 +1,12 @@
-<div class="">
-  <b>标题:</b>
-  <%= @tip_post.title %>
+<div id="main-panel">
+  <h1><%= @tip_post.title %>    </h1>
+
+  <div class="main-options">
+    <%= link_to "返回分类", tip_category_path(@tip_post.tip_category_id) %>
+  <%= link_to "添加TIP", new_tip_post_path %>
+  </div>
+
+  <div class="main-content">
+    <%= @tip_post.content %>    
+  </div>
 </div>
