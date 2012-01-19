@@ -5,6 +5,7 @@ class CreateBookDetails < ActiveRecord::Migration
       t.string :lang, :default => LangConfig::DEFAULT_LANG
       
       t.integer :status, :default => 0
+      t.datetime :deleted_at
       
       t.integer :book_detail_fetch_id
       

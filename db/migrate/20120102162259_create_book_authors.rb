@@ -7,6 +7,8 @@ class CreateBookAuthors < ActiveRecord::Migration
       t.integer :role_type  #原作家，翻译者
       t.integer :position, :default => 0
       
+      t.integer :status, :default => 0
+      t.datetime :deleted_at
       t.timestamps
     end
   end

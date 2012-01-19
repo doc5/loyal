@@ -18,6 +18,10 @@ module ControllerExt
     
     def map_route(path='', domain=nil)
       subdomain_route(SubdomainMap, path, domain)
+    end  
+    
+    def tip_route(path='', domain=nil)
+      subdomain_route(SubdomainTip, path, domain)
     end        
         
     def feeds_route(path='', domain=nil)

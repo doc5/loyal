@@ -5,6 +5,8 @@ class CreateBookTags < ActiveRecord::Migration
       t.integer :book_items_count, :default => 0
       t.integer :users_count, :default => 0
       
+      t.integer :status, :default => 0
+      t.datetime :deleted_at
       t.timestamps
     end
   end

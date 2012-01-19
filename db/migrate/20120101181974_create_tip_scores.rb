@@ -8,6 +8,7 @@ class CreateTipScores < ActiveRecord::Migration
       t.integer :context_flag
       t.integer :point
       
+      t.datetime :deleted_at
       t.timestamps
     end
   end

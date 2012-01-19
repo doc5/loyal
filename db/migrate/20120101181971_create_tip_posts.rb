@@ -11,6 +11,8 @@ class CreateTipPosts < ActiveRecord::Migration
       t.integer :created_by
       t.string :created_ip
       
+      t.datetime :deleted_at
+      
       t.integer :permission, :default => WebsiteConfig::PERMMISSION_PUBLIC
       t.text :permission_encode
       

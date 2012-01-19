@@ -1,0 +1,15 @@
+<div id="side-panel">
+  <h2>
+    <%= link_to "TIP管理", admin_route(admin_tip_root_path) %>
+  </h2>
+  
+  <h4>分类管理</h4>
+  <ul>
+    <li>
+      <%= link_to "分类列表", admin_route(admin_tip_categories_path) %>
+    </li>
+    <li>
+      <%= link_to "新建分类", admin_route(new_admin_tip_category_path) %>
+    </li>
+  </ul>
+</div>

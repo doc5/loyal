@@ -6,6 +6,7 @@ class CreateBookDetailFetches < ActiveRecord::Migration
       t.integer :from_site
       
       t.integer :status, :default => 0
+      t.datetime :deleted_at
       
       t.timestamps
     end

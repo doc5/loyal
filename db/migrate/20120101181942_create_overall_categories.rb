@@ -8,6 +8,8 @@ class CreateOverallCategories < ActiveRecord::Migration
       t.integer :position, :default => 0
       t.string :flag_name
       
+      t.integer :status, :default => 0
+      
       t.string :lang, :default => LangConfig::DEFAULT_LANG
       
       t.string :introduction

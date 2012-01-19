@@ -1,4 +1,6 @@
 Loyal::Application.routes.draw do
+  get "home/index"
+
   constraints :subdomain => "", :domain => 'doc5.com' do
     root :to => "docfive/home#index"
     
@@ -14,6 +16,13 @@ Loyal::Application.routes.draw do
   constraints :subdomain => "#{SubdomainMap}", :domain => 'uusoso.com' do
     root :to => "map/home#index"
     scope :module => "map", :as => "map" do
+      
+    end
+  end
+  
+  constraints :subdomain => "#{SubdomainTip}", :domain => 'uusoso.com' do
+    root :to => "tip/home#index"
+    scope :module => "tip", :as => "tip" do
       
     end
   end
@@ -44,6 +53,12 @@ Loyal::Application.routes.draw do
       resources :roles
       
       namespace :overall do
+        root :to => "home#index"
+        resources :categories do         
+        end
+      end
+      
+      namespace :tip do
         root :to => "home#index"
         resources :categories do         
         end

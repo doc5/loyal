@@ -12,6 +12,8 @@ class CreateBookFavorites < ActiveRecord::Migration
       
       t.integer :position, :default => 0
       
+      t.integer :status, :default => 0
+      t.datetime :deleted_at
       t.timestamps
     end
   end

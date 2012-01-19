@@ -15,6 +15,7 @@ class CreateArchivesItems < ActiveRecord::Migration
       
       t.text :virtue_encode  #属性编码后的yuml
       
+      t.datetime :deleted_at
       t.timestamps
     end
   end

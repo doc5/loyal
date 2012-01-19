@@ -8,6 +8,8 @@ class CreateBookFetchUrls < ActiveRecord::Migration
       
       t.string :url
       
+      t.integer :status, :default => 0
+      t.datetime :deleted_at
       t.timestamps
     end
     

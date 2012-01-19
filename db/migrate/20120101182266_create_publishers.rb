@@ -10,6 +10,7 @@ class CreatePublishers < ActiveRecord::Migration
       
       t.integer :overall_avatars_count, :default => 0
       
+      t.datetime :deleted_at
       t.timestamps
     end
     

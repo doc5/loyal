@@ -1,0 +1,16 @@
+<%= render :partial => "/admin/tip/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>新建Tip分类</h1>
+
+  <div class="main-options">
+    <%= link_to "返回分类列表", admin_route(admin_tip_categories_path) %>
+    <%= link_to "新建Tip分类", admin_route(new_admin_tip_category_path) %>
+  </div>
+
+  <div class="main-content">
+    <%= form_for([:admin, @tip_category], :html => { :multipart => true }) do |f| %>
+      <%= render :partial => 'form', :locals => {:f => f} %>
+    <% end %>
+  </div>
+</div>

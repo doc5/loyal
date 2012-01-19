@@ -8,8 +8,10 @@ class CreateBookItems < ActiveRecord::Migration
       
       t.integer :series_id #系列id
       
-#      t.string :published_by
-#      t.date   :published_at
+      t.string :published_by
+      t.date   :published_at
+      
+      t.integer :status, :default => 0
       
       t.integer :book_comments_count,  :default => 0
       t.integer :book_notes_count    , :default => 0
@@ -32,6 +34,7 @@ class CreateBookItems < ActiveRecord::Migration
       t.integer :scores_d_count, :default => 0 #4星
       t.integer :scores_e_count, :default => 0 #5星
       
+      t.datetime :deleted_at
       t.timestamps
     end
     

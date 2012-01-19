@@ -10,6 +10,8 @@ class CreateBookInterests < ActiveRecord::Migration
       t.integer :permission_type
       t.text    :permission_encode
       
+      t.integer :status, :default => 0
+      t.datetime :deleted_at
       t.timestamps
     end
   end

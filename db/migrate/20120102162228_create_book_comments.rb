@@ -13,6 +13,7 @@ class CreateBookComments < ActiveRecord::Migration
       t.integer :created_by
       t.string  :created_ip
       
+      t.integer :status, :default => 0
       t.datetime :deleted_at
 
       t.timestamps

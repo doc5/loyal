@@ -8,7 +8,8 @@ class CreateBookCategoryFetches < ActiveRecord::Migration
       
       t.integer :book_details_count, :default => 0
       
-      t.integer :status
+      t.integer :status, :default => 0
+      t.datetime :deleted_at
       
       # for tree 
       t.integer :parent_id

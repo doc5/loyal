@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "content_way",   :default => 0
     t.text     "content"
     t.text     "virtue_encode"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "content_way",   :default => 0
     t.text     "content"
     t.text     "virtue_encode"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -53,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,6 +75,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "book_detail_id"
     t.integer  "role_type"
     t.integer  "position",       :default => 0
+    t.integer  "status",         :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -83,6 +88,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.text     "description"
     t.integer  "book_items_count",    :default => 0
     t.integer  "book_comments_count", :default => 0
+    t.integer  "status",              :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -93,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "url_name"
     t.integer  "position",            :default => 0
     t.string   "flag_name"
+    t.integer  "status",              :default => 0
     t.string   "lang",                :default => "zh-cn"
     t.string   "introduction"
     t.text     "description"
@@ -109,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -121,7 +130,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "from_site"
     t.integer  "book_category_id"
     t.integer  "book_details_count", :default => 0
-    t.integer  "status"
+    t.integer  "status",             :default => 0
+    t.datetime "deleted_at"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
@@ -147,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.text     "content"
     t.integer  "created_by"
     t.string   "created_ip"
+    t.integer  "status",        :default => 0
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -166,6 +177,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "status",              :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -175,6 +188,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "title"
     t.integer  "from_site"
     t.integer  "status",     :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -185,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "item_id"
     t.string   "lang",                  :default => "zh-cn"
     t.integer  "status",                :default => 0
+    t.datetime "deleted_at"
     t.integer  "book_detail_fetch_id"
     t.integer  "from_site"
     t.string   "from_uri"
@@ -225,6 +240,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "title"
     t.text     "description"
     t.integer  "position",    :default => 0
+    t.integer  "status",      :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -234,6 +251,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "resource_id"
     t.integer  "from_site"
     t.string   "url"
+    t.integer  "status",        :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -247,6 +266,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.text     "content"
     t.integer  "permission_type"
     t.text     "permission_encode"
+    t.integer  "status",            :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -256,6 +277,9 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "isbn"
     t.string   "isbn_other"
     t.integer  "series_id"
+    t.string   "published_by"
+    t.date     "published_at"
+    t.integer  "status",                       :default => 0
     t.integer  "book_comments_count",          :default => 0
     t.integer  "book_notes_count",             :default => 0
     t.integer  "book_interests_count",         :default => 0
@@ -273,6 +297,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "scores_c_count",               :default => 0
     t.integer  "scores_d_count",               :default => 0
     t.integer  "scores_e_count",               :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -295,6 +320,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "permission_type"
     t.text     "permission_encode"
     t.integer  "book_comments_count", :default => 0
+    t.integer  "status",              :default => 0
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -306,6 +332,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "created_by"
     t.string   "created_ip"
     t.integer  "point"
+    t.integer  "status",        :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -322,6 +350,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "status",              :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -330,6 +360,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "name"
     t.integer  "book_items_count", :default => 0
     t.integer  "users_count",      :default => 0
+    t.integer  "status",           :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -372,6 +404,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "url_name"
     t.integer  "position",            :default => 0
     t.string   "flag_name"
+    t.integer  "status",              :default => 0
     t.string   "lang",                :default => "zh-cn"
     t.string   "introduction"
     t.text     "description"
@@ -394,6 +427,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
 
   create_table "overall_taggings", :force => true do |t|
     t.integer  "tag_id"
+    t.integer  "status",        :default => 0
     t.integer  "taggable_id"
     t.string   "taggable_type"
     t.integer  "position",      :default => 0
@@ -412,6 +446,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "book_items_count",      :default => 0
     t.integer  "book_details_count",    :default => 0
     t.integer  "overall_avatars_count", :default => 0
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -467,6 +502,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "url_name"
     t.integer  "position",            :default => 0
     t.string   "flag_name"
+    t.integer  "status",              :default => 0
     t.string   "lang",                :default => "zh-cn"
     t.string   "introduction"
     t.text     "description"
@@ -513,6 +549,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "tip_comments_count", :default => 0
     t.integer  "created_by"
     t.string   "created_ip"
+    t.datetime "deleted_at"
     t.integer  "permission",         :default => 0
     t.text     "permission_encode"
     t.datetime "created_at"
@@ -526,6 +563,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "created_ip"
     t.integer  "context_flag"
     t.integer  "point"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

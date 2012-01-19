@@ -15,6 +15,9 @@ class CreateBookDetailAvatars < ActiveRecord::Migration
       t.string :avatar_content_type
       t.integer :avatar_file_size
       t.datetime :avatar_updated_at
+      
+      t.integer :status, :default => 0
+      t.datetime :deleted_at
       t.timestamps
     end
   end

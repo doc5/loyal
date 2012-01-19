@@ -9,6 +9,8 @@ class CreateBookScores < ActiveRecord::Migration
       
       t.integer :point      
       
+      t.integer :status, :default => 0
+      t.datetime :deleted_at
       t.timestamps
     end
     

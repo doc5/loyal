@@ -1,0 +1,2 @@
+module Tip::HomeHelper
+end

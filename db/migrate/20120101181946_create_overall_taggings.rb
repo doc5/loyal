@@ -3,6 +3,8 @@ class CreateOverallTaggings < ActiveRecord::Migration
     create_table :overall_taggings do |t|
       t.integer  "tag_id"
       
+      t.integer :status, :default => 0
+      
       t.references :taggable, :polymorphic => true      
       t.integer :position, :default => 0
       t.string   "context"

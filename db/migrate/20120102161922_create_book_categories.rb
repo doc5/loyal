@@ -9,6 +9,8 @@ class CreateBookCategories < ActiveRecord::Migration
       t.integer :position, :default => 0
       t.string :flag_name
       
+      t.integer :status, :default => 0
+      
       t.string :lang, :default => LangConfig::DEFAULT_LANG
       
       t.string :introduction
@@ -33,6 +35,7 @@ class CreateBookCategories < ActiveRecord::Migration
       t.integer :avatar_file_size
       t.datetime :avatar_updated_at
       
+      t.datetime :deleted_at
       t.timestamps
     end
     
