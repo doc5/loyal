@@ -11,7 +11,7 @@
     <div class="list">
       <% if @archives_item_fetches.any? %>
         <% @archives_item_fetches.each do |item_fetch| %>
-      <div class="item_fetch">
+      <div class="item">
         <div class="operate">
           <%= link_to "编辑", admin_route(edit_admin_archives_item_fetch_path(item_fetch)) %>
         </div>        
