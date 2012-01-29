@@ -6,6 +6,13 @@ class ArchivesItemFetch < ActiveRecord::Base
   include ActsMethods::ActsAsHuabanerModel::UuidExtends
   acts_as_huabaner_uuid
   
+  include ActsMethods::ActsAsHuabanerModel::VirtueEncodeNode
+  acts_as_huabaner_virtue_encode_node
+  
+  has_and_belongs_to_many :categories, :join_table => "archives_item_fetchs_and_archives_categories", 
+    :class_name => "ArchivesCategory", :foreign_key => "item_id",
+    :association_foreign_key => "category_id"
+  
   validates_uniqueness_of :from_uri, :message =>"已经被占用了"
   
   has_many :avatars, :class_name => "ArchivesAvatar", :as => :resource
@@ -46,26 +53,6 @@ class ArchivesItemFetch < ActiveRecord::Base
         item_fetch.content = fetched_hash[:content]
         item_fetch.title = fetched_hash[:title]
         item_fetch.save
-        
-#        fetch avatar====================================================
-#        图片无法下载
-#        avatar_nodes = doc.css("#wenzhangziti>p a img")
-#        if avatar_nodes.present?
-#          avatar_first_node = avatar_nodes.first
-#          image_from_uri = avatar_first_node.attr("src")
-#          
-#          Rails.logger.debug "avatar uri: =====>#{image_from_uri}"
-#          
-#          archive_item_avatar = ArchivesAvatar.find_by_from_uri(image_from_uri) || 
-#            ArchivesAvatar.new(:from_uri => image_from_uri)
-#          archive_item_avatar.alt = avatar_first_node.attr("alt")
-#          archive_item_avatar.resource_type = item_fetch.class.to_s
-#          archive_item_avatar.resource_id   = item_fetch.id
-#          archive_item_avatar.name = item_fetch.title
-#          archive_item_avatar.title = item_fetch.title
-#          archive_item_avatar.save
-#        end
-        
       end    
     end
   end  

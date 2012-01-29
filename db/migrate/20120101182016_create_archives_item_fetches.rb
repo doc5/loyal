@@ -17,7 +17,8 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
       t.string :title
       t.text :content
       
-      t.text :virtue_encode  #属性编码后的yuml
+      t.string :virtue_way, :default => 'yaml'
+      t.text :virtue_encode
       
       t.datetime :deleted_at
       

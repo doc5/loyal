@@ -3,7 +3,8 @@ require 'iconv'
 require 'sanitize'
 
 class BookDetail < ActiveRecord::Base  
-  attr_accessor :content_hash
+  include ActsMethods::ActsAsHuabanerModel::ContentEncodeNode
+  acts_as_huabaner_content_encode_node  
   
   belongs_to :item, :class_name => "BookItem", :foreign_key => "item_id", :counter_cache => true  
   has_and_belongs_to_many :book_category_fetches
@@ -15,18 +16,6 @@ class BookDetail < ActiveRecord::Base
   
   validates_presence_of :from_site, :from_uri
   validates_uniqueness_of :from_uri
-  
-  def after_initialize
-    self.impl_content_decode
-  end  
-  
-  before_save do |r|
-    r.impl_content_encode 
-  end
-  
-  after_find do |r|
-    r.impl_content_decode
-  end
   
   CONTENT_OUTLINE         = "outline"
   CONTENT_AUTHOR          = "author"
@@ -101,20 +90,5 @@ class BookDetail < ActiveRecord::Base
     
     self.item_id = book_item.id
     self.save
-  end
-  
-  protected
-  
-  def impl_content_encode
-    self.content_encode = @content_hash.to_yaml
-  end
-  
-  def impl_content_decode
-    begin
-#      @content_hash = JSON::parse(self.content_encode)
-      @content_hash = YAML::load(self.content_encode)
-    rescue
-      @content_hash = {}
-    end
   end
 end

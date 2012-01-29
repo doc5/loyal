@@ -13,7 +13,8 @@ class CreateArchivesItems < ActiveRecord::Migration
       t.integer :content_way, :default => 0 #正文编码类型
       t.text :content
       
-      t.text :virtue_encode  #属性编码后的yuml
+      t.string :virtue_way, :default => 'yaml'
+      t.text :virtue_encode
       
       t.datetime :deleted_at
       
