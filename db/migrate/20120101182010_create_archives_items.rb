@@ -4,8 +4,7 @@ class CreateArchivesItems < ActiveRecord::Migration
       t.string :uuid
       t.string :title
           
-      t.string :refer_unique  #唯一的标识
-      t.string :url_name  
+      t.string :unique_refer  #唯一的标识
       
       t.integer :created_by
       t.string :created_ip
@@ -18,5 +17,8 @@ class CreateArchivesItems < ActiveRecord::Migration
       t.datetime :deleted_at
       t.timestamps
     end
+    
+    add_index :archives_items, [:uuid]
+    add_index :archives_items, [:unique_refer]
   end
 end

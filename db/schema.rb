@@ -12,6 +12,35 @@
 
 ActiveRecord::Schema.define(:version => 20120108083439) do
 
+  create_table "archives_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.integer  "archives_items_count",        :default => 0
+    t.integer  "archives_item_fetches_count", :default => 0
+    t.string   "url_name"
+    t.integer  "position",                    :default => 0
+    t.string   "flag_name"
+    t.integer  "status",                      :default => 0
+    t.string   "lang",                        :default => "zh-cn"
+    t.string   "introduction"
+    t.text     "description"
+    t.integer  "permission",                  :default => 0
+    t.text     "permission_encode"
+    t.integer  "created_by"
+    t.string   "created_ip"
+    t.integer  "style_config_id"
+    t.text     "style_config_text"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "archives_item_fetches", :force => true do |t|
     t.string   "uuid"
     t.string   "title"
@@ -42,9 +71,10 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.datetime "updated_at"
   end
 
-  create_table "archives_items_and_overall_categories", :id => false, :force => true do |t|
+  create_table "archives_items_and_archives_categories", :id => false, :force => true do |t|
     t.integer "archives_item_id"
-    t.integer "overall_category_id"
+    t.integer "archives_category_id"
+    t.integer "ship_flag",            :default => 0
   end
 
   create_table "artists", :force => true do |t|
@@ -552,6 +582,8 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tip_posts", ["uuid"], :name => "index_tip_posts_on_uuid"
 
   create_table "tip_scores", :force => true do |t|
     t.integer  "resource_id"

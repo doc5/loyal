@@ -72,6 +72,7 @@ Loyal::Application.routes.draw do
       
       namespace :archives do
         root :to => "home#index"
+        resources :categories
         resources :items do
         end
       end
