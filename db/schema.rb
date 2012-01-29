@@ -47,10 +47,14 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "unique_url"
     t.integer  "created_by"
     t.string   "created_ip"
-    t.integer  "content_way",   :default => 0
+    t.integer  "content_way",         :default => 0
     t.text     "content"
     t.text     "virtue_encode"
     t.datetime "deleted_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -61,14 +65,18 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   create_table "archives_items", :force => true do |t|
     t.string   "uuid"
     t.string   "title"
-    t.string   "unique_flag",   :default => "URL"
+    t.string   "unique_flag",         :default => "URL"
     t.string   "unique_refer"
     t.integer  "created_by"
     t.string   "created_ip"
-    t.integer  "content_way",   :default => 0
+    t.integer  "content_way",         :default => 0
     t.text     "content"
     t.text     "virtue_encode"
     t.datetime "deleted_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -81,6 +89,19 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer "archives_category_id"
     t.integer "ship_flag",            :default => 0
   end
+
+  create_table "archives_taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "position",      :default => 0
+    t.string   "context"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "archives_taggings", ["tag_id"], :name => "archives_taggings_tag_id"
+  add_index "archives_taggings", ["taggable_id", "taggable_type", "context"], :name => "archives_taggable_index"
 
   create_table "artists", :force => true do |t|
     t.string   "uuid"

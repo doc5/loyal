@@ -21,7 +21,7 @@ Loyal::Application.routes.draw do
   constraints :subdomain => "#{SubdomainTip}", :domain => 'uusoso.com' do
     root :to => "tip/home#index"
     scope :module => "tip", :as => "tip" do    
-      resources :categories            
+      resources :categories, :only => [:show, :index]
       resources :posts, :only => [:show, :new, :destroy, :edit, :update, :create]
       resources :comments          
       
