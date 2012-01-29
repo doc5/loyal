@@ -17,6 +17,11 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
       t.string :title
       t.text :content
       
+      t.string :fetch_author
+      t.datetime :fetch_pubtime      
+      t.string :fetch_category, :default => ""
+      t.string :fetch_tag_list, :default => ""
+      
       t.string :virtue_way, :default => 'yaml'
       t.text :virtue_encode
       
