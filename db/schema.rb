@@ -44,8 +44,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   create_table "archives_item_fetches", :force => true do |t|
     t.string   "uuid"
     t.string   "title"
-    t.string   "refer_unique"
-    t.string   "url_name"
+    t.string   "unique_url"
     t.integer  "created_by"
     t.string   "created_ip"
     t.integer  "content_way",   :default => 0
@@ -56,11 +55,14 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.datetime "updated_at"
   end
 
+  add_index "archives_item_fetches", ["unique_url"], :name => "index_archives_item_fetches_on_unique_url"
+  add_index "archives_item_fetches", ["uuid"], :name => "index_archives_item_fetches_on_uuid"
+
   create_table "archives_items", :force => true do |t|
     t.string   "uuid"
     t.string   "title"
-    t.string   "refer_unique"
-    t.string   "url_name"
+    t.string   "unique_flag",   :default => "URL"
+    t.string   "unique_refer"
     t.integer  "created_by"
     t.string   "created_ip"
     t.integer  "content_way",   :default => 0
@@ -70,6 +72,9 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "archives_items", ["unique_flag", "unique_refer"], :name => "archives_items_unique_index"
+  add_index "archives_items", ["uuid"], :name => "index_archives_items_on_uuid"
 
   create_table "archives_items_and_archives_categories", :id => false, :force => true do |t|
     t.integer "archives_item_id"

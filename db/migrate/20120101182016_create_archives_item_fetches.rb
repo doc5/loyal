@@ -3,9 +3,8 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
     create_table :archives_item_fetches do |t|
       t.string :uuid
       t.string :title
-          
-      t.string :refer_unique  #唯一的标识
-      t.string :url_name 
+      
+      t.string :unique_url
       
       t.integer :created_by
       t.string :created_ip
@@ -16,7 +15,11 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
       t.text :virtue_encode  #属性编码后的yuml
       
       t.datetime :deleted_at
+      
       t.timestamps
     end
+    
+    add_index :archives_item_fetches, [:uuid]
+    add_index :archives_item_fetches, [:unique_url]
   end
 end

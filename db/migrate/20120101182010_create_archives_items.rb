@@ -3,8 +3,9 @@ class CreateArchivesItems < ActiveRecord::Migration
     create_table :archives_items do |t|
       t.string :uuid
       t.string :title
-          
-      t.string :unique_refer  #唯一的标识
+      
+      t.string :unique_flag, :default => "URL"   #唯一标识的类型
+      t.string :unique_refer  #唯一的标识      
       
       t.integer :created_by
       t.string :created_ip
@@ -19,6 +20,6 @@ class CreateArchivesItems < ActiveRecord::Migration
     end
     
     add_index :archives_items, [:uuid]
-    add_index :archives_items, [:unique_refer]
+    add_index :archives_items, [:unique_flag, :unique_refer], :name => "archives_items_unique_index"
   end
 end
