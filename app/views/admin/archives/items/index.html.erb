@@ -8,6 +8,8 @@
   </div>
 
   <div class="main-content">
+    <%= will_paginate @archives_items %>
+    
     <div class="list">
       <% if @archives_items.any? %>
         <% @archives_items.each do |item| %>
@@ -21,7 +23,9 @@
       <% else %>
         暂无文档
       <% end %>
-    </div>    
+    </div>  
+    
+    <%= will_paginate @archives_items %>  
   </div>
 
   <div class="main-options">

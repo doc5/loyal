@@ -8,6 +8,8 @@
   </div>
 
   <div class="main-content">
+    <%= page_entries_info @archives_item_fetches, :model => ArchivesItemFetch, :html => false %>
+    <%= will_paginate @archives_item_fetches %>
     <div class="list">
       <% if @archives_item_fetches.any? %>
         <% @archives_item_fetches.each do |item_fetch| %>
@@ -21,7 +23,8 @@
       <% else %>
         暂无文档
       <% end %>
-    </div>    
+    </div>  
+    <%= will_paginate @archives_item_fetches %>  
   </div>
 
   <div class="main-options">

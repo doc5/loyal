@@ -50,7 +50,9 @@ module March
       
       class << self
         def fetch(options={})
-          
+          CATEGORIE_BASE_CONFIGS.keys.each do |cate|
+            self.fetch_category(cate)
+          end
         end
         
         def fetch_category(category=nil)          
@@ -58,7 +60,7 @@ module March
           return if cate_config.nil?
           
           cate_config[:page].downto(1) do |i|
-#            begin
+            begin
               unless cate_config[:url].nil?
                 base_uri = "#{cate_config[:url]}#{i}.html"
                 puts "fetch #{base_uri}"
@@ -71,23 +73,23 @@ module March
                     link = title[:href]
                     if !link.blank? && link.include?(".html")
                       puts "#{link}   --------------------------"
-#                      begin
+                      begin
                         ArchivesItemFetch.fetch(:from_site => Website::FetchConfig::SITE_DUWENZHANG,
                           :from_uri => link)                      
-#                      rescue
-#                        next
-#                      ensure
-#                        next
-#                      end
+                      rescue
+                        next
+                      ensure
+                        next
+                      end
                     end
                   end
                 end
               end
-#            rescue
-#              next
-#            ensure
-#              next
-#            end
+            rescue
+              next
+            ensure
+              next
+            end
           end
         end
       end
