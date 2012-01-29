@@ -1,0 +1,30 @@
+<%= render :partial => "/admin/archives/partials/side_panel" %>
+
+<div id="main-panel">
+  <h1>文档列表</h1>
+
+  <div class="main-options">
+    <%= link_to "新建文档", admin_route(new_admin_archives_item_fetch_path) %>
+  </div>
+
+  <div class="main-content">
+    <div class="list">
+      <% if @archives_item_fetches.any? %>
+        <% @archives_item_fetches.each do |item_fetch| %>
+      <div class="item">
+        <div class="operate">
+          <%= link_to "编辑", admin_route(edit_admin_archives_item_fetch_path(item_fetch)) %>
+        </div>        
+        <%= link_to "#{item_fetch.title}", admin_route(admin_archives_item_fetch_path(item_fetch)) %>
+      </div>
+        <% end %>
+      <% else %>
+        暂无文档
+      <% end %>
+    </div>    
+  </div>
+
+  <div class="main-options">
+    <%= link_to "新建文档", admin_route(new_admin_archives_item_fetch_path) %>
+  </div>
+</div>

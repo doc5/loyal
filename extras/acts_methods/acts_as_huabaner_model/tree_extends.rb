@@ -11,6 +11,7 @@ module ActsMethods
           
         acts_as_nested_set
           
+        validates_presence_of :name
         attr_accessible :name, :parent_id
         attr_protected :lft, :rgt
           

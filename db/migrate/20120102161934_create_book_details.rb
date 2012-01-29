@@ -37,7 +37,8 @@ class CreateBookDetails < ActiveRecord::Migration
       
       t.string :published_by
       
-      t.text :content_encode    
+      t.string :content_way, :default => "yaml"
+      t.text :content_encode
       
       t.integer :overall_avatars_count, :default => 0
       

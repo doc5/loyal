@@ -5,9 +5,5 @@ module Website
     SITE_DANGDANG = 2
     SITE_TUSHUCHENG = 3
     SITE_DOUBAN = 4
-
-    FETCH_DESCS = {
-
-    }
   end
 end

@@ -1,0 +1,29 @@
+<% if @archives_item_fetch.errors.any? %>
+  <div id="error_explanation">
+    <h2 id="errorExplanationHeader"><%= t('activerecord.errors.template.header', :count => @archives_item_fetch.errors.count) %></h2>	
+    <ul>
+      <% @archives_item_fetch.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <%= f.label :Title %>*<br />
+  <%= f.text_field :title %>
+</div>
+
+<div class="field">
+  <%= f.label :from_uri %>*<br />
+  <%= f.text_field :from_uri %>
+</div>
+
+<div class="field">
+  <%= f.label :content %><br />
+  <%= f.text_area :content %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>

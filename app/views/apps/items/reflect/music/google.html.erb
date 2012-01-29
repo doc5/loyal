@@ -1,4 +1,11 @@
-<iframe width="100%" scrolling="no" 
-        frameborder="0" style="background-color: transparent; height: 610px;" 
-        allowtransparency="true" 
-src="http://www.google.cn/music/top100/player_page" name="iframe_canvas"></iframe> 
+<%= content_for :header do %>
+  <meta http-equiv="refresh" content="1;url='http://www.google.cn/music/top100/player_page'"/>
+<% end %>
+
+<% if false %>
+  <iframe width="100%" scrolling="no" 
+          frameborder="0" style="background-color: transparent; height: 610px;" 
+          allowtransparency="true" 
+  src="http://www.google.cn/music/top100/player_page" name="iframe_canvas"></iframe> 
+
+<% end %>

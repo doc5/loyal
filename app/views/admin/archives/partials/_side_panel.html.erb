@@ -3,6 +3,16 @@
     <%= link_to "文档管理", admin_route(admin_archives_root_path) %>
   </h2>
   
+  <h4>文档分类管理</h4>
+  <ul>
+    <li>
+      <%= link_to "文档分类列表", admin_route(admin_archives_categories_path) %>
+    </li>
+    <li>
+      <%= link_to "新建文档分类", admin_route(new_admin_archives_category_path) %>
+    </li>
+  </ul>
+  
   <h4>文档管理</h4>
   <ul>
     <li>
@@ -10,6 +20,16 @@
     </li>
     <li>
       <%= link_to "新建文档", admin_route(new_admin_archives_item_path) %>
+    </li>
+  </ul>
+  
+  <h4>文档抓取管理</h4>
+  <ul>
+    <li>
+      <%= link_to "文档抓取列表", admin_route(admin_archives_item_fetches_path) %>
+    </li>
+    <li>
+      <%= link_to "新建抓取文档", admin_route(new_admin_archives_item_fetch_path) %>
     </li>
   </ul>
 </div>

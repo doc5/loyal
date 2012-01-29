@@ -1,5 +1,4 @@
 require 'open-uri'
-require 'iconv'
 require 'sanitize'
 
 class BookDetailFetch < ActiveRecord::Base
@@ -11,10 +10,6 @@ class BookDetailFetch < ActiveRecord::Base
   
   validates_presence_of :from_site
   validates_uniqueness_of :url  
-  
-  def self.conv_text(text, encoding)
-    Iconv.conv('UTF-8//IGNORE', encoding.upcase!, text)
-  end
   
   def fetch_detail(options={})
     book_detail = self.book_detail || BookDetail.new(:book_detail_fetch_id => self.id, 
@@ -75,7 +70,7 @@ class BookDetailFetch < ActiveRecord::Base
             when /正文语种*/
               fetch_lang_tag = node_content_text
             when /所属分类*/
-              cate_doc = Nokogiri::HTML(BookDetailFetch.conv_text(node.inner_html, result_str.charset))
+              cate_doc = Nokogiri::HTML(March::StringTools.conv_text(node.inner_html, result_str.charset))
               cate_doc.css("a").each_with_index do |node, i|
                 if i % 3 == 2
                   cate = BookCategoryFetch.find_by_url(node.attr("href"))
@@ -98,7 +93,7 @@ class BookDetailFetch < ActiveRecord::Base
         
         if !node_title.nil? && !node_content.nil? && node_title.any? && node_content.any?
           
-          node_content_html = BookDetailFetch.conv_text(node_content.first.inner_html, result_str.charset)
+          node_content_html = March::StringTools.conv_text(node_content.first.inner_html, result_str.charset)
           
           Rails.logger.debug "#{node_title}:=================>#{node_content_html}"
           

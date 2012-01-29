@@ -3,9 +3,9 @@ class CreateArchivesItems < ActiveRecord::Migration
     create_table :archives_items do |t|
       t.string :uuid
       t.string :title
-          
-      t.string :refer_unique  #唯一的标识
-      t.string :url_name  
+      
+      t.string :unique_flag, :default => "URL"   #唯一标识的类型
+      t.string :unique_refer  #唯一的标识      
       
       t.integer :created_by
       t.string :created_ip
@@ -13,10 +13,15 @@ class CreateArchivesItems < ActiveRecord::Migration
       t.integer :content_way, :default => 0 #正文编码类型
       t.text :content
       
-      t.text :virtue_encode  #属性编码后的yuml
+      t.string :virtue_way, :default => 'yaml'
+      t.text :virtue_encode
       
       t.datetime :deleted_at
+      
       t.timestamps
     end
+    
+    add_index :archives_items, [:uuid]
+    add_index :archives_items, [:unique_flag, :unique_refer], :name => "archives_items_unique_index"
   end
 end
