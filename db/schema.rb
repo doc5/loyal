@@ -44,39 +44,32 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   create_table "archives_item_fetches", :force => true do |t|
     t.string   "uuid"
     t.string   "title"
-    t.string   "unique_url"
+    t.integer  "from_site"
+    t.string   "from_uri"
     t.integer  "created_by"
     t.string   "created_ip"
-    t.integer  "content_way",         :default => 0
+    t.integer  "content_way",   :default => 0
     t.text     "content"
     t.text     "virtue_encode"
     t.datetime "deleted_at"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "archives_item_fetches", ["unique_url"], :name => "index_archives_item_fetches_on_unique_url"
+  add_index "archives_item_fetches", ["from_uri"], :name => "index_archives_item_fetches_on_from_uri"
   add_index "archives_item_fetches", ["uuid"], :name => "index_archives_item_fetches_on_uuid"
 
   create_table "archives_items", :force => true do |t|
     t.string   "uuid"
     t.string   "title"
-    t.string   "unique_flag",         :default => "URL"
+    t.string   "unique_flag",   :default => "URL"
     t.string   "unique_refer"
     t.integer  "created_by"
     t.string   "created_ip"
-    t.integer  "content_way",         :default => 0
+    t.integer  "content_way",   :default => 0
     t.text     "content"
     t.text     "virtue_encode"
     t.datetime "deleted_at"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -100,7 +93,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.datetime "updated_at"
   end
 
-  add_index "archives_taggings", ["tag_id"], :name => "archives_taggings_tag_id"
+  add_index "archives_taggings", ["tag_id"], :name => "archives_taggings_tag_id_index"
   add_index "archives_taggings", ["taggable_id", "taggable_type", "context"], :name => "archives_taggable_index"
 
   create_table "artists", :force => true do |t|
@@ -122,6 +115,22 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "base_avatars", :force => true do |t|
+    t.string   "from_uri"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.integer  "position",            :default => 0
+    t.string   "title"
+    t.string   "alt"
+    t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

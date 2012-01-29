@@ -1,7 +1,10 @@
 class ArchivesAvatar < ActiveRecord::Base
-  table_name "base_avatars"
+  def self.table_name
+    "base_avatars"
+  end
   
   include ActsMethods::ActsAsHuabanerModel::AvatarExtends
+  acts_as_huabaner_avatar  
           
   # 头像相关
   has_attached_file :avatar, :styles => {#300x300#是正方形的

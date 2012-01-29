@@ -1,6 +1,6 @@
-class CreateOverallAvatars < ActiveRecord::Migration
+class CreateBaseAvatars < ActiveRecord::Migration
   def change
-    create_table :overall_avatars do |t|
+    create_table :base_avatars do |t|
       t.string :from_uri
       
       t.string :resource_type

@@ -4,12 +4,17 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
       t.string :uuid
       t.string :title
       
-      t.string :unique_url
+      t.integer :from_site  #京东？当当？淘宝？亚马逊？豆瓣？？
+      t.string :from_uri
       
       t.integer :created_by
       t.string :created_ip
       
       t.integer :content_way, :default => 0 #正文编码类型
+      
+      t.string :lang, :default => LangConfig::DEFAULT_LANG
+      
+      t.string :title
       t.text :content
       
       t.text :virtue_encode  #属性编码后的yuml
@@ -20,6 +25,6 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
     end
     
     add_index :archives_item_fetches, [:uuid]
-    add_index :archives_item_fetches, [:unique_url]
+    add_index :archives_item_fetches, [:from_uri]
   end
 end

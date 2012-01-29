@@ -6,7 +6,6 @@ module ActsMethods
     module AvatarExtends
       def self.included(base)
         base.extend ActsMethods::ActsAsHuabanerModel::AvatarExtends
-        acts_as_huabaner_avatar  
       end
       def acts_as_huabaner_avatar(options = {})            
         include ActsMethods::ActsAsHuabanerModel::AvatarExtends::InstanceMethods
