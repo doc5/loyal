@@ -1,6 +1,6 @@
 class Admin::Archives::ItemFetchesController < AdminController
   def index
-    @archives_item_fetches = ArchivesItemFetch.paginate(:page => params[:page])
+    @archives_item_fetches = ArchivesItemFetch.paginate(:page => params[:page], :order => "created_at DESC")
     
     respond_to do |format|
       format.html
