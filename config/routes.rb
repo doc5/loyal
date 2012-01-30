@@ -11,9 +11,11 @@ Loyal::Application.routes.draw do
   end
   
 #  ================================================== yuedu123 start
-  constraints :subdomain => "#{SubdomainArchives}", :domain => 'yuedu123.com' do
-    root :to => "yuedu123/archives/home#index"
+  constraints :subdomain => "#{SubdomainArchives}", :domain => 'yuedu123.com' do    
     scope :module => "yuedu123", :as => "yuedu123" do
+      root :to => "archives/home#index"
+      match "search", :to => "home#search", :as => :search
+      
       scope :module => "archives", :as => "archives" do
         resources :categories, :only => [:index]
         resources :items, :only => [:index]

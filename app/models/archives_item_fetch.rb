@@ -62,9 +62,7 @@ class ArchivesItemFetch < ActiveRecord::Base
         
       item_fetch.fetch
     end
-  end  
-  
-  
+  end
   
 #  for search attrs
   def shared_searcher_categories
