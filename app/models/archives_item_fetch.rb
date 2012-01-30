@@ -63,4 +63,28 @@ class ArchivesItemFetch < ActiveRecord::Base
       item_fetch.fetch
     end
   end  
+  
+  
+  
+#  for search attrs
+  def shared_searcher_categories
+    
+  end
+  
+  def shared_searcher_created_by
+    
+  end
+  
+  def shared_searcher_title
+    self.title
+  end
+  def shared_searcher_content
+    self.content
+  end
+  def shared_searcher_created_at
+    self.created_at.to_s
+  end
+  def shared_searcher_updated_at
+    self.updated_at.to_s
+  end
 end
