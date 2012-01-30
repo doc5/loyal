@@ -42,7 +42,7 @@ class ArchivesItemFetch < ActiveRecord::Base
         
         fetched_hash[:content] = String.new
         
-        p_category_node = doc.css("table .pindao")[1].css("a").last
+        p_category_node = doc.css("table .pindao")[0].css("a").last
         fetched_hash[:fetch_category] = p_category_node.text
         
         p_title_node = doc.css("table table tr td h1").first
