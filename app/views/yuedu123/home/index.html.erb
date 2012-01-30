@@ -1,3 +1,9 @@
-<% @archives_item_fetches.each do |fetch| %>
-  <%= link_to "#{fetch.title}" %><br/>
-<% end %>
+<div>
+  <% @archives_item_fetches.each do |fetch| %>
+    <div class="item">   
+      <%= link_to "#{fetch.title}", 
+        archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)), 
+        :target => "_blank" %><br/>
+    </div>
+  <% end %>
+</div>

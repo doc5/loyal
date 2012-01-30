@@ -1,2 +1,22 @@
-<h1>Yuedu123::Archives::Fetches#show</h1>
-<p>Find me in app/views/yuedu123/archives/fetches/show.html.erb</p>
+<div id="main">
+  <div id="side-panel">
+    
+  </div>
+  <div id="main-panel">
+    <div class="main-info">      
+      <h1>
+        <%= @archives_item_fetch.title %>
+      </h1>
+      <div class="detail-info">
+        <%= @archives_item_fetch.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        <% @archives_item_fetch.categories.each do |category| %>
+          <%= link_to "#{category.name}", 
+            archives_route(yuedu123_archives_category_path(:url_name => category.url_name)) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="main-content">
+      <%= raw @archives_item_fetch.content %>
+    </div>
+  </div>
+</div>

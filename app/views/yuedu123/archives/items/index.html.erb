@@ -3,13 +3,14 @@
     
   </div>
   <div id="main-panel">
+    <%= will_paginate @archives_item_fetches %>
     <div class="items-list">
 
     </div>
     <% @archives_item_fetches.each do |fetch| %>
-      <%= link_to "#{fetch.title}", 
-        archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)), 
-        :target => "_blank" %><br/>
+      <%= link_to "#{fetch.title}" %><br/>
     <% end %>
+
+    <%= will_paginate @archives_item_fetches %>
   </div>
 </div>

@@ -1,4 +1,4 @@
-SubdomainArchives = 'archives'
+SubdomainArchives = 'arch'
 SubdomainFeeds = "feeds"
 SubdomainWWW   = "www"
 SubdomainAdmin = "admin"

@@ -14,9 +14,15 @@ Loyal::Application.routes.draw do
   constraints :subdomain => "#{SubdomainArchives}", :domain => 'yuedu123.com' do
     root :to => "yuedu123/archives/home#index"
     scope :module => "yuedu123", :as => "yuedu123" do
-      resources :categories, :only => [:show, :index]
-      resources :items, :only => [:show]
-      resources :fetches, :only => [:show]
+      scope :module => "archives", :as => "archives" do
+        resources :categories, :only => [:index]
+        resources :items, :only => [:index]
+        resources :fetches, :only => [:index]
+        
+        match "categories/:url_name", :to => "categories#show", :as => :category
+        match "items/:uuid", :to => "items#show", :as => :item
+        match "fetches/:uuid", :to => "fetches#show", :as => :fetch
+      end
     end
   end
   
@@ -34,14 +40,14 @@ Loyal::Application.routes.draw do
     end
   end
   
-  constraints :subdomain => "#{SubdomainMap}", :domain => 'uusoso.com' do
+  constraints :subdomain => "#{SubdomainMap}", :domain => 'doc5.com' do
     root :to => "map/home#index"
     scope :module => "map", :as => "map" do
       
     end
   end
   
-  constraints :subdomain => "#{SubdomainTip}", :domain => 'uusoso.com' do
+  constraints :subdomain => "#{SubdomainTip}", :domain => 'doc5.com' do
     root :to => "tip/home#index"
     scope :module => "tip", :as => "tip" do    
       resources :categories, :only => [:show, :index]
@@ -68,13 +74,13 @@ Loyal::Application.routes.draw do
   
 
   #  root :to => "home#index"
-  constraints :subdomain => "#{SubdomainBook}", :domain => 'uusoso.com' do
+  constraints :subdomain => "#{SubdomainBook}", :domain => 'doc5.com' do
     scope :module => "book", :as => "book" do
       root :to => "home#index"
     end
   end
   
-  constraints :subdomain => "#{SubdomainAdmin}", :domain => 'uusoso.com' do      
+  constraints :subdomain => "#{SubdomainAdmin}", :domain => 'doc5.com' do      
     scope :module => "admin", :as => "admin" do
       root :to => "home#index"
       resources :users
@@ -123,7 +129,7 @@ Loyal::Application.routes.draw do
     end
   end
   
-  constraints :subdomain => "", :domain => 'uusoso.com' do   
+  constraints :subdomain => "", :domain => 'doc5.com' do   
     root :to => "home#index"
     
     resources :users, :only => [:new, :create] do

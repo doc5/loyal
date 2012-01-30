@@ -6,3 +6,101 @@ body{
     margin: 0;
     padding: 0;
 }
+
+
+body{
+    color: #555555;
+}
+
+a {
+    color: #555555;
+    
+    &:hover {
+        color: red;
+    }   
+}
+
+#header{
+    background-color: #893450;
+    padding: 5px;
+
+    a{
+        color: #ffffff;
+        margin: 2px 5px;
+
+        &:hover{
+            color: red;
+        }
+    }
+}
+
+#container{
+    margin: 0 auto;
+    width: 980px;
+}
+
+#side-panel {
+    width: 150px;
+    float: right;
+    border-right: 1px solid blue;
+
+    h4{
+        margin: 5px 0px;
+    }
+    ul {
+        padding: 2px 2px 2px 10px;
+        margin: 5px 0px;
+    
+        li {
+            padding: 2px;
+        }
+    }
+}
+
+#main-panel{
+    .main-info{
+        text-align: center;
+        .detail-info{
+            font-size: 12px;
+        }
+    }
+
+    padding: 10px 160px 10px 10px;
+
+    h1, h2, h3, h4, h5, h6{
+        font-size: 150%;
+    }
+    
+    .main-options{
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    .main-children{
+        padding: 5px;
+    }
+
+    .main-content{
+        padding: 5px;
+
+        .list {
+            
+            .item{
+                padding: 2px 2px;
+                border-bottom: 1px dashed #ddd;
+
+                .operate {
+                    float: right;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+
+#container:after, #container2:after, #container3:after, #main:after, #main2:after, #main3:after {
+    clear: both;
+    content: " ";
+    display: block;
+}

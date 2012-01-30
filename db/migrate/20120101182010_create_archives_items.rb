@@ -8,7 +8,14 @@ class CreateArchivesItems < ActiveRecord::Migration
       t.string :unique_refer  #唯一的标识  
       
       t.string :rec_author
-      t.string :rec_tag_list, :default => ""    
+#      计算出来的标签列表
+      t.string :rec_tag_list, :default => ""
+#      可见？
+      t.boolean :rec_visible, :default => true
+#      发表了
+      t.boolean :rec_published, :default => true
+#      显示来源
+      t.boolean :show_refer, :default => false
       
       t.integer :created_by
       t.string :created_ip

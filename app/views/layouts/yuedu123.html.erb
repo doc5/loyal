@@ -9,8 +9,17 @@
     <%= yield :header %>
   </head>
   <body>    
-    
-    <%= yield %>
-
+    <div id="container">  
+      <div id="header">
+        <div class="logo">
+          
+        </div>
+        <div class="linkers">
+          <%= link_to "首页", archives_route(root_path) %>
+          <%= link_to "文章列表", archives_route(yuedu123_archives_fetches_path) %>
+        </div>
+      </div>
+      <%= yield %>
+    </div>
   </body>
 </html>

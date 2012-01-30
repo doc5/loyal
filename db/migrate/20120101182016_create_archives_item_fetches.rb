@@ -20,7 +20,17 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
       t.string :fetch_author
       t.datetime :fetch_pubtime      
       t.string :fetch_category, :default => ""
+#      抓取
       t.string :fetch_tag_list, :default => ""
+      
+#      可见？
+      t.boolean :fetch_visible, :default => true
+#      发表了
+      t.boolean :fetch_published, :default => true
+#      显示来源
+      t.boolean :show_from, :default => false
+#      计算出来的标签列表
+      t.string :rec_tag_list, :default => ""
       
       t.string :virtue_way, :default => 'yaml'
       t.text :virtue_encode
