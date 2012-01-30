@@ -1,2 +1,3 @@
-<h1>Yuedu123::Home#index</h1>
-<p>Find me in app/views/yuedu123/home/index.html.erb</p>
+<% @archives_item_fetches.each do |fetch| %>
+  <%= link_to "#{fetch.title}" %><br/>
+<% end %>

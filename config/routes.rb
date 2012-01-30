@@ -1,13 +1,31 @@
 Loyal::Application.routes.draw do
+  get "categories/show"
+
+  get "fetches/show"
+
+  get "home/index"
+
   constraints :subdomain => "", :domain => 'doc5.com' do
     root :to => "docfive/home#index"
     
   end
   
-  constraints :subdomain => "#{SubdomainWWW}", :domain => 'yuedu123.com' do
+#  ================================================== yuedu123 start
+  constraints :subdomain => "#{SubdomainArchives}", :domain => 'yuedu123.com' do
+    root :to => "yuedu123/archives/home#index"
+    scope :module => "yuedu123", :as => "yuedu123" do
+      resources :categories, :only => [:show, :index]
+      resources :items, :only => [:show]
+      resources :fetches, :only => [:show]
+    end
+  end
+  
+  constraints :subdomain => "#{SubdomainWWW}", :domain => /yuedu123.com/ do
     root :to => "yuedu123/home#index"
     
-  end
+  end  
+# ================================================== yuedu123 end
+
   
   constraints :subdomain => "#{SubdomainApps}", :domain => 'doc5.com' do
     root :to => "apps/home#index"

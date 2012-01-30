@@ -1,0 +1,9 @@
+<%= will_paginate @archives_item_fetches %>
+<div class="items-list">
+  
+</div>
+<% @archives_item_fetches.each do |fetch| %>
+  <%= link_to "#{fetch.title}" %><br/>
+<% end %>
+
+<%= will_paginate @archives_item_fetches %>

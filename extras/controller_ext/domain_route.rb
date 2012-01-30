@@ -1,5 +1,9 @@
 module ControllerExt
   module DomainRoute
+    def archives_route(path='', domain=nil)
+      subdomain_route(SubdomainArchives, path, domain)
+    end 
+    
     def admin_route(path='', domain=nil)
       subdomain_route(SubdomainAdmin, path, domain)
     end 
