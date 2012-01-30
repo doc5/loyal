@@ -78,9 +78,11 @@ class ArchivesItemFetch < ActiveRecord::Base
   def shared_searcher_title
     self.title
   end
+  
   def shared_searcher_content
-    self.content
+    March::StringTools.clean_html(self.content)
   end
+  
   def shared_searcher_created_at
     self.created_at.to_s
   end

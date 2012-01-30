@@ -27,8 +27,7 @@ module March
           end
         end
         return text
-      end
-    
+      end    
     
       def sanitize(html, ok_tags='a href, b, br, i, p' )
         # no closing tag necessary for these
