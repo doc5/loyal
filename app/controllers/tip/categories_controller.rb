@@ -1,6 +1,6 @@
 class Tip::CategoriesController < TipController
   def index
-    @tip_categories = TipCategory.categories_self_and_children #.root_categories
+    @tip_categories = TipCategory.categories_self_and_children
   end
 
   def show

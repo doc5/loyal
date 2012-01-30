@@ -4,6 +4,11 @@ Loyal::Application.routes.draw do
     
   end
   
+  constraints :subdomain => "#{SubdomainWWW}", :domain => 'yuedu123.com' do
+    root :to => "yuedu123/home#index"
+    
+  end
+  
   constraints :subdomain => "#{SubdomainApps}", :domain => 'doc5.com' do
     root :to => "apps/home#index"
     scope :module => "apps", :as => "apps" do

@@ -1,1 +1,3 @@
 https://github.com/binarylogic/authlogic
+#准备test数据库
+rake db:test:prepare
