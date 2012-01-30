@@ -48,10 +48,21 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "from_uri"
     t.integer  "created_by"
     t.string   "created_ip"
+<<<<<<< HEAD
     t.integer  "content_way",   :default => 0
     t.string   "lang",          :default => "zh-cn"
     t.text     "content"
     t.string   "virtue_way",    :default => "yaml"
+=======
+    t.integer  "content_way",    :default => 0
+    t.string   "lang",           :default => "zh-cn"
+    t.text     "content"
+    t.string   "fetch_author"
+    t.datetime "fetch_pubtime"
+    t.string   "fetch_category", :default => ""
+    t.string   "fetch_tag_list", :default => ""
+    t.string   "virtue_way",     :default => "yaml"
+>>>>>>> 9e06b79d00b3c21a7c0cbcf80d45022f00fa81e9
     t.text     "virtue_encode"
     t.datetime "deleted_at"
     t.datetime "created_at"
@@ -71,6 +82,11 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "title"
     t.string   "unique_flag",   :default => "URL"
     t.string   "unique_refer"
+<<<<<<< HEAD
+=======
+    t.string   "rec_author"
+    t.string   "rec_tag_list",  :default => ""
+>>>>>>> 9e06b79d00b3c21a7c0cbcf80d45022f00fa81e9
     t.integer  "created_by"
     t.string   "created_ip"
     t.integer  "content_way",   :default => 0

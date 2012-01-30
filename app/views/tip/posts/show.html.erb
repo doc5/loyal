@@ -1,9 +1,11 @@
 <div id="main-panel">
+  <%= render :partial => "/tip/categories/path", 
+    :locals => {:with_self => true, :current_category => @tip_post.category} %>
   <h1><%= @tip_post.title %>    </h1>
 
   <div class="main-options">
     <%= link_to "返回分类", tip_category_path(@tip_post.tip_category_id) %>
-  <%= link_to "添加TIP", new_tip_post_path %>
+    <%= link_to "添加TIP", new_tip_post_path %>
   </div>
 
   <div class="main-content">

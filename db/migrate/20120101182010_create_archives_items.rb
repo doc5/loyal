@@ -5,7 +5,10 @@ class CreateArchivesItems < ActiveRecord::Migration
       t.string :title
       
       t.string :unique_flag, :default => "URL"   #唯一标识的类型
-      t.string :unique_refer  #唯一的标识      
+      t.string :unique_refer  #唯一的标识  
+      
+      t.string :rec_author
+      t.string :rec_tag_list, :default => ""    
       
       t.integer :created_by
       t.string :created_ip

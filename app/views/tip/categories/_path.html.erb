@@ -1,0 +1,4 @@
+<% (with_self ? current_category.self_and_ancestors : current_category.ancestors).each do |category| %>
+  >> 
+  <%= link_to "#{category.name}", tip_category_path(:id => category.id) %>
+<% end %>

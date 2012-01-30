@@ -28,28 +28,26 @@ class ArchivesItemFetch < ActiveRecord::Base
         :from_site => options[:from_site],
         :from_uri => options[:from_uri]
       )
-    
-      uri_open = URI.parse(item_fetch.from_uri)
-      result_str = uri_open.read      
-      doc = Nokogiri::HTML(result_str)
       
-      #      defined fetch
       fetched_hash = Hash.new
       
       case item_fetch.from_site
-      when Website::FetchConfig::SITE_DUWENZHANG        
+      when Website::FetchConfig::SITE_DUWENZHANG
+        doc = March::Fetch::OpenByUri.open(item_fetch.from_uri)
+        
         fetched_hash[:content] = String.new
+        
+        p_category_node = doc.css("table .pindao")[1].css("a").last
+        fetched_hash[:fetch_category] = p_category_node.text
         
         p_title_node = doc.css("table table tr td h1").first
         fetched_hash[:title] = p_title_node.text
         
-        p_content_nodes = doc.css("#wenzhangziti>p")        
-        p_content_nodes.each do |node|
-          node_text = node.text.strip
-          Rails.logger.debug "===>#{node_text}"
-          fetched_hash[:content] << "<p>#{node_text}</p>"
-        end
-      
+        fetched_hash[:content] = doc.css("#wenzhangziti").inner_html
+        fetched_hash[:content] = March::StringTools.conv_text(fetched_hash[:content], 'gb2312')
+        fetched_hash[:content] = March::StringTools.sanitize(fetched_hash[:content], 'br, p') unless fetched_hash[:content].blank?
+              
+        item_fetch.fetch_category = fetched_hash[:fetch_category]
         item_fetch.content = fetched_hash[:content]
         item_fetch.title = fetched_hash[:title]
         item_fetch.save
