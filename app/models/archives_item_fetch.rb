@@ -19,6 +19,32 @@ class ArchivesItemFetch < ActiveRecord::Base
   has_one :first_avatar, :class_name => "ArchivesAvatar", :as => :resource, 
     :order => "position ASC"
   
+  def fetch
+    fetched_hash = Hash.new
+    
+    case self.from_site
+    when Website::FetchConfig::SITE_DUWENZHANG
+      doc = March::Fetch::OpenByUri.open(self.from_uri)
+        
+      fetched_hash[:content] = String.new
+        
+      p_category_node = doc.css("table .pindao")[0].css("a").last
+      fetched_hash[:fetch_category] = p_category_node.text
+        
+      p_title_node = doc.css("table table tr td h1").first
+      fetched_hash[:title] = p_title_node.text
+        
+      fetched_hash[:content] = doc.css("#wenzhangziti").inner_html
+      fetched_hash[:content] = March::StringTools.conv_text(fetched_hash[:content], 'gb2312')
+      fetched_hash[:content] = March::StringTools.sanitize(fetched_hash[:content], 'br, p') unless fetched_hash[:content].blank?
+              
+      self.fetch_category = fetched_hash[:fetch_category]
+      self.content = fetched_hash[:content]
+      self.title = fetched_hash[:title]
+      self.save
+    end  
+  end
+  
   class << self
     def fetch(options={})
       #    TODO: from_site include?
@@ -33,30 +59,8 @@ class ArchivesItemFetch < ActiveRecord::Base
       else
         return unless options[:force_update]
       end
-      
-      fetched_hash = Hash.new
-      
-      case item_fetch.from_site
-      when Website::FetchConfig::SITE_DUWENZHANG
-        doc = March::Fetch::OpenByUri.open(item_fetch.from_uri)
         
-        fetched_hash[:content] = String.new
-        
-        p_category_node = doc.css("table .pindao")[0].css("a").last
-        fetched_hash[:fetch_category] = p_category_node.text
-        
-        p_title_node = doc.css("table table tr td h1").first
-        fetched_hash[:title] = p_title_node.text
-        
-        fetched_hash[:content] = doc.css("#wenzhangziti").inner_html
-        fetched_hash[:content] = March::StringTools.conv_text(fetched_hash[:content], 'gb2312')
-        fetched_hash[:content] = March::StringTools.sanitize(fetched_hash[:content], 'br, p') unless fetched_hash[:content].blank?
-              
-        item_fetch.fetch_category = fetched_hash[:fetch_category]
-        item_fetch.content = fetched_hash[:content]
-        item_fetch.title = fetched_hash[:title]
-        item_fetch.save
-      end    
+      item_fetch.fetch
     end
   end  
 end
