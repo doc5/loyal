@@ -4,6 +4,8 @@ require 'rmmseg'
 require 'rmmseg/ferret'
 
 _default_shared_options_ferret ||=  {:analyzer => RMMSeg::Ferret::Analyzer.new}
+
+#_default_shared_options_ferret ||=  {:analyzer => Ferret::Analysis::PerFieldAnalyzer.new}
 _default_shared_options_fields = {
   :categories => {:store => :yes, :index => :untokenized, :boost => 5, :via => :shared_searcher_categories},               
   :created_by => {:store => :yes, :boost => 5, :via => :shared_searcher_created_by},            
