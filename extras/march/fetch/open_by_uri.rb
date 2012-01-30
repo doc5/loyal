@@ -1,6 +1,4 @@
 require 'open-uri'
-#require 'iconv'
-#require 'sanitize'
 
 module March
   module Fetch

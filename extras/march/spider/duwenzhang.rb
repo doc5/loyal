@@ -1,3 +1,6 @@
+# call: 
+#   March::Spider::Duwenzhang.fetch 抓取所有读文章网站的文章
+
 module March
   module Spider
     class Duwenzhang
@@ -51,15 +54,15 @@ module March
       class << self
         def fetch(options={})
           CATEGORIE_BASE_CONFIGS.keys.each do |cate|
-            self.fetch_category(cate)
+            self.fetch_category(:category => cate, :force_update => false)
           end
         end
         
-        def fetch_category(category=nil)          
-          cate_config = CATEGORIE_BASE_CONFIGS[category]
+        def fetch_category(options={})          
+          cate_config = CATEGORIE_BASE_CONFIGS[options[:category]]
           return if cate_config.nil?
           
-          cate_config[:page].downto(1) do |i|
+          (options[:page] || cate_config[:page]).to_i.downto((options[:down_page] || 1).to_i) do |i|
             begin
               unless cate_config[:url].nil?
                 base_uri = "#{cate_config[:url]}#{i}.html"
@@ -75,7 +78,7 @@ module March
                       puts "#{link}   --------------------------"
                       begin
                         ArchivesItemFetch.fetch(:from_site => Website::FetchConfig::SITE_DUWENZHANG,
-                          :from_uri => link)                      
+                          :from_uri => link, :force_update => options[:force_update])                      
                       rescue
                         next
                       ensure

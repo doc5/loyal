@@ -24,10 +24,15 @@ class ArchivesItemFetch < ActiveRecord::Base
       #    TODO: from_site include?
       return if options[:from_site].nil?
     
-      item_fetch = ArchivesItemFetch.find_by_from_uri(options[:from_uri]) || ArchivesItemFetch.new(
-        :from_site => options[:from_site],
-        :from_uri => options[:from_uri]
-      )
+      item_fetch = ArchivesItemFetch.find_by_from_uri(options[:from_uri])
+      if item_fetch.nil?
+        item_fetch = ArchivesItemFetch.new(
+          :from_site => options[:from_site],
+          :from_uri => options[:from_uri]
+        )
+      else
+        return unless options[:force_update]
+      end
       
       fetched_hash = Hash.new
       

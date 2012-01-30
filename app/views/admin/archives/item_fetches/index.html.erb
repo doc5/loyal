@@ -15,6 +15,9 @@
         <% @archives_item_fetches.each do |item_fetch| %>
       <div class="item">
         <div class="operate">
+          <span>
+            <%= item_fetch.fetch_category %>
+          </span>          
           <%= link_to "编辑", admin_route(edit_admin_archives_item_fetch_path(item_fetch)) %>
         </div>        
         <%= link_to "#{item_fetch.title}", admin_route(admin_archives_item_fetch_path(item_fetch)) %>

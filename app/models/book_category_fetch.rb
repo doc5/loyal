@@ -51,6 +51,7 @@ class BookCategoryFetch < ActiveRecord::Base
   end
   
   class << self
+#    抓取京东商城的图书分类
     def fetch_360buy_categories(force=false)
       category_url = CATEGORY_CONFIGS[Website::BookConfig::SITE_360BUY][:url]
       uri_open = URI.parse(category_url)

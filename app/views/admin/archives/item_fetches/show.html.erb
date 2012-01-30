@@ -16,6 +16,11 @@
     </p>
     
     <p>
+      <b>归类</b><br/>
+      <%= @archives_item_fetch.fetch_category %>
+    </p>
+    
+    <p>
       <b>Unique URL</b><br/>
       <%= @archives_item_fetch.from_uri %>
     </p>        
@@ -24,5 +29,6 @@
       <b>content</b><br/>
       <%= raw @archives_item_fetch.content %>
     </p>
+    
   </div>
 </div>
