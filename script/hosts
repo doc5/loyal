@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+require 'fileutils' 
+@host_path = '/etc/hosts'
+@host_tmp_path = '/tmp/hosts_tmp'
+
+@domins = [
+  'doc5.com',
+  'apps.doc5.com',
+  'map.doc5.com',
+  'www.yuedu123.com',
+  'yuedu123.com',
+  'arch.yuedu123.com'
+]
+
+@ips = [
+  '127.0.0.1',
+  '173.234.208.88'
+]
+
+def check_line(line)
+  @domins.each do |domin|
+    return false if line =~ /#{domin}/
+  end
+  return true
+end
+
+def add_domin(ip)
+  File.open(@host_path, 'a') do |file_w|
+      @domins.each do |domin|
+        file_w.puts "#{ip} #{domin}"
+      end
+      file_w.close
+  end
+end
+
+def delete_all
+  File.open(@host_tmp_path, 'w') do |file_w|
+    File.open(@host_path, 'r') do |file_r|
+      file_r.each_line do |line|
+        if check_line line
+          file_w.puts line
+        end
+      end
+      file_r.close
+    end
+    file_w.close
+  end
+  FileUtils.cp @host_tmp_path,@host_path
+end
+
+def understand(input)
+  if 'n' == input
+    delete_all 
+    puts "已恢复!"
+    return 
+  end
+  @ips.each_with_index do |ip,index|
+    if input == index.to_s
+      delete_all
+      add_domin ip
+      puts "已设置 #{ip}"
+      return 
+    end
+  end
+  puts "放弃操作 退出"
+end
+
+#####################MAIN########################
+puts "=================请选择=================="
+puts "[n] 恢复 hosts"
+@ips.each_with_index do |ip,index|
+  puts "[#{index}] 把hosts 设置到 #{ip}"
+end
+puts "    按其他任意键退出 "
+puts "========================================="
+
+#STDIN.gets
+while (input = STDIN.gets.strip).empty?
+end
+understand input
+

@@ -48,18 +48,14 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "from_uri"
     t.integer  "created_by"
     t.string   "created_ip"
-    t.integer  "content_way",     :default => 0
-    t.string   "lang",            :default => "zh-cn"
+    t.integer  "content_way",    :default => 0
+    t.string   "lang",           :default => "zh-cn"
     t.text     "content"
     t.string   "fetch_author"
     t.datetime "fetch_pubtime"
-    t.string   "fetch_category",  :default => ""
-    t.string   "fetch_tag_list",  :default => ""
-    t.boolean  "fetch_visible",   :default => true
-    t.boolean  "fetch_published", :default => true
-    t.boolean  "show_from",       :default => false
-    t.string   "rec_tag_list",    :default => ""
-    t.string   "virtue_way",      :default => "yaml"
+    t.string   "fetch_category", :default => ""
+    t.string   "fetch_tag_list", :default => ""
+    t.string   "virtue_way",     :default => "yaml"
     t.text     "virtue_encode"
     t.datetime "deleted_at"
     t.datetime "created_at"
@@ -81,9 +77,6 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "unique_refer"
     t.string   "rec_author"
     t.string   "rec_tag_list",  :default => ""
-    t.boolean  "rec_visible",   :default => true
-    t.boolean  "rec_published", :default => true
-    t.boolean  "show_refer",    :default => false
     t.integer  "created_by"
     t.string   "created_ip"
     t.integer  "content_way",   :default => 0
@@ -151,8 +144,6 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.integer  "status",              :default => 0
-    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -251,6 +242,24 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   end
 
   add_index "book_comments", ["resource_type", "resource_id"], :name => "book_comments_resource_index"
+
+  create_table "book_detail_avatars", :force => true do |t|
+    t.string   "from_uri"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.integer  "position",            :default => 0
+    t.string   "title"
+    t.string   "alt"
+    t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "status",              :default => 0
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "book_detail_fetches", :force => true do |t|
     t.string   "url"
@@ -432,6 +441,38 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "users_count",      :default => 0
     t.integer  "status",           :default => 0
     t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "book_tmp_avatars", :force => true do |t|
+    t.string   "from_uri"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.integer  "position",            :default => 0
+    t.string   "title"
+    t.string   "alt"
+    t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "overall_avatars", :force => true do |t|
+    t.string   "from_uri"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.integer  "position",            :default => 0
+    t.string   "title"
+    t.string   "alt"
+    t.string   "name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

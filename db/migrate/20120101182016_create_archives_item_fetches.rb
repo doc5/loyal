@@ -21,8 +21,7 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
       t.datetime :fetch_pubtime      
       t.string :fetch_category, :default => ""
 #      抓取
-      t.string :fetch_tag_list, :default => ""
-      
+      t.string :fetch_tag_list, :default => ""      
 #      可见？
       t.boolean :fetch_visible, :default => true
 #      发表了
