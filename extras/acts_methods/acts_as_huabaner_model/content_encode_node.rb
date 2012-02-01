@@ -1,6 +1,4 @@
 # -*- encoding : utf-8 -*-
-require "open-uri"
-
 module ActsMethods
   module ActsAsHuabanerModel      
     module ContentEncodeNode
