@@ -53,7 +53,7 @@ gem 'sqlite3-ruby'
 gem 'awesome_nested_set'
 #search
 gem "ferret"
-gem "rmmseg"
+#gem "rmmseg"
 gem 'acts_as_ferret', '>= 0.5'
 #--------------------
 

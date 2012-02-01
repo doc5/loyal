@@ -1,0 +1,170 @@
+<%# -*- mode: text; coding: utf-8 -*- %>
+<%
+  $title = "RMMSeg Homepage"
+  $authors = { 'pluskid' => 'http://pluskid.lifegoo.com' }
+
+  $unindent = '  '
+%>
+
+<% chapter "Introduction" do %> 
+
+  RMMSeg is an implementation of
+  "MMSEG":http://technology.chtsai.org/mmseg/ Chinese word
+  segmentation algorithm. It is based on two variants of maximum
+  matching algorithms. Two algorithms are available for using:
+  
+  * simple algorithm that uses only forward maximum matching.
+  * complex algorithm that uses three-word chunk maximum matching and 3
+    aditonal rules to solve ambiguities.
+
+  For more information about the algorithm, please refer to the
+  following essays:
+
+  * http://technology.chtsai.org/mmseg/
+  * http://pluskid.lifegoo.com/?p=261
+
+  RMMSeg can be used as either a stand alone program or an Analyzer of
+  "Ferret":http://ferret.davebalmain.com/trac.
+
+<% end %>
+
+<% chapter "Setup" do %>
+  <% section "Requirements" do %>
+
+    Your system needs the following software to run RMMSeg.
+
+    |_. Software                  |_. Notes                   |
+    | "Ruby":http://ruby-lang.org | Version 1.8.x is required |
+    | "hoe":http://seattlerb.rubyforge.org/hoe/ | If you want to build the gem manually |
+    | "Rake":http://rake.rubyforge.org/ | If you want to build the gem manually |
+    | "rspec":http://rspec.rubyforge.org/ | If you want to run the testcases |
+
+  <% end %>
+
+  <% section "Installation" do %>
+    <% section "Using RubyGems" do %>
+      To install the gem remotely from "RubyForge":http://rubyforge.org :
+
+        sudo gem install rmmseg
+
+      Or you can download the gem file manually from "RubyForge":http://rubyforge.org/projects/rmmseg/ and install it locally:
+
+        sudo gem install --local rmmseg-x.y.z.gem
+
+    <% end %>
+
+    <% section "From Subversion" do %>
+      From subversion repository hosted at "RubyForge":http://rmmseg.rubyforge.org/svn/, you can always get the latest source code.
+      <% note "The latest code might be unstable" do %>
+        Some new features may only be available in the latest code in subversion, but the code might be broken in some cases. So it is recommended to use the released gem package for production.
+      <% end %>
+      To check out the code from Rubyforge, you need to install subversion, then:
+
+        svn checkout http://rmmseg.rubyforge.org/svn/trunk/ rmmseg
+
+      Then you can run
+
+        rake gem
+
+      to build the gem file.
+    <% end %>
+  <% end %>
+<% end %>
+
+<% chapter "Usage" do %>
+   
+  <% section "Stand Alone rmmseg" do %>
+    RMMSeg comes with a script @rmmseg@. To get the basic usage, just execute it with @-h@ option:
+      
+      rmmseg -h
+
+    It reads from STDIN and print result to STDOUT. Here is a real
+    example:
+
+      $ echo "我们都喜欢用 Ruby" | rmmseg
+      我们 都 喜欢 用 Ruby
+
+  <% end %>
+
+  <% section "Analyzer for Ferret" do %>
+    RMMSeg include an analyzer for Ferret. It is simply ready to
+    use. Just require it and pass it to Ferret. Here's a complete
+    example:
+
+    <code lang="ruby">
+    <%# include ferret_example.rb %>
+    </code>
+
+    execute it on the following key words:
+
+      $ ruby ferret_example.rb Ruby 中文
+
+    will generate the following results:
+    
+    <code lang="text">
+    Searching for Ruby...
+    
+    *** Document "RMMSeg" found with a score of 0.21875
+    ----------------------------------------
+    RMMSeg 我近日做的一个 Ruby 中文分词实现，下一步是和 Ferret 进行集成。
+    
+    *** Document "Ruby 1.9" found with a score of 0.21875
+    ----------------------------------------
+    Ruby 1.9.0 已经发布了，1.9 的一个重大改进就是对 Unicode 的支持。
+    
+    *** Document "Ferret" found with a score of 0.176776692271233
+    ----------------------------------------
+    Ferret is a high-performance, full-featured text search engine library
+    written for Ruby. It is inspired by Apache Lucene Java project. With
+    the introduction of Ferret, Ruby users now have one of the fastest and
+    most flexible search libraries available. And it's surprisingly easy
+    to use.
+    
+    Searching for 中文...
+    
+    *** Document "分词" found with a score of 0.281680464744568
+    ----------------------------------------
+    中文分词比较困难，不像英文那样，直接在空格和标点符号的地方断开就可以了。
+    
+    *** Document "RMMSeg" found with a score of 0.281680464744568
+    ----------------------------------------
+    RMMSeg 我近日做的一个 Ruby 中文分词实现，下一步是和 Ferret 进行集成。
+    </code>
+
+    And if you run the example in terminal, you'll see the result
+    highlighted as in <%= xref "Ferret Example Screenshot" %>.
+
+    <% figure "Ferret Example Screenshot" do %>
+      !http://pluskid.lifegoo.com/wp-content/uploads/2008/02/rmmseg.png!
+    <% end %>
+
+  <% end %>
+
+  <% section "Customization" do %>
+    RMMSeg can be customized through @RMMSeg::Config@. For example, to use your own dictionaries, just set it before starting to do segmentation:
+
+    <code lang="ruby">
+    RMMSeg::Config.dictionaries = [["dict1.dic", true],  # with frequency info
+                                   ["dict2.dic", false], # without
+                                   ["dict3.dic", false]]
+    RMMSeg::Config.max_word_length = 6
+    </code>
+
+    Or to use the simple algorithm for more efficient (and less accurate) segmenting:
+
+    <code>
+    RMMSeg::Config.algorithm = :simple
+    </code>
+
+    For more information on customization, please refer to the RDoc of "RMMSeg::Config":http://rmmseg.rubyforge.org/rmmseg/index.html.
+  <% end %>
+
+<% end %>
+
+<% chapter "Resources" do %>
+  * "Project Home":http://rubyforge.org/projects/rmmseg/: The Project page at RubyForge.
+  * "RDoc of RMMSeg":http://rmmseg.rubyforge.org/rmmseg/index.html: The auto generated rdoc of RMMSeg.
+  * "A Screencast":http://pluskid.lifegoo.com/?p=272: Demo of Ferret RMMSeg and acts_as_ferret.
+  * "Implementation Details":http://pluskid.lifegoo.com/?p=261: My blog post about the implementation details of RMMSeg (Chinese).
+  * "Author's Email":mailto:pluskid@gmail.com: Contact me if you have any problem.
+<% end %>

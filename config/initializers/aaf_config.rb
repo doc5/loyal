@@ -6,5 +6,5 @@
 #  [File.join(_config_path_true, '1.dict'), true],  # with frequency info
 #  [File.join(_config_path_false, '2.dict'), false] # without
 #]
-
-RMMSeg::Config.max_word_length = 6
+#
+#RMMSeg::Config.max_word_length = 6

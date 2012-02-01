@@ -24,7 +24,7 @@ module ActsMethods
       module InstanceMethods        
         def calculate_hot_words
           seg_string = "#{self.shared_searcher_title} #{self.shared_searcher_content}"
-          seg_index = March::Tools::WordSeg.new_ferret_index
+          seg_index = Ferret::Index::Index.new(:analyzer => RMMSeg::Ferret::Analyzer.new)
 #          seg_index << seg_string
           segs = RMMSeg::SimpleAlgorithm.new(seg_string).segment
 #          segs
