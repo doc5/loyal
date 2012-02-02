@@ -75,6 +75,8 @@ GEM
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.6.4)
+    loyal_rmmseg (0.0.2)
+      rake
     magic_encoding (0.0.2)
     mail (2.3.0)
       i18n (>= 0.4.0)
@@ -200,6 +202,7 @@ DEPENDENCIES
   ferret
   jquery-rails
   json
+  loyal_rmmseg
   magic_encoding
   memcache-client
   mini_magick

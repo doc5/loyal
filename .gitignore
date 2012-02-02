@@ -1,4 +1,4 @@
-
+/supports/gems/**/*.gem
 
 /public/tuan-frame.html
 /public/tuan-proxy.html
