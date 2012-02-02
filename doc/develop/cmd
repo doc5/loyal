@@ -1,0 +1,6 @@
+重新加载字典
+RMMSeg::Dictionary::instance.reload
+
+加载字典 => seg_word
+SegWord.sync_rmmseg_words
+

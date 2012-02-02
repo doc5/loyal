@@ -524,8 +524,14 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   end
 
   create_table "seg_words", :force => true do |t|
-    t.integer "name"
+    t.string  "name"
+    t.integer "status",  :default => 0
+    t.integer "freq",    :default => 0
+    t.boolean "counted", :default => true
+    t.boolean "blocked", :default => true
   end
+
+  add_index "seg_words", ["name"], :name => "index_seg_words_on_name"
 
   create_table "ship_book_items_and_book_categories", :id => false, :force => true do |t|
     t.integer "item_id"

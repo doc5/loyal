@@ -19,6 +19,8 @@ _default_shared_options_fields = {
 }
 _default_shared_options_if = Proc.new { |entity| (defined?(entity.do_index?) || true) }
 
+#ActsAsFerret::rebuild_index 'shared'
+
 ActsAsFerret::define_index('shared',
   :models => {    
     ArchivesItemFetch => {

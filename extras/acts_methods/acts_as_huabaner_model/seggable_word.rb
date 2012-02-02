@@ -21,7 +21,9 @@ module ActsMethods
         end
       end
       
-      module InstanceMethods        
+      module InstanceMethods      
+#        计算热词
+# => 首先，计算出记录中频率最高的前20个词语（该词语需要在辞典中存在）
         def calculate_hot_words
           seg_string = "#{self.shared_searcher_title} #{self.shared_searcher_content}"
           seg_index = Ferret::Index::Index.new(:analyzer => RMMSeg::Ferret::Analyzer.new)
