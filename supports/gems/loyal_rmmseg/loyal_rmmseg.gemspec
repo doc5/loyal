@@ -1,13 +1,13 @@
 Gem::Specification.new do |s|
   s.name = 'loyal_rmmseg'
-  s.version = '0.0.2'
+  s.version = '0.0.3'
 
   # s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ['happy']
   s.date = '2012-02-02'
   s.description = 'Chinese Seg.'
   s.email = 'happy@doc5.com'
-  s.files = Dir['README.txt', 'History.txt', 'Manifest.txt', 'Rakefile', 'lib/**/*', 'data/**/*', 'bin/**/*', 'misc/**/*', 'spec/**/*', 'tasks/**/*']
+  s.files = Dir['README.txt', 'History.txt', 'Rakefile', 'lib/**/*', 'data/**/*', 'bin/**/*', 'misc/**/*', 'spec/**/*', 'tasks/**/*']
   s.homepage = 'http://www.doc5.com'
   s.licenses = ["MIT"]
 #  s.require_path = 'lib'
