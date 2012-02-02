@@ -1,17 +1,17 @@
+version = File.read(File.expand_path("../VERSION", __FILE__)).strip
 Gem::Specification.new do |s|
   s.name = 'loyal_rmmseg'
-  s.version = '0.0.3'
+  s.version = "#{version}"
 
   # s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ['happy']
   s.date = '2012-02-02'
   s.description = 'Chinese Seg.'
   s.email = 'happy@doc5.com'
-  s.files = Dir['README.txt', 'History.txt', 'Rakefile', 'lib/**/*', 'data/**/*', 'bin/**/*', 'misc/**/*', 'spec/**/*', 'tasks/**/*']
+  s.files = Dir['README.txt', 'History.txt', 'VERSION', 'Rakefile', 'lib/**/*', 'data/**/*', 'misc/**/*', 'spec/**/*', 'tasks/**/*']
   s.homepage = 'http://www.doc5.com'
   s.licenses = ["MIT"]
 #  s.require_path = 'lib'
-#  s.require_paths = ['bin', 'data', 'lib', 'misc', 'spec', 'tasks']
   s.rubygems_version = '1.3.7'
   s.summary = 'Nice Chinese Seg.'
 
@@ -19,8 +19,6 @@ Gem::Specification.new do |s|
 end
 
 =begin
-
-version = File.read(File.expand_path("../../RAILS_VERSION", __FILE__)).strip
 
 Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY

@@ -131,7 +131,7 @@ Loyal::Application.routes.draw do
     end
   end
   
-  constraints :subdomain => "", :domain => 'doc5.com' do   
+  constraints :subdomain => /#{SubdomainWWW}/, :domain => 'doc5.com' do   
     root :to => "home#index"
     
     resources :users, :only => [:new, :create] do

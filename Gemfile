@@ -1,5 +1,5 @@
 #source 'http://rubygems.org'
-source 'http://www.doc5.com:8808'
+source 'http://doc5.com:8808'
 
 gem 'rails', '3.1.3'
 gem 'mysql'
@@ -53,8 +53,8 @@ gem 'sqlite3-ruby'
 gem 'awesome_nested_set'
 #search
 gem "ferret"
-#gem "rmmseg"
-gem 'loyal_rmmseg'
+gem "rmmseg"
+#gem 'loyal_rmmseg'
 gem 'acts_as_ferret', '>= 0.5'
 #--------------------
 

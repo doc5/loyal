@@ -6,7 +6,7 @@ require 'rmmseg/simple_algorithm'
 require 'rmmseg/complex_algorithm'
 
 module RMMSeg
-  VERSION = '0.1.6'
+  VERSION = File.read(File.expand_path("../../VERSION", __FILE__)).strip
   
   # Segment +text+ using the algorithm configured.
   def segment(text)
