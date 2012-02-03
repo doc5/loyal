@@ -4,7 +4,7 @@ class CreateSegHotWords < ActiveRecord::Migration
       t.integer  :seg_word_id   
       t.references :seggable, :polymorphic => true
       
-      t.integer :count, :default => 0
+      t.integer :freq, :default => 0
       t.timestamps
     end
     

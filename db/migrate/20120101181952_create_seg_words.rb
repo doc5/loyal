@@ -12,7 +12,8 @@ class CreateSegWords < ActiveRecord::Migration
     end
     
     add_index :seg_words, [:name]
-    add_index :seg_words, [:name, :segable]
-    add_index :seg_words, [:name, :blocked]
+#    add_index :seg_words, [:name, :segable]
+#    add_index :seg_words, [:name, :blocked]
+#    add_index :seg_words, [:name, :segable, :blocked]
   end
 end

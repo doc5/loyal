@@ -506,7 +506,7 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.integer  "seg_word_id"
     t.integer  "seggable_id"
     t.string   "seggable_type"
-    t.integer  "count",         :default => 0
+    t.integer  "freq",          :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

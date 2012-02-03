@@ -1,6 +1,6 @@
 class SegWord < ActiveRecord::Base
   validates_presence_of :name
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :case_sensitive => false
   
   STATUS_INIT  = 0
   
@@ -15,6 +15,10 @@ class SegWord < ActiveRecord::Base
           end
         }
       end
+    end
+    
+    def could_seg?(w)
+      w.u.length > 1
     end
   end
   
@@ -31,7 +35,7 @@ class SegWord < ActiveRecord::Base
           seg_word = SegWord.find_by_name(pair[0])
           if seg_word.nil?
             _records << {:name => pair[0], :status => STATUS_INIT, 
-              :freq => pair[1], :blocked => false, :segable => pair[0].u.length > 1}
+              :freq => pair[1], :blocked => false, :segable => SegWord.could_seg?(pair[0])}
 #            seg_word = SegWord.new(:name => pair[0], :status => STATUS_INIT, :freq => pair[1])
 #            seg_word.save
           end
@@ -49,7 +53,7 @@ class SegWord < ActiveRecord::Base
 
           if seg_word.nil?
             _records << {:name => line, :status => STATUS_INIT, 
-              :freq => 0, :blocked => false, :segable => pair[0].u.length > 1}
+              :freq => 0, :blocked => false, :segable => SegWord.could_seg?(line)}
 #            seg_word = SegWord.new(:name => line, :status => STATUS_INIT)
 #            seg_word.save
           end
