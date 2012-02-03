@@ -23,29 +23,38 @@ class SegWord < ActiveRecord::Base
   
   class << self
     def load_rmmseg_dictionary_with_freq(file)
+      _records = Array.new
+      
       File.open(file, "r") { |f|
         f.each_line { |line|
           pair = line.split(" ")
           seg_word = SegWord.find_by_name(pair[0])
           if seg_word.nil?
-            seg_word = SegWord.new(:name => pair[0], :status => STATUS_INIT, :freq => pair[1])
-            seg_word.save
+            _records << {:name => pair[0], :status => STATUS_INIT, :freq => pair[1]}
+#            seg_word = SegWord.new(:name => pair[0], :status => STATUS_INIT, :freq => pair[1])
+#            seg_word.save
           end
         }
       }
+      
+      SegWord.create(_records)
     end
     def load_rmmseg_dictionary(file)
+      _records = Array.new
       File.open(file, "r") { |f|
         f.each_line { |line|
           line.slice!(-1)       # chop!
           seg_word = SegWord.find_by_name(line)
 
           if seg_word.nil?
-            seg_word = SegWord.new(:name => line, :status => STATUS_INIT)
-            seg_word.save
+            _records << {:name => line, :status => STATUS_INIT}
+#            seg_word = SegWord.new(:name => line, :status => STATUS_INIT)
+#            seg_word.save
           end
         }
       }
+      
+      SegWord.create(_records)
     end
   end
 end
