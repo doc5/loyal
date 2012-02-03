@@ -36,7 +36,7 @@ module ActsMethods
               seg_word = SegWord.find_by_name(seg) || SegWord.create(:name => seg)
               _seg_ids_array << seg_word.id
               
-              if !seg_word.blocked? && seg_word.segable
+              if !seg_word.blocked? && seg_word.seggable
                 if _segs_hashed[seg]
                   _segs_hashed[seg][:freq] += 1
                 else
