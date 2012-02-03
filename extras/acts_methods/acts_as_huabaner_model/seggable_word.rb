@@ -13,8 +13,7 @@ module ActsMethods
         include ActsMethods::ActsAsHuabanerModel::SeggableWord::InstanceMethods
         extend  ActsMethods::ActsAsHuabanerModel::SeggableWord::SingletonMethods  
         
-        has_many :hot_words, :class_name => "SegHotWord", 
-          :as => :seggable, :order => "freq DESC"
+        has_many :hot_words, :class_name => "SegHotWord", :as => :seggable, :order => "freq DESC"
         
         after_save do |r|
           
@@ -29,11 +28,18 @@ module ActsMethods
           segs = RMMSeg::SimpleAlgorithm.new(seg_string).segment
           _segs_hashed = Hash.new
           _seg_ids_array = Array.new
+          
+          Rails.logger.debug "================> 读取热词"
+          
+          _seg_words = (SegWord.find :all, :conditions => ['name in (?)', segs]).uniq
+          
+          Rails.logger.debug "================> 读取热词完毕"
+          
           segs.each do |seg|
             seg.downcase!
             #            TODO: || => &&
             if SegWord.could_seg?(seg)
-              seg_word = SegWord.find_by_name(seg) || SegWord.create(:name => seg)
+              seg_word = (_seg_words.select{|s| s.name == seg }).first || SegWord.create(:name => seg)
               if !seg_word.blocked? && seg_word.seggable                
                 if _segs_hashed[seg]
                   _segs_hashed[seg][:freq] += 1
@@ -45,17 +51,23 @@ module ActsMethods
             end
           end    
           
+          Rails.logger.debug "================> _hot_segs = (_segs_hashed...."
+          
           _hot_segs = (_segs_hashed.sort{|a1, a2| a2[1][:freq] <=> a1[1][:freq]})[0, limit]
           
           _rm_hot_word_ids = Array.new
-          (self.hot_words.collect{|h| h.seg_word_id }).each do |hid|
+          (self.class.find(self.id).hot_words.collect{|h| h.seg_word_id }).each do |hid|
             _rm_hot_word_ids << hid unless _seg_ids_array.include?(hid)
           end
+          
+          Rails.logger.debug "================> 删除废弃的SegHotWord"
           
           if _rm_hot_word_ids.any?
             SegHotWord.destroy_all ["seggable_type=? AND seggable_id=? AND seg_word_id in(?)", 
               self.class.name, self.id, _rm_hot_word_ids]
           end
+          
+          Rails.logger.debug "================> 新建SegHotWord"
           
           #TODO:          ?需要优化算法          
           _hot_segs.each do |word, seg_word|            

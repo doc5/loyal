@@ -525,14 +525,12 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
 
   create_table "seg_words", :force => true do |t|
     t.string  "name"
-    t.integer "status",  :default => 0
-    t.integer "freq",    :default => 0
-    t.boolean "blocked", :default => false
-    t.boolean "segable", :default => true
+    t.integer "status",   :default => 0
+    t.integer "freq",     :default => 0
+    t.boolean "blocked",  :default => false
+    t.boolean "seggable", :default => true
   end
 
-  add_index "seg_words", ["name", "blocked"], :name => "index_seg_words_on_name_and_blocked"
-  add_index "seg_words", ["name", "segable"], :name => "index_seg_words_on_name_and_segable"
   add_index "seg_words", ["name"], :name => "index_seg_words_on_name"
 
   create_table "ship_book_items_and_book_categories", :id => false, :force => true do |t|

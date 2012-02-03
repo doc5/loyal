@@ -4,3 +4,8 @@ RMMSeg::Dictionary::instance.reload
 加载字典 => seg_word
 SegWord.sync_rmmseg_words
 
+
+ActsAsFerret::rebuild_index 'shared'
+
+a=ArchivesItemFetch.last
+a.calculate_hot_words

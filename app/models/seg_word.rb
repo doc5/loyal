@@ -18,7 +18,7 @@ class SegWord < ActiveRecord::Base
     end
     
     def could_seg?(w)
-      w.u.length > 1
+      March::StringTools.utf8_length(w) > 1
     end
   end
   

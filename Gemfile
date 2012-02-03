@@ -1,5 +1,5 @@
-#source 'http://rubygems.org'
-source 'http://doc5.com:8808'
+source 'http://rubygems.org'
+#source 'http://doc5.com:8808'
 
 gem 'rails', '3.1.3'
 gem 'mysql'
@@ -35,7 +35,7 @@ gem 'jquery-rails'
 
 
 # add by happy
-gem 'icu4r'
+#gem 'icu4r'
 gem 'omniauth', '= 1.0.1'
 gem 'cancan', '>= 1.6.7'
 gem "magic_encoding"
