@@ -22,17 +22,19 @@ module ActsMethods
       end
       
       module InstanceMethods
-#        计算热词
-# => 首先，计算出记录中频率最高的前20个词语（该词语需要在辞典中存在）
+        #        计算热词
+        # => 首先，计算出记录中频率最高的前20个词语（该词语需要在辞典中存在）
         def calculate_hot_words(limit=20)
           seg_string = "#{self.shared_searcher_title} #{self.shared_searcher_content}"
           segs = RMMSeg::SimpleAlgorithm.new(seg_string).segment
           _segs_hashed = Hash.new
+          _seg_ids_array = Array.new
           segs.each do |seg|
             seg.downcase!
-#            TODO: || => &&
+            #            TODO: || => &&
             if SegWord.could_seg?(seg)
               seg_word = SegWord.find_by_name(seg) || SegWord.create(:name => seg)
+              _seg_ids_array << seg_word.id
               
               if !seg_word.blocked? && seg_word.segable
                 if _segs_hashed[seg]
@@ -42,12 +44,21 @@ module ActsMethods
                 end                
               end
             end
-          end          
+          end    
           
           _hot_segs = (_segs_hashed.sort{|a1, a2| a2[1][:freq] <=> a1[1][:freq]})[0, limit]
           
-#TODO:          ?需要优化算法          
+          _rm_hot_word_ids = Array.new
+          (self.hot_words.collect{|h| h.seg_word_id }).each do |hid|
+            _rm_hot_word_ids << hid unless _seg_ids_array.include?(hid)
+          end
           
+          if _rm_hot_word_ids.any?
+            SegHotWord.destroy_all ["seggable_type=? AND seggable_id=? AND seg_word_id in(?)", 
+              self.class.name, self.id, _rm_hot_word_ids]
+          end
+          
+          #TODO:          ?需要优化算法          
           _hot_segs.each do |word, seg_word|            
             SegHotWord.create(
               :seg_word_id => seg_word[:id], 
