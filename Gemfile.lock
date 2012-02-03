@@ -69,6 +69,7 @@ GEM
     hashie (1.2.0)
     hike (1.2.1)
     i18n (0.6.0)
+    icu4r (0.1.4.2006.05.29)
     jk-ferret (0.11.8.3)
       rake
     jquery-rails (1.0.19)
@@ -199,6 +200,7 @@ DEPENDENCIES
   coffee-rails (~> 3.1.1)
   factory_girl_rails
   ferret
+  icu4r
   jquery-rails
   json
   magic_encoding

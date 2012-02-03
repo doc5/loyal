@@ -30,7 +30,8 @@ class SegWord < ActiveRecord::Base
           pair = line.split(" ")
           seg_word = SegWord.find_by_name(pair[0])
           if seg_word.nil?
-            _records << {:name => pair[0], :status => STATUS_INIT, :freq => pair[1]}
+            _records << {:name => pair[0], :status => STATUS_INIT, 
+              :freq => pair[1], :blocked => false, :segable => pair[0].u.length > 1}
 #            seg_word = SegWord.new(:name => pair[0], :status => STATUS_INIT, :freq => pair[1])
 #            seg_word.save
           end
@@ -47,7 +48,8 @@ class SegWord < ActiveRecord::Base
           seg_word = SegWord.find_by_name(line)
 
           if seg_word.nil?
-            _records << {:name => line, :status => STATUS_INIT}
+            _records << {:name => line, :status => STATUS_INIT, 
+              :freq => 0, :blocked => false, :segable => pair[0].u.length > 1}
 #            seg_word = SegWord.new(:name => line, :status => STATUS_INIT)
 #            seg_word.save
           end
