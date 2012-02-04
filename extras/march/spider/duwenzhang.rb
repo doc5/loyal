@@ -162,19 +162,23 @@ module March
           end
         end
         
+        def classify_categories_map
+          return @_cache_classify_categories_map if defined?@_cache_classify_categories_map
+          _categories = ArchivesCategory.find :all, :conditions => ["flag_name in (?)", CATEGORIES_FETCH_MAP.values.collect{|v| "#{PREFIX_FLAG_NAME}#{v}" }]
+          @_cache_classify_categories_map = Hash.new
+          _categories.each do |cate|
+            @_cache_classify_categories_map[cate.flag_name] = cate
+          end
+          @_cache_classify_categories_map
+        end
+        
 #        归类所有的文章
 # => March::Spider::Duwenzhang.classify_categories
-        def classify_categories(options={})
-          _categories = ArchivesCategory.find :all, :conditions => ["flag_name in (?)", CATEGORIES_FETCH_MAP.values.collect{|v| "#{PREFIX_FLAG_NAME}#{v}" }]
-          _categories_map = Hash.new
-          _categories.each do |cate|
-            _categories_map[cate.flag_name] = cate
-          end          
-          
-          (options[:id].nil? ? ArchivesItemFetch.find_all_by_from_site(Website::FetchConfig::SITE_DUWENZHANG) : 
-            ArchivesItemFetch.find_all_by_id(options[:id])).each do |item|
-            _category = _categories_map["#{PREFIX_FLAG_NAME}#{CATEGORIES_FETCH_MAP[item.fetch_category]}"]
+        def classify_categories(options={})          
+          ArchivesItemFetch.find_all_by_from_site(Website::FetchConfig::SITE_DUWENZHANG).each do |item|
+            _category = self.classify_categories_map["#{PREFIX_FLAG_NAME}#{CATEGORIES_FETCH_MAP[item.fetch_category]}"]
             if _category.present? && !item.category_ids.include?(_category.id)
+              Rails.logger.debug "归类==========> #{_category.name} 更新"
               item.categories << _category
               item.save
             else
@@ -185,7 +189,7 @@ module March
         end
         
 #        抓取
-        def fetch_categories(options={})
+        def fetch(options={})
           CATEGORIE_BASE_CONFIGS.keys.each do |cate|
             self.fetch_category(:category => cate, :force_update => false)
           end

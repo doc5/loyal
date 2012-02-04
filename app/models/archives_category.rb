@@ -10,7 +10,7 @@ class ArchivesCategory < ActiveRecord::Base
   validates_uniqueness_of :url_name
   validates_uniqueness_of :flag_name
   
-  def sql_tree_item_fetches
+  def sql_tree_item_fetches(options={})
     return @_cache_sql_tree_item_fetches if defined?(@_cache_sql_tree_item_fetches)
     _self_and_children_ids = self.self_and_descendants.collect{ |c| c.id }
     
@@ -18,27 +18,35 @@ class ArchivesCategory < ActiveRecord::Base
       SELECT "archives_item_fetches".* FROM "archives_item_fetches" 
       INNER JOIN "archives_item_fetchs_and_archives_categories" ON 
       "archives_item_fetches"."id" = "archives_item_fetchs_and_archives_categories"."item_id" 
-      WHERE "archives_item_fetchs_and_archives_categories"."category_id" in (#{_self_and_children_ids.join(',')})
+      WHERE "archives_item_fetchs_and_archives_categories"."category_id" in (#{_self_and_children_ids.join(',')})      
 SQL
+    @_cache_sql_tree_item_fetches << "ORDER BY #{options[:order]}" unless options[:order].blank?
     @_cache_sql_tree_item_fetches
   end
   
   def paginate_tree_item_fetches(options={})
-    return @_cache_tree_item_fetches if defined?(@_cache_tree_item_fetches)
-    
-#    TODO: 
-    options[:total_entries] = self.archives_tree_item_fetches_count
-    @_cache_tree_item_fetches = ArchivesItemFetch.paginate_by_sql(self.sql_tree_item_fetches, options)
+    ArchivesItemFetch.paginate_by_sql(self.sql_tree_item_fetches(:order => options[:order]), options)
   end
   
-#  刷新所有的计数
+  def tree_item_fetches(options={})
+    ArchivesItemFetch.find_by_sql(self.sql_tree_item_fetches, options)
+  end
+  
+  #  刷新所有的计数
   def reset_loyal_counters
     self.self_and_ancestors.each do |cate|
-      cate.archives_tree_item_fetches_count = ArchivesItemFetch.find_by_sql(cate.sql_tree_item_fetches).count
+      cate.archives_tree_item_fetches_count = self.tree_item_fetches.count
       cate.archives_item_fetches_count = cate.item_fetches.count
       cate.save
     end
   end
+  
+#  =====================================> 页面显示逻辑用
+  def filter_item_fetches_on_home_box(options={})
+    options[:per_page] ||= 15
+    self.paginate_tree_item_fetches(:page => 1, :per_page => options[:per_page], :order => "created_at DESC")
+  end
+#  ====================================================================
   
   class << self
     def increment_item_fetches_counter(id)
@@ -66,5 +74,23 @@ SQL
       cate
     end
   end
+  
+  
+  public
+  scope :filter_on_archives_home,
+    :conditions => ["flag_name in (?)", 
+    [
+      'haowen-aiqing', 
+      'haowen-qinqing', 
+      'haowen-youqing',
+      'haowen-shenghuosuibi',
+      'haowen-zheli',
+      'haowen-lizhi',
+      'haowen-jingdian',
+      'haowen-gaoxiao',
+      'haowen-yingwen',
+      'haowen-xiaoyuan'
+    ]
+  ]
   
 end

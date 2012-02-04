@@ -9,7 +9,7 @@ class Yuedu123::Archives::CategoriesController < Yuedu123Controller
   end
   
   def index
-    @archives_categories = ArchivesCategory.total_tree_struct
+    @archives_categories = ArchivesCategory.root_categories
     
     respond_to do |format|
       format.html

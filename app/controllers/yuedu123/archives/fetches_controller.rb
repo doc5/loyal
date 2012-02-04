@@ -6,7 +6,7 @@ class Yuedu123::Archives::FetchesController < Yuedu123Controller
   end
   
   def index
-    @archives_item_fetches = ArchivesItemFetch.paginate :page => params[:page]
+    @archives_item_fetches = ArchivesItemFetch.paginate :page => params[:page], :order => "created_at DESC"
     
     @seo_title = "文章列表 第#{params[:page] || 1}页"
   end

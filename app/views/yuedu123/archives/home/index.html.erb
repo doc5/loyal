@@ -1,15 +1,24 @@
-<div id="main">
-  <div id="side-panel">
-    
-  </div>
+<div id="main" class="home-main">
   <div id="main-panel">
-    <div class="items-list">
-
+    <% ArchivesCategory.filter_on_archives_home.each do |category| %>
+    <div class="box">
+      <div class="box-title">
+        <%= link_to "#{category.name}", 
+          archives_route(yuedu123_archives_category_path(:url_name => category.url_name)), :target => "_blank" %>
+      </div>
+      <div class="box-body">
+        <div class="list">
+          <% category.filter_item_fetches_on_home_box.each do |fetch| %>
+            <div class="item">   
+              <%= link_to "#{fetch.title}", 
+                archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)), 
+                :target => "_blank" %><br/>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="box-footer"></div>
     </div>
-    <% @archives_item_fetches.each do |fetch| %>
-      <%= link_to "#{fetch.title}", 
-        archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)), 
-        :target => "_blank" %><br/>
     <% end %>
   </div>
 </div>

@@ -82,17 +82,61 @@ a {
 
     .main-content{
         padding: 5px;
+    }
+
+    .list {            
+        .item{
+            padding: 2px 2px;
+            border-bottom: 1px dashed #ddd;
+
+            .operate {
+                float: right;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .box {
+        .box-title {
+            a{
+                color: blue;
+            }   
+        }
+
+        
+    }
+}
+
+.home-main {
+    #main-panel{
+        padding: 10px;
+        
+        .box-body{
+            font-size: 12.5px;
+        }
 
         .list {
             
-            .item{
-                padding: 2px 2px;
-                border-bottom: 1px dashed #ddd;
+        }
+    }
+}
 
-                .operate {
-                    float: right;
-                    font-size: 14px;
-                }
+.cate-list{
+
+    padding: 5px;
+    .root-cate{
+        .root-title{
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .root-body{
+            padding: 2px 2px 2px 10px;
+
+            .sec-body{
+                padding: 2px 2px 2px 10px;
+                font-size: 12.5px;
+                margin-bottom: 5px;
             }
         }
     }
