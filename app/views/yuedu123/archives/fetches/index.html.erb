@@ -7,17 +7,7 @@
       <h1>所有文章列表</h1>
     </div>
     <div class="main-content">      
-      <%= will_paginate @archives_item_fetches %>
-      <div class="list">     
-        <% @archives_item_fetches.each do |fetch| %>
-          <div class="item">   
-            <%= link_to "#{fetch.title}", 
-              archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)), 
-              :target => "_blank" %><br/>
-          </div>
-        <% end %>
-      </div>
-      <%= will_paginate @archives_item_fetches %>
+      <%= render :partial => "/yuedu123/archives/fetches/list" %>
     </div>
   </div>
 </div>

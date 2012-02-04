@@ -1,0 +1,6 @@
+<div class="main-children">
+  <% category.children.each do |cate| %>
+    <%= link_to "#{cate.name}", 
+      archives_route(yuedu123_archives_category_path(:url_name => cate.url_name)), :target => "_self" %>
+  <% end %>
+</div>

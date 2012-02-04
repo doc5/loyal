@@ -1,5 +1,6 @@
 # rake archives:item_fetch:spider:fetch_category RAILS_ENV=development site=duwenzhang page=5 down_page=2 category=yingyuwenzhang
 # rake archives:item_fetch:spider:duwenzhang:fetch RAILS_ENV=development
+# rake archives:item_fetch:spider:duwenzhang:classify_categories RAILS_ENV=development
 
 namespace :archives do  
   namespace :item_fetch do

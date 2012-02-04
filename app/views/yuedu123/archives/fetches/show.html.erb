@@ -3,7 +3,9 @@
     
   </div>
   <div id="main-panel">
-    <div class="main-info">      
+    <div class="main-info"> 
+      <%= render :partial => "/yuedu123/archives/categories/path", :locals => {:include_self => true, :category => @archives_item_fetch.first_category} %>
+      
       <h1>
         <%= @archives_item_fetch.title %>
       </h1>

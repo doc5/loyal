@@ -22,6 +22,14 @@ class ArchivesItemFetch < ActiveRecord::Base
   has_one :first_avatar, :class_name => "ArchivesAvatar", :as => :resource, 
     :order => "position ASC"
   
+#  取值==================================
+  def first_category
+    self.categories.first
+  end
+#  ==================================
+  
+#  操作===================================================================
+# => 抓取文章
   def fetch
     fetched_hash = Hash.new
     
@@ -47,6 +55,7 @@ class ArchivesItemFetch < ActiveRecord::Base
       self.save
     end  
   end
+#  ======================================================================
   
   class << self
     def fetch(options={})

@@ -5,18 +5,18 @@
     <div class="root-cate">
       <div class="root-title">
         <%= link_to "#{root_category.level_with_name}", 
-            archives_route(yuedu123_archives_category_path(:url_name => root_category.url_name)), :target => "_blank" %>
+            archives_route(yuedu123_archives_category_path(:url_name => root_category.url_name)), :target => "_self" %>
       </div>
       <div class="root-body">
         <% root_category.children.each do |sec_category| %>
           <div class="sec-title">
             <%= link_to "#{sec_category.name}", 
-              archives_route(yuedu123_archives_category_path(:url_name => sec_category.url_name)), :target => "_blank" %>
+              archives_route(yuedu123_archives_category_path(:url_name => sec_category.url_name)), :target => "_self" %>
           </div>
           <div class="sec-body">
             <% sec_category.children.each do |category| %>
               <%= link_to "#{category.name}", 
-                archives_route(yuedu123_archives_category_path(:url_name => category.url_name)), :target => "_blank" %>
+                archives_route(yuedu123_archives_category_path(:url_name => category.url_name)), :target => "_self" %>
             <% end %>
           </div>
         <% end %>

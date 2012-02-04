@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
-    <title><%= @seo_title %></title>
+    <title><%= "#{@seo_title} - #{Website::Info.yuedu123_intro}" %></title>
     <%= stylesheet_link_tag    "yuedu123" %>
     <%= javascript_include_tag "yuedu123" %>
     <%= csrf_meta_tags %>
@@ -20,7 +20,14 @@
           <%= link_to "文章列表", archives_route(yuedu123_archives_fetches_path) %>
         </div>
       </div>
+      
+      <div id="navigation">
+        <%= render :partial => "/yuedu123/partials/search_form" %>
+      </div>
+      
       <%= yield %>
+      
+      <%= render :partial => "/partials/footer" %>
     </div>
   </body>
 </html>

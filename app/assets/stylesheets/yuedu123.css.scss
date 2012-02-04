@@ -59,6 +59,16 @@ a {
 
 #main-panel{
     .main-info{
+        .main-path{
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .main-children{
+            text-align: center;
+            font-size: 12px;
+        }
+
         text-align: center;
         .detail-info{
             font-size: 12px;
@@ -99,7 +109,7 @@ a {
     .box {
         .box-title {
             a{
-                color: blue;
+                color: #893450;
             }   
         }
 
@@ -111,8 +121,15 @@ a {
     #main-panel{
         padding: 10px;
         
+        .box {
+            padding: 5px;
+            float: left;
+            width: 465px;
+            height: 330px;
+        }
         .box-body{
             font-size: 12.5px;
+            padding: 2px;
         }
 
         .list {
@@ -142,9 +159,83 @@ a {
     }
 }
 
+#footer {
+    padding-bottom: 20px;
+    font-size: 12px;
+    
+    .footer-line {
+        border-bottom: 2px dotted #CCDDFF;
+        margin-top: 20px;
+    }
+
+    .copyright, .friend-links {
+        padding: 5px 10px;
+        text-align: center;
+        color: #AAAAAA;
+        a {            
+            color: #AAAAAA;
+        }
+    }
+}
+
+
+.pagination{
+    font-size: 12px;
+    padding: 5px;
+    
+    .previous_page, .next_page {
+        font-family: "宋体";
+        overflow: hidden;
+    }
+
+    .current{
+
+    }
+
+    .disabled{
+        
+    }
+
+    a {
+        padding: 2px;
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #E7ECF0;
+        display: inline-block;
+        margin-right: 2px;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+    }
+}
+
+.res{
+    padding: 2px 2px 5px;
+    width: 540px;
+
+    .res-ttl {
+        font-size: 14px;
+    }
+
+    .res-body{
+        font-size: 12px;
+    }
+}
+
+.highlight {
+    color: red;
+}
+
 
 #container:after, #container2:after, #container3:after, #main:after, #main2:after, #main3:after {
     clear: both;
     content: " ";
     display: block;
+}
+
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
 }

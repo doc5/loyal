@@ -172,18 +172,22 @@ module March
           @_cache_classify_categories_map
         end
         
+        def classify_category(item)
+          _category = self.classify_categories_map["#{PREFIX_FLAG_NAME}#{CATEGORIES_FETCH_MAP[item.fetch_category]}"]
+          if _category.present? && !item.category_ids.include?(_category.id)
+            Rails.logger.debug "归类==========> #{_category.name} 更新"
+            item.categories << _category
+            item.save
+          else
+            Rails.logger.debug "==========> category 无更新"
+          end
+        end
+        
 #        归类所有的文章
 # => March::Spider::Duwenzhang.classify_categories
         def classify_categories(options={})          
           ArchivesItemFetch.find_all_by_from_site(Website::FetchConfig::SITE_DUWENZHANG).each do |item|
-            _category = self.classify_categories_map["#{PREFIX_FLAG_NAME}#{CATEGORIES_FETCH_MAP[item.fetch_category]}"]
-            if _category.present? && !item.category_ids.include?(_category.id)
-              Rails.logger.debug "归类==========> #{_category.name} 更新"
-              item.categories << _category
-              item.save
-            else
-              Rails.logger.debug "==========> category 无更新"
-            end            
+            self.classify_category(item)
           end
           true
         end
