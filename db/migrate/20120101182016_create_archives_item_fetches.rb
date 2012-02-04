@@ -30,6 +30,8 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
       t.boolean :show_from, :default => false
 #      计算出来的标签列表
       t.string :rec_tag_list, :default => ""
+#      相关项目的列表
+      t.string :related_item_ids_list, :default => ""
       
       t.string :virtue_way, :default => 'yaml'
       t.text :virtue_encode

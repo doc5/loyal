@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120108083439) do
+ActiveRecord::Schema.define(:version => 20120204182723) do
 
   create_table "archives_categories", :force => true do |t|
     t.string   "name"
@@ -50,22 +50,23 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
     t.string   "from_uri"
     t.integer  "created_by"
     t.string   "created_ip"
-    t.integer  "content_way",     :default => 0
-    t.string   "lang",            :default => "zh-cn"
+    t.integer  "content_way",           :default => 0
+    t.string   "lang",                  :default => "zh-cn"
     t.text     "content"
     t.string   "fetch_author"
     t.datetime "fetch_pubtime"
-    t.string   "fetch_category",  :default => ""
-    t.string   "fetch_tag_list",  :default => ""
-    t.boolean  "fetch_visible",   :default => true
-    t.boolean  "fetch_published", :default => true
-    t.boolean  "show_from",       :default => false
-    t.string   "rec_tag_list",    :default => ""
-    t.string   "virtue_way",      :default => "yaml"
+    t.string   "fetch_category",        :default => ""
+    t.string   "fetch_tag_list",        :default => ""
+    t.boolean  "fetch_visible",         :default => true
+    t.boolean  "fetch_published",       :default => true
+    t.boolean  "show_from",             :default => false
+    t.string   "rec_tag_list",          :default => ""
+    t.string   "virtue_way",            :default => "yaml"
     t.text     "virtue_encode"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "related_item_ids_list"
   end
 
   add_index "archives_item_fetches", ["from_uri"], :name => "index_archives_item_fetches_on_from_uri"
@@ -79,22 +80,23 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   create_table "archives_items", :force => true do |t|
     t.string   "uuid"
     t.string   "title"
-    t.string   "unique_flag",   :default => "URL"
+    t.string   "unique_flag",           :default => "URL"
     t.string   "unique_refer"
     t.string   "rec_author"
-    t.string   "rec_tag_list",  :default => ""
-    t.boolean  "rec_visible",   :default => true
-    t.boolean  "rec_published", :default => true
-    t.boolean  "show_refer",    :default => false
+    t.string   "rec_tag_list",          :default => ""
+    t.boolean  "rec_visible",           :default => true
+    t.boolean  "rec_published",         :default => true
+    t.boolean  "show_refer",            :default => false
     t.integer  "created_by"
     t.string   "created_ip"
-    t.integer  "content_way",   :default => 0
+    t.integer  "content_way",           :default => 0
     t.text     "content"
-    t.string   "virtue_way",    :default => "yaml"
+    t.string   "virtue_way",            :default => "yaml"
     t.text     "virtue_encode"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "related_item_ids_list"
   end
 
   add_index "archives_items", ["unique_flag", "unique_refer"], :name => "archives_items_unique_index"

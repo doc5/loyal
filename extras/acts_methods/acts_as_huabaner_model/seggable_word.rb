@@ -21,6 +21,30 @@ module ActsMethods
       end
       
       module InstanceMethods
+#        relation
+# => 相关项目
+        def related_items(limit=10)
+          if defined?(self.related_item_ids_list) && self.related_item_ids_list
+            _results = self.class.find :all, :conditions => ["id in (?)", self.related_item_ids_list.split(",")], :limit => limit
+          else
+            _results = self.catulate_related_item_ids(limit)
+          end          
+          _results
+        end
+        
+        def catulate_related_item_ids(limit=10)
+          seg_string = "#{self.shared_searcher_title} #{self.shared_searcher_categories} #{self.rec_tag_list}"
+          segs = RMMSeg::SimpleAlgorithm.new(seg_string).segment
+          _results = ActsAsFerret.find(segs.join("||"), 'shared', :page => 1, :per_page => limit * 2 + 1)
+          _results.delete_at(0)
+          
+          if defined?(self.related_item_ids_list)
+            self.related_item_ids_list = _results.collect{|c| c.id}.join(",")
+            self.save
+          end
+          _results[0, limit]
+        end
+        
         #        计算热词
         # => 首先，计算出记录中频率最高的前20个词语（该词语需要在辞典中存在）
         def calculate_hot_words(limit=20)

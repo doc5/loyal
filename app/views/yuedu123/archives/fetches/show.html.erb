@@ -20,5 +20,7 @@
     <div class="main-content">
       <%= raw @archives_item_fetch.content %>
     </div>
+    
+    <%= render :partial => "/yuedu123/archives/fetches/related", :locals => {:item => @archives_item_fetch} %>
   </div>
 </div>

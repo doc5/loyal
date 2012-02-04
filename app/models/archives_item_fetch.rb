@@ -16,11 +16,12 @@ class ArchivesItemFetch < ActiveRecord::Base
     :class_name => "ArchivesCategory", :foreign_key => "item_id",
     :association_foreign_key => "category_id"
   
-  validates_uniqueness_of :from_uri, :message =>"已经被占用了"
-  
   has_many :avatars, :class_name => "ArchivesAvatar", :as => :resource
   has_one :first_avatar, :class_name => "ArchivesAvatar", :as => :resource, 
     :order => "position ASC"
+  
+  validates_presence_of :title
+  validates_uniqueness_of :from_uri, :message =>"已经被占用了"
   
 #  取值==================================
   def first_category
@@ -38,6 +39,9 @@ class ArchivesItemFetch < ActiveRecord::Base
       doc = March::Fetch::OpenByUri.open(self.from_uri)
         
       fetched_hash[:content] = String.new
+      
+      p_author_node = doc.css("table .author a")[0]
+      fetched_hash[:author] = p_author_node.text
         
       p_category_node = doc.css("table .pindao")[0].css("a").last
       fetched_hash[:fetch_category] = p_category_node.text
@@ -52,6 +56,7 @@ class ArchivesItemFetch < ActiveRecord::Base
       self.fetch_category = fetched_hash[:fetch_category]
       self.content = fetched_hash[:content]
       self.title = fetched_hash[:title]
+      self.fetch_author = fetched_hash[:author]
       self.save
     end  
   end
@@ -78,7 +83,7 @@ class ArchivesItemFetch < ActiveRecord::Base
   
 #  for search attrs
   def shared_searcher_categories
-    
+    self.categories.collect{|c| c.name}.join(",")
   end
   
   def shared_searcher_created_by

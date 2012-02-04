@@ -16,6 +16,8 @@ class CreateArchivesItems < ActiveRecord::Migration
       t.boolean :rec_published, :default => true
 #      显示来源
       t.boolean :show_refer, :default => false
+#      相关项目的列表
+      t.string :related_item_ids_list, :default => ""
       
       t.integer :created_by
       t.string :created_ip

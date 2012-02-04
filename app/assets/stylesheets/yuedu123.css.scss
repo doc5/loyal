@@ -34,6 +34,14 @@ a {
     }
 }
 
+#navigation {
+    margin: 5px 5px 0px;
+    padding: 5px;
+    form {
+        display: inline;
+    }
+}
+
 #container{
     margin: 0 auto;
     width: 980px;
@@ -114,6 +122,17 @@ a {
         }
 
         
+    }
+}
+
+.main-related{
+    
+    ul {
+        font-size: 13px;
+        li {
+            width: 370px;
+            float: left;
+        }
     }
 }
 
@@ -209,15 +228,16 @@ a {
 }
 
 .res{
-    padding: 2px 2px 5px;
+    padding: 3px 3px 10px;
     width: 540px;
 
-    .res-ttl {
-        font-size: 14px;
+    .res-ttl, .res-ttl a {
+        font-size: 16px;
+        color: blue;
     }
 
     .res-body{
-        font-size: 12px;
+        font-size: 13px;
     }
 }
 

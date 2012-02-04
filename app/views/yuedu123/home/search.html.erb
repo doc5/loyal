@@ -1,17 +1,22 @@
 <% if @query_words.present? %>
-  <% @querey_results.each do |result| %>
+  <% if @querey_results.any? %>
+    <% @querey_results.each do |result| %>
+      <div class="res">
+        <div class="res-ttl">
+          <%= helper_ferret_result_linker(result, :highlight => true, :query_words => @querey_results) %>
+        </div>
+        <div class="res-body">
+          <%= raw result.highlight(@query_words, :field => :content, 
+            :pre_tag => "<span class='highlight'>", :post_tag => "</span>") %>
+        </div>
+      </div>
+    <% end %>
+    <%= will_paginate @querey_results %>
+  <% else %>
     <div class="res">
-      <div class="res-ttl">
-        <%= raw result.highlight(@query_words, :field => :title, 
-          :pre_tag => "<span class='highlight'>", :post_tag => "</span>")%>
-      </div>
-      <div class="res-body">
-        <%= raw result.highlight(@query_words, :field => :content, 
-          :pre_tag => "<span class='highlight'>", :post_tag => "</span>")%>
-      </div>
+      没有搜到相关结果
     </div>
   <% end %>
-  <%= will_paginate @querey_results %>
 <% else %>
   请输入关键词
 <% end %>
