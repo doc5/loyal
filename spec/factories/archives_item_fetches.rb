@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :archives_item_fetch do
-    
+    title "this is title"
   end
 end
