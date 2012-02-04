@@ -1,6 +1,7 @@
 # rake archives:item_fetch:spider:fetch_category RAILS_ENV=development site=duwenzhang page=5 down_page=2 category=yingyuwenzhang
 # rake archives:item_fetch:spider:duwenzhang:fetch RAILS_ENV=development
 # rake archives:item_fetch:spider:duwenzhang:classify_categories RAILS_ENV=development
+# rake archives:item_fetch:spider:duwenzhang:init_categories RAILS_ENV=development
 
 namespace :archives do  
   namespace :item_fetch do
@@ -13,7 +14,15 @@ namespace :archives do
           March::Spider::Duwenzhang.classify_categories
         
           puts "--------------end-----------完成归类duwenzhang网站所有文章-------------------------"        
-        end        
+        end
+        
+        task :init_categories => :environment do
+          puts "--------------start-----------归类duwenzhang网站所有文章-------------------------"
+          
+          March::Spider::Duwenzhang.init_categories
+        
+          puts "--------------end-----------完成归类duwenzhang网站所有文章-------------------------"        
+        end
         
         task :fetch => :environment do
           puts "--------------start-----------抓取duwenzhang网站所有文章-------------------------"
