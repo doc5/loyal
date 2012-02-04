@@ -5,7 +5,9 @@ class CreateArchivesCategories < ActiveRecord::Migration
       t.string :title
       
       t.integer :archives_items_count, :default => 0
+      t.integer :archives_tree_items_count, :default => 0
       t.integer :archives_item_fetches_count, :default => 0
+      t.integer :archives_tree_item_fetches_count, :default => 0
       
       t.string :url_name
       t.integer :position, :default => 0

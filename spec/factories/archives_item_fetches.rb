@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :archives_item_fetch do
+    
   end
 end

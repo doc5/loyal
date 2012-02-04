@@ -15,16 +15,18 @@ ActiveRecord::Schema.define(:version => 20120108083439) do
   create_table "archives_categories", :force => true do |t|
     t.string   "name"
     t.string   "title"
-    t.integer  "archives_items_count",        :default => 0
-    t.integer  "archives_item_fetches_count", :default => 0
+    t.integer  "archives_items_count",             :default => 0
+    t.integer  "archives_tree_items_count",        :default => 0
+    t.integer  "archives_item_fetches_count",      :default => 0
+    t.integer  "archives_tree_item_fetches_count", :default => 0
     t.string   "url_name"
-    t.integer  "position",                    :default => 0
+    t.integer  "position",                         :default => 0
     t.string   "flag_name"
-    t.integer  "status",                      :default => 0
-    t.string   "lang",                        :default => "zh-cn"
+    t.integer  "status",                           :default => 0
+    t.string   "lang",                             :default => "zh-cn"
     t.string   "introduction"
     t.text     "description"
-    t.integer  "permission",                  :default => 0
+    t.integer  "permission",                       :default => 0
     t.text     "permission_encode"
     t.integer  "created_by"
     t.string   "created_ip"

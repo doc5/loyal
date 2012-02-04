@@ -146,6 +146,7 @@ module March
       ]
       
       class << self
+# => March::Spider::Duwenzhang.init_categories
         def init_categories
           ArchivesCategory.touch(:flag_name => "#{ROOT_FLAG_NAME}", :name => "好文章", :url_name => "haowen")
           INIT_CATEGORIES.each do |flag_name, opt|
