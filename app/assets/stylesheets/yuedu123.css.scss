@@ -336,21 +336,9 @@ a {
     /*vertical-align: text-bottom;*/
 }
 
-input[type="hidden"] {
-    border: none;
-    padding: 0;
-    display: none;
-}
-
-input.HiddenField
-{ 
-    display: none; 
-    width: 0px;
-    height:0px;
-    margin: 0px;
-    padding: 0px;
-    font-size: 0px;
-    line-height: 0px;
+input {
+    _border: expression(if(this.type=='hidden'){return 'none';});
+    _padding: expression(if(this.type=='hidden'){return 0;});
 }
 
 #container:after, #container2:after, #container3:after, #main:after, #main2:after, #main3:after {
