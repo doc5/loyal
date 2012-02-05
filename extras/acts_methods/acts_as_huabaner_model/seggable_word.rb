@@ -15,35 +15,39 @@ module ActsMethods
         
         has_many :hot_words, :class_name => "SegHotWord", :as => :seggable, :order => "freq DESC"
         
-        after_save do |r|
-          
+        def related_items(query, ferret_options={}, ar_options={})
+          self.find_with_ferret(query, ferret_options, ar_options)
         end
       end
       
       module InstanceMethods
 #        relation
 # => 相关项目
-        def related_items(limit=10)
-          if defined?(self.related_item_ids_list) && self.related_item_ids_list.present?
-            _results = self.class.find :all, :conditions => ["id in (?)", self.related_item_ids_list.split(",")], :limit => limit
-          else
-            _results = self.catulate_related_item_ids(limit)
-          end          
-          _results
+        def related_items(limit=20)
+          Rails.logger.debug "===============================> class: #{self.class.name}"
+          self.more_like_this({:field_names => ['title', 'content', 'categories']}, {:page => 1, :per_page => limit})
         end
+#        def related_items(limit=10)
+#          if defined?(self.related_item_ids_list) && self.related_item_ids_list.present?
+#            _results = self.class.find :all, :conditions => ["id in (?)", self.related_item_ids_list.split(",")], :limit => limit
+#          else
+#            _results = self.catulate_related_item_ids(limit)
+#          end          
+#          _results
+#        end
         
-        def catulate_related_item_ids(limit=10)
-          seg_string = "#{self.shared_searcher_title} #{self.shared_searcher_categories} #{self.rec_tag_list}"
-          segs = RMMSeg::SimpleAlgorithm.new(seg_string).segment
-          _results = ActsAsFerret.find(segs.join("||"), 'shared', :page => 1, :per_page => limit * 2 + 1)
-          _results.delete_at(0)
-          
-          if defined?(self.related_item_ids_list) && self.related_item_ids_list.present?
-            self.related_item_ids_list = _results.collect{|c| c.id}.join(",")
-            self.save
-          end
-          _results[0, limit]
-        end
+#        def catulate_related_item_ids(limit=10)
+#          seg_string = "#{self.shared_searcher_title} #{self.shared_searcher_categories} #{self.rec_tag_list}"
+#          segs = RMMSeg::SimpleAlgorithm.new(seg_string).segment
+#          _results = ActsAsFerret.find(segs.join("||"), 'shared', :page => 1, :per_page => limit * 2 + 1)
+#          _results.delete_at(0)
+#          
+#          if defined?(self.related_item_ids_list) && self.related_item_ids_list.present?
+#            self.related_item_ids_list = _results.collect{|c| c.id}.join(",")
+#            self.save
+#          end
+#          _results[0, limit]
+#        end
         
         #        计算热词
         # => 首先，计算出记录中频率最高的前20个词语（该词语需要在辞典中存在）
