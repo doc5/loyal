@@ -24,9 +24,16 @@ module ActsMethods
 #        relation
 # => 相关项目
         def related_items(limit=20)
+          @_cache_related_items_hash = Hash.new if @_cache_related_items_hash.nil?
+          return @_cache_related_items_hash[limit] unless @_cache_related_items_hash[limit].nil?
+          
           Rails.logger.debug "===============================> class: #{self.class.name}"
-          self.more_like_this({:field_names => ['title', 'content', 'categories']}, {:page => 1, :per_page => limit})
+          @_cache_related_items_hash[limit] = self.more_like_this(
+            {:field_names => ['title', 'content', 'categories']}, 
+            {:page => 1, :per_page => limit}
+          )
         end
+        
 #        def related_items(limit=10)
 #          if defined?(self.related_item_ids_list) && self.related_item_ids_list.present?
 #            _results = self.class.find :all, :conditions => ["id in (?)", self.related_item_ids_list.split(",")], :limit => limit
