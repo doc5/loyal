@@ -39,7 +39,7 @@ module March
         },
         'gaoxiaowenzhang' => {
           :name => "搞笑文章", :parent => nil, 
-          :url => "http://www.duwenzhang.com/wenzhang/gaoxiaozhang/list_9_", :page => 18
+          :url => "http://www.duwenzhang.com/wenzhang/gaoxiaowenzhang/list_9_", :page => 18
         },
         'yingyuwenzhang' => {
           :name => "英语文章", :parent => nil, 
