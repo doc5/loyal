@@ -3,11 +3,11 @@
     <% @query_results.each do |result| %>
       <div class="res">
         <div class="res-ttl">
-          <%= helper_ferret_result_linker(result, :highlight => true, :query_words => @query_words) %>
+          <%= helper_ferret_result_linker(result, :highlight => true, :query_words => @query_words_used) %>
         </div>
         <div class="res-body">
           <%#= excerpt(result.shared_searcher_content, @query_words) %>
-          <%= raw result.highlight(@query_words, :field => :content, 
+          <%= raw result.highlight(@query_words_used, :field => :content, 
             :pre_tag => "<span class='highlight'>", :post_tag => "</span>") %>
         </div>
       </div>
