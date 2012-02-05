@@ -37,7 +37,7 @@ a {
 
 #navigation {
     margin: 5px 5px 0px;
-    padding: 5px;
+    padding: 5px 5px 0px 5px;
     height: 80px; 
 
     form {        
@@ -172,7 +172,7 @@ a {
 
 .home-main {
     #main-panel{
-        padding: 10px;
+        padding: 0px 10px 10px 10px;
         
         .box {
             border-color: #CCCCCC;
@@ -182,7 +182,6 @@ a {
             margin: 5px;
             float: left;
             width: 465px;  
-            height: 310px;
         }
 
         .box-title {
@@ -214,8 +213,11 @@ a {
             padding: 2px;
         }
 
-        .list {
-            
+        .list {            
+            .item{
+                height: 16px;
+                line-height: 16px;
+            }
         }
     }
 }
