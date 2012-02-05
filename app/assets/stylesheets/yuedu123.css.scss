@@ -332,6 +332,12 @@ a {
     /*vertical-align: text-bottom;*/
 }
 
+input[type=hidden] {
+    border: none;
+    padding: 0;
+    display: none;
+}
+
 #container:after, #container2:after, #container3:after, #main:after, #main2:after, #main3:after {
     clear: both;
     content: " ";
