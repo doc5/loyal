@@ -1,6 +1,6 @@
 class Yuedu123::Archives::HomeController < Yuedu123Controller
   def index
-    @seo_title = "读文章首页 - #{Website::Info.yuedu123_name}"
+    @seo_title = "#{Website::Info.yuedu123_name} - 读文章首页"
   end
 
 end

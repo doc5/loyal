@@ -11,9 +11,6 @@
   <body>    
     <div id="container">  
       <div id="header">
-        <div class="logo">
-          
-        </div>
         <div class="linkers">
           <%= link_to "首页", archives_route(root_path) %>
           <%= link_to "文章分类", archives_route(yuedu123_archives_categories_path) %>
@@ -22,7 +19,9 @@
       </div>
       
       <div id="navigation">
-        阅读123
+        <a href="<%= www_route(root_path, 'yuedu123.com') %>" class="logo-link">
+          <%= image_tag "yuedu123-logo.gif" %>
+        </a>
         <%= render :partial => "/yuedu123/partials/search_form" %>
       </div>
       

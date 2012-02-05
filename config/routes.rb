@@ -1,11 +1,5 @@
 Loyal::Application.routes.draw do
-  get "categories/show"
-
-  get "fetches/show"
-
-  get "home/index"
-
-  constraints :subdomain => "", :domain => 'doc5.com' do
+  constraints :subdomain => "#{SubdomainWWW}", :domain => 'doc5.com' do
     root :to => "docfive/home#index"
     
   end

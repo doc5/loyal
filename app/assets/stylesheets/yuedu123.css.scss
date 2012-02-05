@@ -40,6 +40,10 @@ a {
     form {
         display: inline;
     }
+
+    a.logo-link{
+        text-decoration: none;
+    }
 }
 
 #container{
@@ -245,6 +249,27 @@ a {
     color: red;
 }
 
+.key-words{
+    background: url("images/bk/bt_gray_1.png") no-repeat scroll -304px 0 transparent;
+    border-color: #9A9A9A #CDCDCD #CDCDCD #9A9A9A;
+    border-style: solid;
+    border-width: 1px;
+    font: 16px arial;
+    height: 22px;
+    padding: 4px 7px;
+    vertical-align: text-bottom;
+    width: 404px;
+}
+
+.submit-btn{
+    background: url("images/bk/bt_gray_1.png") no-repeat scroll 0 0 #DDDDDD;
+    border: 0 none;
+    cursor: pointer;
+    height: 32px;
+    padding: 0;
+    width: 95px;
+    vertical-align: text-bottom;
+}
 
 #container:after, #container2:after, #container3:after, #main:after, #main2:after, #main3:after {
     clear: both;

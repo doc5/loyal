@@ -1,6 +1,7 @@
 class Yuedu123::HomeController < Yuedu123Controller
   def index    
     redirect_to archives_route(root_path)
+    
 #    @seo_title = "#{Website::Info.yuedu123_name}"
   end
   
