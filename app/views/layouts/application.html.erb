@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Loyal</title>
+    <title>Happy Zone</title>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= link_to "test", "http://www.baidu.com", :onclick => "return openAppWindow(this, {});", :target => "_blank" %>
-    
     <div>
       <% if logged_in? %>
         <%= current_user.email %>
@@ -22,6 +20,7 @@
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <% end %>
     </div>
+    
     <%= yield %>
 
   </body>

@@ -123,6 +123,14 @@ a {
 
     .main-content{
         padding: 5px;
+        color: #000000;
+        font-size: 14px;
+        line-height: 25px;
+        margin-top: 10px;
+
+        p {            
+            text-indent: 2em;
+        }
     }
 
     .list {            

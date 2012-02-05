@@ -41,7 +41,7 @@
 
 
 #header {
-    background: url("images/front-header-bk.jpg?v=2") no-repeat scroll 0 0 #fff;
+    background: url("images/front-header-bk.jpg") no-repeat scroll 0 0 #fff;
     color: MediumVioletRed;
 /*    text-transform: uppercase;*/
     width: 100%;

@@ -24,7 +24,7 @@ module ControllerExt
     def sign_in_url    
       #      from = params[:from]
       #      from = URI.escape(request.fullpath) if from.blank?
-      "#{blank_route(login_path)}"
+      "#{www_route(login_path)}"
     end
 
     def access_denied
