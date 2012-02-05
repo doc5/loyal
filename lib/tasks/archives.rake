@@ -17,11 +17,11 @@ namespace :archives do
         end
         
         task :init_categories => :environment do
-          puts "--------------start-----------归类duwenzhang网站所有文章-------------------------"
+          puts "--------------start-----------初始化因duwenzhang网站所有分类-------------------------"
           
           March::Spider::Duwenzhang.init_categories
         
-          puts "--------------end-----------完成归类duwenzhang网站所有文章-------------------------"        
+          puts "--------------end-----------完成初始化因duwenzhang网站所有分类-------------------------"        
         end
         
         task :fetch => :environment do

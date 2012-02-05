@@ -15,10 +15,10 @@ class ArchivesCategory < ActiveRecord::Base
     _self_and_children_ids = self.self_and_descendants.collect{ |c| c.id }
     
     @_cache_sql_tree_item_fetches = <<SQL
-      SELECT "archives_item_fetches".* FROM "archives_item_fetches" 
-      INNER JOIN "archives_item_fetchs_and_archives_categories" ON 
-      "archives_item_fetches"."id" = "archives_item_fetchs_and_archives_categories"."item_id" 
-      WHERE "archives_item_fetchs_and_archives_categories"."category_id" in (#{_self_and_children_ids.join(',')})      
+      SELECT `archives_item_fetches`.* FROM `archives_item_fetches` 
+      INNER JOIN `archives_item_fetchs_and_archives_categories` ON 
+      `archives_item_fetches`.`id` = `archives_item_fetchs_and_archives_categories`.`item_id` 
+      WHERE `archives_item_fetchs_and_archives_categories`.`category_id` in (#{_self_and_children_ids.join(',')})      
 SQL
     @_cache_sql_tree_item_fetches << "ORDER BY #{options[:order]}" unless options[:order].blank?
     @_cache_sql_tree_item_fetches
