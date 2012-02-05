@@ -1,10 +1,12 @@
-<div class="main-related">
-  <div>相关文章</div>
-  <ul class="clearfix">
-    <% item.related_items.each do |fetch| %>
-      <li>
-        <%= helper_ferret_result_linker(fetch, :highlight => false, :target => "_self") %>
-      </li>
-    <% end %>    
-  </ul>
-</div>
+<% if item.related_items.present? && item.related_items.any? %>
+  <div class="main-related">
+    <div>相关文章</div>
+    <ul class="clearfix">
+      <% item.related_items.each do |fetch| %>
+        <li>
+          <%= helper_ferret_result_linker(fetch, :highlight => false, :target => "_self") %>
+        </li>
+      <% end %>    
+    </ul>
+  </div>
+<% end %>
