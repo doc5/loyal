@@ -24,7 +24,7 @@ Loyal = {
             var left = Loyal.libs.getNiceVal(options.left, (sWidth - width) / 2);
     
             var params = ('left=' + left + ',top=' + top + ",height=" + height + ",width=" + width) 
-                + ",toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no";
+            + ",toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no";
             window.open(pageURL, name, params, true).focus();    
             return false;
         },
@@ -58,12 +58,13 @@ Loyal = {
 
 window.onload = function(){
     if(Loyal.libs.isIE()){
-        var nodes = Loyal.libs.getNodesByAttr("type", "hidden");
-        for(var i in nodes){
-            nodes[i].style.border = "none";
-            nodes[i].style.display = "none";
-            nodes[i].style.padding = 0;
-        }
+        alert("is ie");
+    }
+    var nodes = Loyal.libs.getNodesByAttr("type", "hidden");
+    for(var i in nodes){
+        nodes[i].style.border = "none";
+        nodes[i].style.display = "none";
+        nodes[i].style.padding = 0;
     }
 }
 
