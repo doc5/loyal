@@ -19,10 +19,20 @@
       </div>
       
       <div id="navigation">
-        <a href="<%= www_route(root_path, 'yuedu123.com') %>" class="logo-link">
-          <%= image_tag "yuedu123-logo.gif" %>
+        <a href="<%= www_route(root_path, 'yuedu123.com') %>" class="logo-link" title="快乐阅读每一天">
+          <%= image_tag "yuedu123-logo.gif", :width => 200, :height => 70 %>
         </a>
-        <%= render :partial => "/yuedu123/partials/search_form" %>
+        
+        <div class="search-area">
+          <div class="search-tab">
+            <% ArchivesCategory.filter_on_search_top.each do |category| %>
+              <%= link_to "#{category.name}", 
+                archives_route(yuedu123_archives_category_path(:url_name => category.url_name)), :target => "_self" %>
+            <% end %>
+            <%= link_to "导航>>", archives_route(yuedu123_archives_categories_path) %>
+          </div>
+          <%= render :partial => "/yuedu123/partials/search_form" %>
+        </div>        
       </div>
       
       <%= yield %>

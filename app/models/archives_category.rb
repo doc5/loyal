@@ -76,7 +76,20 @@ SQL
   end
   
   
-  public
+  public  
+  scope :filter_on_search_top,
+    :conditions => ["flag_name in (?)", 
+    [
+      'haowen-aiqing', 
+      'haowen-qinqing', 
+      'haowen-youqing',
+      'haowen-shenghuosuibi',
+      'haowen-zheli',
+      'haowen-lizhi',
+      'haowen-jingdian',
+      'haowen-gaoxiao'
+    ]
+  ]
   scope :filter_on_archives_home,
     :conditions => ["flag_name in (?)", 
     [

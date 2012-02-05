@@ -37,11 +37,30 @@ a {
 #navigation {
     margin: 5px 5px 0px;
     padding: 5px;
-    form {
-        display: inline;
+    height: 80px; 
+
+    form {        
+        
+    }
+
+    .search-area{
+        float: left;
+        padding: 0px 0px 0px 10px;
+    }
+
+    .search-tab {
+        font-size: 12px;
+        padding: 8px;
+        
+        a {
+            text-decoration: none;
+            margin: 0 5px 0 0;
+        }
     }
 
     a.logo-link{
+        height: 80px;
+        float: left;
         text-decoration: none;
     }
 }
@@ -257,7 +276,7 @@ a {
     font: 16px arial;
     height: 22px;
     padding: 4px 7px;
-    vertical-align: text-bottom;
+    /*vertical-align: text-bottom;*/
     width: 404px;
 }
 
@@ -268,7 +287,7 @@ a {
     height: 32px;
     padding: 0;
     width: 95px;
-    vertical-align: text-bottom;
+    /*vertical-align: text-bottom;*/
 }
 
 #container:after, #container2:after, #container3:after, #main:after, #main2:after, #main3:after {
