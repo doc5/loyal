@@ -6,5 +6,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ./shared/libs/IE9
 //= require ./shared/loyal
 //= require ./shared/apps

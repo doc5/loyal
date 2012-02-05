@@ -336,9 +336,16 @@ a {
     /*vertical-align: text-bottom;*/
 }
 
-input {
-    _border: expression(if(this.type=='hidden'){return 'none';});
-    _padding: expression(if(this.type=='hidden'){return 0;});
+/* http://code.google.com/p/ie7-js */
+input[type="hidden"] {
+    display: none; 
+    width: 0px;
+    height:0px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 0px;
+    line-height: 0px;
+    border: none;
 }
 
 #container:after, #container2:after, #container3:after, #main:after, #main2:after, #main3:after {
