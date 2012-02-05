@@ -79,9 +79,8 @@ a {
 }
 
 #side-panel {
-    width: 150px;
-    float: right;
-    border-right: 1px solid blue;
+    padding: 10px 10px 10px 750px;
+    font-size: 14px;
 
     h4{
         margin: 5px 0px;
@@ -97,6 +96,9 @@ a {
 }
 
 #main-panel{
+    width: 740px;
+    float: left;
+
     .main-info{
         .main-path{
             text-align: left;
@@ -113,8 +115,6 @@ a {
             font-size: 12px;
         }
     }
-
-    padding: 10px 160px 10px 10px;
 
     h1, h2, h3, h4, h5, h6{
         font-size: 150%;
@@ -146,9 +146,17 @@ a {
             padding: 2px 2px;
             border-bottom: 1px dashed #ddd;
 
+            a {
+                color: #000000;
+            }
+
             .operate {
                 float: right;
-                font-size: 14px;
+                font-size: 12px;                
+            }
+
+            .operate, .operate a{
+                color: #888888;
             }
         }
     }
@@ -171,8 +179,9 @@ a {
     ul {
         font-size: 13px;
         li {
-            width: 370px;
-            float: left;
+            height: 20px;
+            line-height: 20px;
+            list-style: square outside none;
         }
     }
 }

@@ -1,7 +1,4 @@
 <div id="main">
-  <div id="side-panel">
-    
-  </div>
   <div id="main-panel">
     <div class="main-info"> 
       <%= render :partial => "/yuedu123/archives/categories/path", :locals => {:include_self => true, :category => @archives_item_fetch.first_category} %>
@@ -22,5 +19,10 @@
     </div>
     
     <%= render :partial => "/yuedu123/archives/fetches/related", :locals => {:item => @archives_item_fetch} %>
+  </div>
+  
+  
+  <div id="side-panel">
+    
   </div>
 </div>
