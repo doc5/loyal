@@ -57,15 +57,13 @@ Loyal = {
 };
 
 window.onload = function(){
-    if(Loyal.libs.isIE()){
-        alert("is ie");
-    }
     var nodes = Loyal.libs.getNodesByAttr("type", "hidden");
+    alert(nodes.length);
     for(var i in nodes){
         nodes[i].style.border = "none";
         nodes[i].style.display = "none";
         nodes[i].style.padding = 0;
-    }
+    }    
 }
 
 /**参数解释
