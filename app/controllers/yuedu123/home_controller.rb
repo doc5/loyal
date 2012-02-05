@@ -10,7 +10,7 @@ class Yuedu123::HomeController < Yuedu123Controller
     
     if @query_words.present?
       @query_results = ActsAsFerret.find(
-        @query_words, 
+        RMMSeg::SimpleAlgorithm.new(@query_words).segment.join("||"), 
         'shared', 
         {:page => params[:page], :per_page => 20}, 
         {}
