@@ -349,13 +349,7 @@ a {
     /*vertical-align: text-bottom;*/
 }
 
-#container:after, #container2:after, #container3:after, #main:after, #main2:after, #main3:after {
-    clear: both;
-    content: " ";
-    display: block;
-}
-
-.clearfix:after {
+.clearfix:after, #container:after, #container2:after, #container3:after, #main:after, #main2:after, #main3:after {
     clear: both;
     content: ".";
     display: block;
