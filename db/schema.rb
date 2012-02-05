@@ -61,12 +61,12 @@ ActiveRecord::Schema.define(:version => 20120204182723) do
     t.boolean  "fetch_published",       :default => true
     t.boolean  "show_from",             :default => false
     t.string   "rec_tag_list",          :default => ""
+    t.string   "related_item_ids_list", :default => ""
     t.string   "virtue_way",            :default => "yaml"
     t.text     "virtue_encode"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "related_item_ids_list"
   end
 
   add_index "archives_item_fetches", ["from_uri"], :name => "index_archives_item_fetches_on_from_uri"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20120204182723) do
     t.boolean  "rec_visible",           :default => true
     t.boolean  "rec_published",         :default => true
     t.boolean  "show_refer",            :default => false
+    t.string   "related_item_ids_list", :default => ""
     t.integer  "created_by"
     t.string   "created_ip"
     t.integer  "content_way",           :default => 0
@@ -96,7 +97,6 @@ ActiveRecord::Schema.define(:version => 20120204182723) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "related_item_ids_list"
   end
 
   add_index "archives_items", ["unique_flag", "unique_refer"], :name => "archives_items_unique_index"
