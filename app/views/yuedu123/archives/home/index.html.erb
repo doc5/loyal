@@ -3,6 +3,10 @@
     <% ArchivesCategory.filter_on_archives_home.each do |category| %>
     <div class="box">
       <div class="box-title">
+        <div class="more">
+          <%= link_to "更多 >", 
+            archives_route(yuedu123_archives_category_path(:url_name => category.url_name)), :target => "_blank" %>
+        </div>
         <%= link_to "#{category.name}", 
           archives_route(yuedu123_archives_category_path(:url_name => category.url_name)), :target => "_blank" %>
       </div>

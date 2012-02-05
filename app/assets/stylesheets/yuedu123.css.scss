@@ -16,7 +16,7 @@ a {
     color: #555555;
     
     &:hover {
-        color: red;
+        color: red !important;
     }   
 }
 
@@ -146,6 +146,8 @@ a {
     }
 
     .box {
+        float: left;
+
         .box-title {
             a{
                 color: #893450;
@@ -172,11 +174,39 @@ a {
         padding: 10px;
         
         .box {
-            padding: 5px;
+            border-color: #CCCCCC;
+            border-width: 0 1px 1px 1px;
+            border-style: solid;
+
+            margin: 5px;
             float: left;
-            width: 465px;
-            height: 330px;
+            width: 465px;            
         }
+
+        .box-title {
+            background: url("images/bk/box_top_bk_1.gif") no-repeat scroll center top transparent;
+            border-bottom: 1px solid #CCCCCC;
+            font-size: 14px;
+            height: 22px;
+            line-height: 22px;
+            padding-top: 3px;
+            text-indent: 1.2em;
+
+            .more {
+                margin-right: 10px;
+                float: right;
+                a {
+                    color: #0C81B8;
+                    text-decoration: none;
+                    font-size: 12px;
+                }
+            }
+
+            a{
+                color: #893450;
+            }   
+        }
+
         .box-body{
             font-size: 12.5px;
             padding: 2px;
