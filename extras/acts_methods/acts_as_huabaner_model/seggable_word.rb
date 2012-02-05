@@ -24,7 +24,7 @@ module ActsMethods
 #        relation
 # => 相关项目
         def related_items(limit=10)
-          if defined?(self.related_item_ids_list) && self.related_item_ids_list
+          if defined?(self.related_item_ids_list) && self.related_item_ids_list.present?
             _results = self.class.find :all, :conditions => ["id in (?)", self.related_item_ids_list.split(",")], :limit => limit
           else
             _results = self.catulate_related_item_ids(limit)
@@ -38,7 +38,7 @@ module ActsMethods
           _results = ActsAsFerret.find(segs.join("||"), 'shared', :page => 1, :per_page => limit * 2 + 1)
           _results.delete_at(0)
           
-          if defined?(self.related_item_ids_list)
+          if defined?(self.related_item_ids_list) && self.related_item_ids_list.present?
             self.related_item_ids_list = _results.collect{|c| c.id}.join(",")
             self.save
           end

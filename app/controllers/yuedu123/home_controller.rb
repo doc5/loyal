@@ -9,7 +9,7 @@ class Yuedu123::HomeController < Yuedu123Controller
     @query_words = params[:query]
     
     if @query_words.present?
-      @querey_results = ActsAsFerret.find(@query_words, 'shared', :page => params[:page], :per_page => 20)
+      @query_results = ActsAsFerret.find(@query_words, 'shared', :page => params[:page], :per_page => 20)
       
       @seo_title = "阅读搜索_#{@query_words} - #{Website::Info.yuedu123_name}"
     else

@@ -1,17 +1,18 @@
 <% if @query_words.present? %>
-  <% if @querey_results.any? %>
-    <% @querey_results.each do |result| %>
+  <% if @query_results.present? && @query_results.any? %>
+    <% @query_results.each do |result| %>
       <div class="res">
         <div class="res-ttl">
-          <%= helper_ferret_result_linker(result, :highlight => true, :query_words => @querey_results) %>
+          <%= helper_ferret_result_linker(result, :highlight => true, :query_words => @query_words) %>
         </div>
         <div class="res-body">
+          <%#= excerpt(result.shared_searcher_content, @query_words) %>
           <%= raw result.highlight(@query_words, :field => :content, 
             :pre_tag => "<span class='highlight'>", :post_tag => "</span>") %>
         </div>
       </div>
     <% end %>
-    <%= will_paginate @querey_results %>
+    <%= will_paginate @query_results %>
   <% else %>
     <div class="res">
       没有搜到相关结果
