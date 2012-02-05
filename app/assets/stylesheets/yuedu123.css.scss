@@ -40,8 +40,11 @@ a {
     padding: 5px 5px 0px 5px;
     height: 80px; 
 
+    vertical-align: text-top;
+    
     form {        
-        
+        vertical-align: text-top;
+        display: inline;
     }
 
     .search-area{
