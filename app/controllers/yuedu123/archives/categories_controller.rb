@@ -3,7 +3,7 @@ class Yuedu123::Archives::CategoriesController < Yuedu123Controller
     @archives_category = ArchivesCategory.find_by_url_name params[:url_name]
     @archives_item_fetches = @archives_category.paginate_tree_item_fetches(:page => params[:page])
     
-    @seo_title = "[分类] #{@archives_category.name}"
+    @seo_title = "[分类] #{@archives_category.name} - #{Website::Info.yuedu123_name}"
     
     respond_to do |format|
       format.html
@@ -13,7 +13,7 @@ class Yuedu123::Archives::CategoriesController < Yuedu123Controller
   def index
     @archives_categories = ArchivesCategory.root_categories
     
-    @seo_title = "文章分类导航"
+    @seo_title = "文章分类导航 - #{Website::Info.yuedu123_name}"
     
     respond_to do |format|
       format.html
