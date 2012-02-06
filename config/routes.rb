@@ -16,7 +16,7 @@ Loyal::Application.routes.draw do
         
         match "categories/:url_name", :to => "categories#show", :as => :category
         match "items/:uuid", :to => "items#show", :as => :item
-        match "fetches/:uuid", :to => "fetches#show", :as => :fetch
+        match "shares/:uuid", :to => "fetches#show", :as => :fetch
       end
     end
   end
