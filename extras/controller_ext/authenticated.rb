@@ -19,6 +19,10 @@ module ControllerExt
     def login_required
       logged_in? || access_denied
     end
+    
+    def admin_required
+      login_required && current_user.admin?
+    end
 
     #   登录的超链接
     def sign_in_url    
