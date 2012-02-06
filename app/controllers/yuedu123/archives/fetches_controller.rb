@@ -2,7 +2,11 @@ class Yuedu123::Archives::FetchesController < Yuedu123Controller
   def show
     @archives_item_fetch = ArchivesItemFetch.find_by_uuid params[:uuid]
     
-    @seo_title = @archives_item_fetch.title
+    if @archives_item_fetch.first_category
+      @seo_title = "《#{@archives_item_fetch.title}》- #{@archives_item_fetch.first_category.name}"
+    else
+      @seo_title = "《#{@archives_item_fetch.title}》"
+    end
   end
   
   def index
