@@ -1,5 +1,6 @@
-source 'http://rubygems.org'
+#source 'http://rubygems.org'
 #source 'http://doc5.com:8808'
+source 'http://ruby.taobao.org/'
 
 gem 'rails', '3.1.3'
 gem 'mysql'
@@ -54,7 +55,6 @@ gem 'awesome_nested_set'
 #search
 gem "ferret"
 gem "rmmseg"
-#gem 'loyal_rmmseg'
 gem 'acts_as_ferret', '>= 0.5'
 #--------------------
 

@@ -35,7 +35,7 @@ module ActsMethods
               :field_names => ['title', 'content', 'categories'], 
               :analyzer => "RMMSeg::Ferret::Analyzer"
             }, 
-            {:page => 1, :per_page => limit}
+            {:page => 1, :per_page => limit, :lazy => true}
           )
           
           rescue => err

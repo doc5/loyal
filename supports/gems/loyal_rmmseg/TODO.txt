@@ -1,5 +1,0 @@
-=== TODO
-
-* Add mock test for RMMSeg::Ferret.
-* Avoid Memory Leak
-* Improve Performance

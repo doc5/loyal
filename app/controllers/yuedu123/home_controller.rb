@@ -14,7 +14,7 @@ class Yuedu123::HomeController < Yuedu123Controller
       @query_results = ActsAsFerret.find(
         @query_words_used, 
         'shared', 
-        {:page => params[:page], :per_page => 20}, 
+        {:page => params[:page], :per_page => 20, :lazy => true}, 
         {}
       )
       
