@@ -4,6 +4,7 @@ require 'fileutils'
 @host_tmp_path = '/tmp/hosts_tmp'
 
 @domins = [
+  'assets.doc5.com',
   'admin.doc5.com',
   'www.doc5.com',
   'apps.doc5.com',
