@@ -51,8 +51,5 @@ module Loyal
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = ASSETS_VERSION
-    
-#    config.logger = Logger.new(STDOUT)
-#    config.logger = Log4r::Logger.new("Application Log")
   end
 end

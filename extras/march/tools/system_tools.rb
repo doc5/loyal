@@ -18,7 +18,7 @@ module March
         rss_after_action = process_status.gets.split[1].to_i  
         process_status.close 
 
-        puts "==============> CONSUME MEMORY: #{rss_after_action - rss_before_action} \KB\tNow: #{rss_after_action} KB"
+        Rails.logger.error "==============> CONSUME MEMORY: #{rss_after_action - rss_before_action} \KB\tNow: #{rss_after_action} KB"
         res
       end
     end

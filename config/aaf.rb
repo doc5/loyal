@@ -3,6 +3,9 @@ require 'rubygems'
 require 'rmmseg'  
 require 'rmmseg/ferret'
 
+ActsAsFerret.logger.level = Logger::ERROR
+
+_default_shared_options_remote = true
 _default_shared_options_ferret ||=  {:analyzer => RMMSeg::Ferret::Analyzer.new}
 
 #_default_shared_options_ferret ||=  {:analyzer => Ferret::Analysis::PerFieldAnalyzer.new}
@@ -24,10 +27,12 @@ _default_shared_options_if = Proc.new { |entity| (defined?(entity.do_index?) || 
 ActsAsFerret::define_index('shared',
   :models => {    
     ArchivesItemFetch => {
-      :fields => _default_shared_options_fields
+      :fields => _default_shared_options_fields,
+      :remote => _default_shared_options_remote
     }, 
     ArchivesItem => {
-      :fields => _default_shared_options_fields
+      :fields => _default_shared_options_fields,
+      :remote => _default_shared_options_remote
     }
   },
   :if => _default_shared_options_if,
