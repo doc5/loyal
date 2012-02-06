@@ -9,7 +9,7 @@ Loyal::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = true
+  config.serve_static_assets = false
 #  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
@@ -20,7 +20,8 @@ Loyal::Application.configure do
   config.assets.compile = true
 
   # Generate digests for assets URLs
-  config.assets.digest = false
+#  config.assets.digest = false
+  config.assets.digest = true
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
