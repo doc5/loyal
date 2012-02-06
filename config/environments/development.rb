@@ -30,6 +30,5 @@ Loyal::Application.configure do
   
   config.log_level = :debug
   
-  config.assets.manifest = "assets"
   config.action_controller.asset_host = "http://assets.doc5.com:9050"
 end
