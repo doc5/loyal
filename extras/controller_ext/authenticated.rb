@@ -6,7 +6,7 @@ module ControllerExt
     end
 
     def current_user
-      @current_user ||= (login_from_session || login_from_cookie || login_from_basic_auth || false)
+      @current_user ||= (login_from_session || login_from_cookie || login_from_basic_auth)
     end
 
     def user_login(new_user)
@@ -21,7 +21,7 @@ module ControllerExt
     end
     
     def admin_required
-      login_required && current_user.admin?
+      logged_in? && current_user.admin? || access_denied("Need Admin!")
     end
 
     #   登录的超链接
@@ -31,11 +31,11 @@ module ControllerExt
       "#{www_route(login_path)}"
     end
 
-    def access_denied
+    def access_denied(notice="Require Sign in!")
       respond_to do |format|
         format.html do
           store_location
-          redirect_to sign_in_url, :notice => "Require Sign in!"
+          redirect_to sign_in_url, :notice => notice
         end
 
         format.any(:js, :xml) do
