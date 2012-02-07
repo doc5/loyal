@@ -46,10 +46,11 @@ Loyal::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
   config.action_controller.asset_host = "http://assets.doc5.com"
 
+  
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w( admin.js, apps.js, blogsoso.js docfive.js home.js map.js sessions.js tip.js users.js yuedu123.js temporary.js)
-  config.assets.precompile += %w( admin.css, apps.css, blogsoso.css docfive.css home.css map.css sessions.css tip.css users.css yuedu123.css temporary.css)
+  config.assets.precompile += %w( admin.js apps.js blogsoso.js docfive.js home.js map.js sessions.js tip.js users.js yuedu123.js temporary.js)
+  config.assets.precompile += %w( admin.css apps.css blogsoso.css docfive.css home.css map.css sessions.css tip.css users.css yuedu123.css temporary.css)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
