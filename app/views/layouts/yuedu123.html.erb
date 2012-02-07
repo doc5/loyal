@@ -3,8 +3,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
     <title><%= "#{@seo_title} - #{Website::Info.yuedu123_intro}" %></title>
-    <%= stylesheet_link_tag    "yuedu123" %>
-    <%= javascript_include_tag "yuedu123" %>
+    <%= stylesheet_link_tag    "yuedu123", :cache => true %>
+    <%= javascript_include_tag "yuedu123", :cache => true %>
     <%= csrf_meta_tags %>
     <%= yield :header %>
   </head>

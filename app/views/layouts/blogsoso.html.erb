@@ -5,10 +5,10 @@
     <title>个人站长、企业网站推广、网络推广、SEO、IT技术、互联网资讯、网络营销、企业博客、博客大全！ - happy</title>
 
 
-    <%= stylesheet_link_tag "shared/default" %>
-    <%= stylesheet_link_tag "themes/blogsoso/default/style" %>
+    <%= stylesheet_link_tag "shared/default", :cache => true %>
+    <%= stylesheet_link_tag "themes/blogsoso/default/style", :cache => true %>
     
-    <%= javascript_include_tag "blogsoso" %>    
+    <%= javascript_include_tag "blogsoso", :cache => true %>    
     <%= csrf_meta_tags %>
 
     <meta name="description" content="个人站长、企业网站推广、网络推广、SEO、IT技术、互联网资讯、网络营销、企业博客、博客大全！" /> 

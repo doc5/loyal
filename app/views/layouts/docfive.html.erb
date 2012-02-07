@@ -3,8 +3,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
     <title><%= @seo_title %></title>
-    <%= stylesheet_link_tag    "docfive" %>
-    <%= javascript_include_tag "docfive" %>
+    <%= stylesheet_link_tag    "docfive", :cache => true %>
+    <%= javascript_include_tag "docfive", :cache => true %>
     <%= csrf_meta_tags %>
     <%= yield :header %>
   </head>

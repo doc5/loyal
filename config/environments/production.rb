@@ -20,8 +20,8 @@ Loyal::Application.configure do
   config.assets.compile = true
 
   # Generate digests for assets URLs
-#  config.assets.digest = false
-  config.assets.digest = true
+  config.assets.digest = false
+#  config.assets.digest = true
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
