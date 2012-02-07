@@ -1,1 +1,3 @@
 rake assets:precompile
+
+bundle exec thin start -p 9000 -e production -d
