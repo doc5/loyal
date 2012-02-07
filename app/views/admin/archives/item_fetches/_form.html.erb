@@ -1,3 +1,5 @@
+<%= render :partial => "/partials/editors/kindeditor" %>
+
 <% if @archives_item_fetch.errors.any? %>
   <div id="error_explanation">
     <h2 id="errorExplanationHeader"><%= t('activerecord.errors.template.header', :count => @archives_item_fetch.errors.count) %></h2>	

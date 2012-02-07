@@ -1,6 +1,9 @@
 <%= content_for :header do %>
-  <%#= stylesheet_link_tag    "/javascripts/libs/kindeditor" %>
-  <%= javascript_include_tag "/javascripts/libs/kindeditor/kindeditor-min" %>
+  <% unless @_chache_kindeditor_instance_defined %>
+    <% @_chache_kindeditor_instance_defined = true %>
+    <%#= stylesheet_link_tag    "/javascripts/libs/kindeditor" %>
+    <%= javascript_include_tag "/javascripts/libs/kindeditor/kindeditor-min" %>
+  <% end %>
   
   <% editor_selector = ".rich-editor" if (!defined?(editor_selector) || editor_selector.blank?) %>
   <% editor_theme = "default" if (!defined?(editor_theme) || editor_theme.blank?) %>
