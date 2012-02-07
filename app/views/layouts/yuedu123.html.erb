@@ -6,36 +6,46 @@
     <%= stylesheet_link_tag    "yuedu123" %>
     <%= javascript_include_tag "yuedu123" %>
     <%= csrf_meta_tags %>
+
+    <meta name="keywords" content="<%= h @seo_keys %>"/> 
+    <meta name="description" content="<%= h "#{@seo_desc.strip}" %>"/> 
+
     <%= yield :header %>
   </head>
-  <body>    
-    <div id="container">  
-      <div id="header">
-        <div class="linkers">
-          <%= link_to "首页", archives_route(root_path) %>
-          <%= link_to "阅读导航", archives_route(yuedu123_archives_categories_path) %>
+  <body>  
+    <div id="container"> 
+      <% cache(March::Cache::Key.yuedu123_layout_header) do %>      
+        <div id="header">
+          <div class="linkers">
+            <%= link_to "首页", archives_route(root_path) %>
+            <%= link_to "阅读导航", archives_route(yuedu123_archives_categories_path) %>
+          </div>
         </div>
-      </div>
-      
+      <% end %>
+
       <div id="navigation">
         <a href="<%= www_route(root_path, 'yuedu123.com') %>" class="logo-link" title="快乐阅读每一天">
           <%= image_tag "yuedu123-logo.gif", :width => 200, :height => 70 %>
         </a>
-        
+
         <div class="search-area">
-          <div class="search-tab">
-            <% ArchivesCategory.filter_on_search_top.each do |category| %>
-              <%= link_to "#{category.name}", 
-                archives_route(yuedu123_archives_category_path(:url_name => category.url_name)), :target => "_self" %>
-            <% end %>
-            <%= link_to "导航>>", archives_route(yuedu123_archives_categories_path) %>
-          </div>
+          <% cache(March::Cache::Key.yuedu123_layout_search_tab) do %>
+            <div class="search-tab">
+              <% ArchivesCategory.filter_on_search_top.each do |category| %>
+                <%= link_to "#{category.name}", 
+                  archives_route(yuedu123_archives_category_path(:url_name => category.url_name)), :target => "_self" %>
+              <% end %>
+              <%= link_to "导航>>", archives_route(yuedu123_archives_categories_path) %>
+            </div>
+          <% end %>
+          
           <%= render :partial => "/yuedu123/partials/search_form" %>
         </div>        
       </div>
-      
+
+
       <%= yield %>
-      
+
       <%= render :partial => "/partials/footer" %>
     </div>
   </body>

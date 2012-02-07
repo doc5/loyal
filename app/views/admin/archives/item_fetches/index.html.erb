@@ -16,6 +16,11 @@
       <div class="item">
         <div class="operate">
           <span>
+            <% item_fetch.categories.each do |category| %>
+              <%= link_to "#{category.level_with_name}", admin_route(admin_archives_category_path(category)) %>
+            <% end %>
+          </span>
+          <span>
             <%= item_fetch.fetch_category %>
           </span>          
           <%= link_to "编辑", admin_route(edit_admin_archives_item_fetch_path(item_fetch)) %>

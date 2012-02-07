@@ -27,7 +27,7 @@ module ActsMethods
           @_cache_related_items_hash = {} unless @_cache_related_items_hash.is_a?(Hash)
           return @_cache_related_items_hash[limit] unless @_cache_related_items_hash[limit].nil?
           
-          Rails.logger.debug "===============================> class: #{self.class.name}"
+          Rails.logger.debug "===============#{limit}================> class: #{self.class.name}"
           
           begin
           @_cache_related_items_hash[limit] = self.more_like_this(

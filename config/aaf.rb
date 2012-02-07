@@ -17,6 +17,10 @@ _default_shared_options_fields = {
     :store => :yes,
     :term_vector => :with_positions_offsets, 
     :via => :shared_searcher_content},
+  :outline => {:boost=> 30,
+    :store => :yes,
+    :term_vector => :with_positions_offsets, 
+    :via => :shared_searcher_outline},
   :created_at => {:index => :untokenized, :store => :yes, :via => :shared_searcher_created_at},
   :updated_at => {:index => :untokenized, :store => :yes, :via => :shared_searcher_updated_at}
 }

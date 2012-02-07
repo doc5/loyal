@@ -12,6 +12,7 @@
     var editor;
     KindEditor.ready(function(K) {
       editor = K.create('<%= editor_selector %>', {
+        newlineTag : 'p',
         resizeType : 1,
         allowPreviewEmoticons : false,
         allowImageUpload : false,

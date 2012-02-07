@@ -7,5 +7,7 @@ class Yuedu123::Archives::FetchesController < Yuedu123Controller
     else
       @seo_title = "《#{@archives_item_fetch.title}》"
     end
+    
+    @seo_desc = "#{@archives_item_fetch.shared_searcher_outline}"
   end
 end

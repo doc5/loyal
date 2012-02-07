@@ -1,9 +1,9 @@
-<% cache(March::Cache::Key.archives_item_fetch_related_items(item.id, :limit => 20)) do %>
-  <% if item && item.related_items(20) && item.related_items.any? %>
+<% cache(March::Cache::Key.yuedu123_archives_item_fetch_related_items(item.id, :limit => 10)) do %>
+  <% if item && (items = item.related_items(10)).any? %>
     <div class="main-related">
       <div>相关文章</div>
       <ul class="clearfix">
-        <% item.related_items.each do |fetch| %>
+        <% items.each do |fetch| %>
           <li>
             <%= helper_ferret_result_linker(fetch, :highlight => false, :target => "_self") %>
           </li>

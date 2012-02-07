@@ -17,6 +17,17 @@
     
     <p>
       <b>归类</b><br/>
+      <% if @archives_item_fetch.categories.any? %>
+        <% @archives_item_fetch.categories.each do |category| %>
+          <%= link_to "#{category.level_with_name}", admin_route(admin_archives_category_path(category)) %>
+        <% end %>
+      <% else %>
+        没有归类
+      <% end %>
+    </p>
+    
+    <p>
+      <b>抓取归类</b><br/>
       <%= @archives_item_fetch.fetch_category %>
     </p>
     

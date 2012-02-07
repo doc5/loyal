@@ -96,8 +96,13 @@ class ArchivesItemFetch < ActiveRecord::Base
     self.title
   end
   
+  def shared_searcher_outline(limit=110)
+    @_cahce_shared_searcher_outline_hash = Hash.new if @_cahce_shared_searcher_outline_hash.nil?
+    @_cahce_shared_searcher_outline_hash[limit] ||= March::StringTools.truncate_u(shared_searcher_content, limit)    
+  end
+  
   def shared_searcher_content
-    March::StringTools.clean_html(self.content)
+    @_cache_shared_searcher_content ||= March::StringTools.clean_html(self.content)
   end
   
   def shared_searcher_created_at

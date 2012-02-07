@@ -17,6 +17,16 @@
 </div>
 
 <div class="field">
+  <%= f.label :category_ids %><br />
+  <select name="archives_item_fetch[category_ids][]">
+    <option value=""><%=  h(I18n.t('please_select_for_tag')) %></option>
+    <% ArchivesCategory.categories_self_and_children.each do |category| %>
+      <option value="<%= category.id %>"<%= " selected='selected'" if @archives_item_fetch.category_ids.include?(category.id) %>><%= h(category.level_with_name) %></option>
+    <% end %>
+  </select>
+</div>
+
+<div class="field">
   <%= f.label :fetch_category %>*<br />
   <%= f.text_field :fetch_category %>
 </div>

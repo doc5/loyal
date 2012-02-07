@@ -2,8 +2,20 @@ module March
   module Cache
     class Key
       class << self
-        def archives_item_fetch_related_items(id, options={})
-          "archives_item_fetch_related_items_#{id}_#{format_options(options)}"
+        def yuedu123_archives_item_fetch_related_items(id, options={})
+          "yuedu123_archives_item_fetch_related_items_#{id}_#{format_options(options)}"
+        end
+        
+        def yuedu123_archives_home_main_panel_boxes(options={})
+          "yuedu123_archives_home_main_panel_boxes_#{format_options(options)}"
+        end
+        
+        def yuedu123_layout_header(options={})
+        "yuedu123_layout_header_#{format_options(options)}"
+        end
+        
+        def yuedu123_layout_search_tab(options={})
+          "yuedu123_layout_search_tab_#{format_options(options)}"
         end
         
         def format_options(options={})
