@@ -1,0 +1,26 @@
+<%= content_for :header do %>
+  <%#= stylesheet_link_tag    "/javascripts/libs/kindeditor" %>
+  <%= javascript_include_tag "/javascripts/libs/kindeditor/kindeditor-min" %>
+  
+  <% editor_selector = ".rich-editor" if (!defined?(editor_selector) || editor_selector.blank?) %>
+  <% editor_theme = "default" if (!defined?(editor_theme) || editor_theme.blank?) %>
+
+  <script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+      editor = K.create('<%= editor_selector %>', {
+        resizeType : 1,
+        allowPreviewEmoticons : false,
+        allowImageUpload : false,
+        items : [
+          'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'cut', 'copy', 'paste',
+		'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+		'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+		'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+		'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+		'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+		'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'map', 'code', 'pagebreak', 'anchor', 'link', 'unlink', '|', 'about']
+      });
+    });
+  </script>
+<% end %>
