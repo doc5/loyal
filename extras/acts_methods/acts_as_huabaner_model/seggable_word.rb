@@ -32,7 +32,7 @@ module ActsMethods
           begin
           @_cache_related_items_hash[limit] = self.more_like_this(
             {
-              :field_names => ['title', 'categories'], 
+              :field_names => ['content', 'categories'], 
               :analyzer => "RMMSeg::Ferret::Analyzer"
             }, 
             {:page => 1, :per_page => limit, :lazy => true}
