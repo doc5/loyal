@@ -1,12 +1,14 @@
-<% if item && item.related_items && item.related_items.any? %>
-  <div class="main-related">
-    <div>相关文章</div>
-    <ul class="clearfix">
-      <% item.related_items.each do |fetch| %>
-        <li>
-          <%= helper_ferret_result_linker(fetch, :highlight => false, :target => "_self") %>
-        </li>
-      <% end %>    
-    </ul>
-  </div>
+<% cache(March::Cache::Key.archives_item_fetch_related_items(item.id, :limit => 20)) do %>
+  <% if item && item.related_items(20) && item.related_items.any? %>
+    <div class="main-related">
+      <div>相关文章</div>
+      <ul class="clearfix">
+        <% item.related_items.each do |fetch| %>
+          <li>
+            <%= helper_ferret_result_linker(fetch, :highlight => false, :target => "_self") %>
+          </li>
+        <% end %>    
+      </ul>
+    </div>
+  <% end %>
 <% end %>

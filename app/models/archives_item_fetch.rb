@@ -3,6 +3,8 @@ require 'iconv'
 require 'sanitize'
 
 class ArchivesItemFetch < ActiveRecord::Base
+#  acts_as_huabaner_cached_record
+  
   include ActsMethods::ActsAsHuabanerModel::UuidExtends
   acts_as_huabaner_uuid
   

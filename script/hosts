@@ -80,4 +80,3 @@ puts "========================================="
 while (input = STDIN.gets.strip).empty?
 end
 understand input
-
