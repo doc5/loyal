@@ -8,11 +8,4 @@ class Yuedu123::Archives::FetchesController < Yuedu123Controller
       @seo_title = "《#{@archives_item_fetch.title}》"
     end
   end
-  
-  def index
-    @archives_item_fetches = ArchivesItemFetch.paginate :page => params[:page], :order => "created_at DESC"
-    
-    @seo_title = "文章列表 第#{params[:page] || 1}页 - #{Website::Info.yuedu123_name}"
-  end
-
 end

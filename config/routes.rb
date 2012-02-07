@@ -11,11 +11,11 @@ Loyal::Application.routes.draw do
       
       scope :module => "archives", :as => "archives" do
         resources :categories, :only => [:index]
-        resources :items, :only => [:index]
-        resources :fetches, :only => [:index]
+#        resources :items, :only => [:index]
+#        resources :fetches, :only => [:index]
         
         match "categories/:url_name", :to => "categories#show", :as => :category
-        match "items/:uuid", :to => "items#show", :as => :item
+#        match "items/:uuid", :to => "items#show", :as => :item
         match "shares/:uuid", :to => "fetches#show", :as => :fetch
       end
     end
