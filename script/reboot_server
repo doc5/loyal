@@ -1,0 +1,4 @@
+$root_path = "#{File.dirname(__FILE__)}/.."
+$rails_env = 'production'
+
+system "cd #{$root_path} && bundle exec thin restart -C config/thin.yml"

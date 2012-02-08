@@ -14,16 +14,16 @@ def run_precompile_assets
 end
 
 def run_stop_server
-  system "cd #{$root_path} && bundle exec thin stop -C #{$root_path}/config/thin.yml"
+  system "cd #{$root_path} && bundle exec thin stop -C config/thin.yml"
 end
 
 def run_restart_server
-  system "cd #{$root_path} && bundle exec thin restart -C #{$root_path}/config/thin.yml"
+  system "cd #{$root_path} && bundle exec thin restart -C config/thin.yml"
 end
 
 def run_start_server
-#  system "thin config -C #{$root_path}/config/thin.yml --servers 5 -e production -d -p 9000"
-  system "cd #{$root_path} && bundle exec thin start -C #{$root_path}/config/thin.yml"
+#  system "cd #{$root_path} thin config -C config/thin.yml --servers 5 -e production -d -p 9000"
+  system "cd #{$root_path} && bundle exec thin start -C config/thin.yml"
 end
 
 
