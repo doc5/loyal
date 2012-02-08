@@ -17,6 +17,9 @@
     <%= javascript_include_tag "map/adapters/#{map_adapter_type}/impl-#{map_adapter_version}" %>
     
     <%= yield :header %>
+      
+    <link rel="shortcut icon" href="<%= asset_path("/favicon.ico") %>" type="image/x-icon" />
+    <link rel="Bookmark" href="<%= asset_path("/favicon.ico") %>" type="image/x-icon" />
   </head>
   <body>
     <%#= link_to "test", "http://www.baidu.com", :onclick => "return openAppWindow(this, {});", :target => "_blank" %>

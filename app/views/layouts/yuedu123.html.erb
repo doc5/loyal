@@ -9,7 +9,9 @@
 
     <meta name="keywords" content="<%= h @seo_keys %>"/> 
     <meta name="description" content="<%= h "#{@seo_desc.strip}" %>"/> 
-
+    
+    <link rel="shortcut icon" href="<%= asset_path("/favicon.ico") %>" type="image/x-icon" />
+    <link rel="Bookmark" href="<%= asset_path("/favicon.ico") %>" type="image/x-icon" />
     <%= yield :header %>
   </head>
   <body>  

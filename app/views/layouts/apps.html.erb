@@ -7,6 +7,9 @@
     <%= javascript_include_tag "apps" %>
     <%= csrf_meta_tags %>
     <%= yield :header %>
+    
+    <link rel="shortcut icon" href="<%= asset_path("/favicon.ico") %>" type="image/x-icon" />
+    <link rel="Bookmark" href="<%= asset_path("/favicon.ico") %>" type="image/x-icon" />
   </head>
   <body>        
     <%= yield %>
