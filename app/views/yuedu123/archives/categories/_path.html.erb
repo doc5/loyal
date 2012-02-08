@@ -1,12 +1,14 @@
-<% if category.present? %>
-  <div class="main-path">
-    当前位置:
-    <%= link_to "分类导航", archives_route(yuedu123_archives_categories_path) %>
-    <% ((defined?(include_self) && include_self) ? category.self_and_ancestors : category.ancestors).each do |cate| %>
-      >> 
-      <%= link_to "#{cate.name}", 
-        archives_route(yuedu123_archives_category_path(:url_name => cate.url_name)), :target => "_self" %>
-    <% end %>
-    >>  
-  </div>
+<% cache(March::Cache::Key.yuedu123_archives_category_path(category)) do %>
+  <% if category.present? %>
+    <div class="main-path">
+      当前位置:
+      <%= link_to "分类导航", archives_route(yuedu123_archives_categories_path) %>
+      <% ((defined?(include_self) && include_self) ? category.self_and_ancestors : category.ancestors).each do |cate| %>
+        >> 
+        <%= link_to "#{cate.name}", 
+          archives_route(yuedu123_archives_category_path(:url_name => cate.url_name)), :target => "_self" %>
+      <% end %>
+      >>  
+    </div>
+  <% end %>
 <% end %>

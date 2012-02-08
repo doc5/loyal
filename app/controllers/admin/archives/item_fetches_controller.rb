@@ -1,4 +1,7 @@
 class Admin::Archives::ItemFetchesController < AdminController
+#  http://railscasts.com/episodes/89-page-caching
+  cache_sweeper :archives_item_fetch_sweeper, :only => [:create, :update, :destroy]
+  
   def index
     @archives_item_fetches = ArchivesItemFetch.paginate(:page => params[:page], :order => "created_at DESC")
     

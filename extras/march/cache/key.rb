@@ -18,6 +18,10 @@ module March
           "yuedu123_layout_search_tab_#{format_options(options)}"
         end
         
+        def yuedu123_archives_category_path(category, options={})
+          "yuedu123_archives_category_path_#{category.id if category.present?}_#{format_options(options)}"
+        end
+        
         def format_options(options={})
           options.values.join("_")
         end
