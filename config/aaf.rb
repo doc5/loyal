@@ -24,7 +24,7 @@ _default_shared_options_fields = {
   :created_at => {:index => :untokenized, :store => :yes, :via => :shared_searcher_created_at},
   :updated_at => {:index => :untokenized, :store => :yes, :via => :shared_searcher_updated_at}
 }
-_default_shared_options_if = Proc.new { |entity| (defined?(entity.do_index?) || true) }
+#_default_shared_options_if = Proc.new { |entity| (defined?(entity.do_index?) || true) }
 
 #ActsAsFerret::rebuild_index 'shared'
 
@@ -39,6 +39,6 @@ ActsAsFerret::define_index('shared',
       :remote => _default_shared_options_remote
     }
   },
-  :if => _default_shared_options_if,
+#  :if => _default_shared_options_if,
   :ferret => _default_shared_options_ferret
 )

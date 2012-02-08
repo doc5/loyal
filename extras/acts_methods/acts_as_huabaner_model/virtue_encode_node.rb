@@ -16,7 +16,7 @@ module ActsMethods
   
         def after_initialize
           self.impl_virtue_decode
-        end  
+        end
   
         before_save do |r|
           r.impl_virtue_encode 

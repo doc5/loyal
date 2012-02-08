@@ -3,7 +3,11 @@ require 'iconv'
 require 'sanitize'
 
 class ArchivesItemFetch < ActiveRecord::Base
-#  acts_as_huabaner_cached_record
+  #  acts_as_huabaner_cached_record
+  attr_accessor :ferret_enabled
+  def after_initialize
+    self.ferret_enabled = false
+  end
   
   include ActsMethods::ActsAsHuabanerModel::UuidExtends
   acts_as_huabaner_uuid
@@ -25,14 +29,14 @@ class ArchivesItemFetch < ActiveRecord::Base
   validates_presence_of :title
   validates_uniqueness_of :from_uri, :message =>"已经被占用了"
   
-#  取值==================================
+  #  取值==================================
   def first_category
     self.categories.first
   end
-#  ==================================
+  #  ==================================
   
-#  操作===================================================================
-# => 抓取文章
+  #  操作===================================================================
+  # => 抓取文章
   def fetch
     fetched_hash = Hash.new
     
@@ -62,7 +66,7 @@ class ArchivesItemFetch < ActiveRecord::Base
       self.save
     end  
   end
-#  ======================================================================
+  #  ======================================================================
   
   class << self
     def fetch(options={})
@@ -83,7 +87,11 @@ class ArchivesItemFetch < ActiveRecord::Base
     end
   end
   
-#  for search attrs
+  #  for search attrs
+  def ferret_enabled?
+    self.ferret_enabled
+  end
+  
   def shared_searcher_categories
     self.categories.collect{|c| c.name}.join(",")
   end
