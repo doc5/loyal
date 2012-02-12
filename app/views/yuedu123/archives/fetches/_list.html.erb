@@ -4,8 +4,14 @@
     <% @archives_item_fetches.each do |fetch| %>
       <div class="item">
         <div class="title">          
-          <div class="operate">
-            <%= fetch.created_at.strftime('%Y-%m-%d %H:%M') %>
+          <div class="operate">         
+          
+            <% fetch.categories.each do |category| %>
+              <%= link_to "#{category.name}", 
+                archives_route(yuedu123_archives_category_path(:url_name => category.url_name)) %>
+            <% end %>
+            
+            @<%= fetch.created_at.strftime('%Y-%m-%d %H:%M') %>
           </div>
 
           <%= link_to "#{fetch.title}", 
@@ -14,6 +20,9 @@
         </div>
         <div class="outline">
           <%= truncate(sanitize(fetch.content, :tags => %w(table tr td)), :length => 250) %>
+          <%= link_to "阅读>>", 
+            archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)), 
+            :target => "_blank" %>          
         </div>
       </div>
     <% end %>
