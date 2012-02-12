@@ -2,7 +2,7 @@
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>
 <script type="text/javascript"> 
   function parseQueryFromUrl () {
-    var queryParamName = "query";
+    var queryParamName = "q";
     var search = window.location.search.substr(1);
     var parts = search.split('&');
     for (var i = 0; i < parts.length; i++) {
@@ -16,10 +16,15 @@
 
   google.load('search', '1', {language : 'zh-CN', style : google.loader.themes.ESPRESSO});
   google.setOnLoadCallback(function() {
-    var customSearchOptions = {};  var customSearchControl = new google.search.CustomSearchControl(
+    var customSearchOptions = {};
+    var imageSearchOptions = {};
+    imageSearchOptions['layout'] = google.search.ImageSearch.LAYOUT_POPUP;
+    customSearchOptions['enableImageSearch'] = true;
+    customSearchOptions['imageSearchOptions'] = imageSearchOptions;  var customSearchControl = new google.search.CustomSearchControl(
       '007453578348929938944:ovuevlwyhbo', customSearchOptions);
     customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
     var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
     options.enableSearchResultsOnly(); 
     customSearchControl.draw('cse', options);
     var queryFromUrl = parseQueryFromUrl();
