@@ -3,13 +3,18 @@
   <% if @archives_item_fetches.any? %>
     <% @archives_item_fetches.each do |fetch| %>
       <div class="item">
-        <div class="operate">
-          <%= fetch.created_at.strftime('%Y-%m-%d %H:%M') %>
-        </div>
+        <div class="title">          
+          <div class="operate">
+            <%= fetch.created_at.strftime('%Y-%m-%d %H:%M') %>
+          </div>
 
-        <%= link_to "#{fetch.title}", 
-          archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)), 
-          :target => "_blank" %>
+          <%= link_to "#{fetch.title}", 
+            archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)), 
+            :target => "_blank" %>
+        </div>
+        <div class="outline">
+          <%= truncate(sanitize(fetch.content, :tags => %w(table tr td)), :length => 250) %>
+        </div>
       </div>
     <% end %>
   <% else %>

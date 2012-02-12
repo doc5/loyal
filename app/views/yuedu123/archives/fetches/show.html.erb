@@ -44,11 +44,12 @@
         相关文章
       </div>
       <ul class="box-body">
-        <% @archives_item_fetch.nearby_related_items(:compare_opts => 1).each do |fetch| %>
+        <% @archives_item_fetch.nearby_related_items(:compare_opts => -1).each do |fetch| %>
           <li><%= link_to "#{fetch.title}", 
             archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)) %></li>
         <% end %>
-        <% @archives_item_fetch.nearby_related_items(:compare_opts => -1).each do |fetch| %>
+          
+        <% @archives_item_fetch.nearby_related_items(:compare_opts => 1).each do |fetch| %>
           <li><%= link_to "#{fetch.title}", 
             archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)) %></li>
         <% end %>
