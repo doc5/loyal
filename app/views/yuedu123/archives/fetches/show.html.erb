@@ -18,11 +18,42 @@
       <%= raw @archives_item_fetch.content %>
     </div>
     
+    <div class="pre-next-items">        
+      上一篇：
+      <% if @archives_item_fetch.pre_related_item %>
+        <%= link_to "#{@archives_item_fetch.pre_related_item.title}", 
+          archives_route(yuedu123_archives_fetch_path(:uuid => @archives_item_fetch.pre_related_item.uuid)) %>
+      <% else %>
+        没有了
+      <% end %>
+      下一篇：
+      <% if @archives_item_fetch.next_related_item %>
+        <%= link_to "#{@archives_item_fetch.next_related_item.title}", 
+          archives_route(yuedu123_archives_fetch_path(:uuid => @archives_item_fetch.next_related_item.uuid)) %>
+      <% else %>
+        没有了
+      <% end %>
+    </div>
     <%= render :partial => "/yuedu123/archives/fetches/related", :locals => {:item => @archives_item_fetch} %>
   </div>
   
   
   <div id="side-panel">
-    
+    <div class="box">
+      <div class="box-title">
+        相关文章
+      </div>
+      <ul class="box-body">
+        <% @archives_item_fetch.nearby_related_items(:compare_opts => 1).each do |fetch| %>
+          <li><%= link_to "#{fetch.title}", 
+            archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)) %></li>
+        <% end %>
+        <% @archives_item_fetch.nearby_related_items(:compare_opts => -1).each do |fetch| %>
+          <li><%= link_to "#{fetch.title}", 
+            archives_route(yuedu123_archives_fetch_path(:uuid => fetch.uuid)) %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>
+

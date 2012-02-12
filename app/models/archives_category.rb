@@ -4,30 +4,37 @@ class ArchivesCategory < ActiveRecord::Base
   
   has_and_belongs_to_many :item_fetches, :join_table => "archives_item_fetchs_and_archives_categories", 
     :class_name => "ArchivesItemFetch", :foreign_key => "category_id",
-    :association_foreign_key => "item_id"
+    :association_foreign_key => "item_id", :order => "id desc"
   
   validates_presence_of :url_name, :flag_name
   validates_uniqueness_of :url_name
   validates_uniqueness_of :flag_name
   
-  def sql_tree_item_fetches(options={})
-    return @_cache_sql_tree_item_fetches if defined?(@_cache_sql_tree_item_fetches)
-    _self_and_children_ids = self.self_and_descendants.collect{ |c| c.id }
+  def sql_item_fetches(options={})
+    return @_cache_sql_item_fetches if defined?(@_cache_sql_item_fetches)
     
-    options[:ids] = _self_and_children_ids.join(',')
-    @_cache_sql_tree_item_fetches = <<SQL
+    @_cache_sql_item_fetches = <<SQL
       SELECT `archives_item_fetches`.* FROM `archives_item_fetches` 
       INNER JOIN `archives_item_fetchs_and_archives_categories` ON 
       `archives_item_fetches`.`id` = `archives_item_fetchs_and_archives_categories`.`item_id` 
       WHERE `archives_item_fetchs_and_archives_categories`.`category_id` in (#{options[:ids]})      
 SQL
     
-    @_cache_sql_tree_item_fetches << "ORDER BY #{options[:order]}" unless options[:order].blank?
-    @_cache_sql_tree_item_fetches
+    options[:order] = "id desc"
+    @_cache_sql_item_fetches << "ORDER BY #{options[:order]}" unless options[:order].blank?
+    @_cache_sql_item_fetches
+  end
+  
+  def sql_tree_item_fetches(options={})
+    return @_cache_sql_tree_item_fetches if defined?(@_cache_sql_tree_item_fetches)
+    _self_and_children_ids = self.self_and_descendants.collect{ |c| c.id }
+    
+    options[:ids] = _self_and_children_ids.join(',')
+    @_cache_sql_tree_item_fetches = sql_item_fetches(options)    
   end
   
   def paginate_tree_item_fetches(options={})
-    ArchivesItemFetch.paginate_by_sql(self.sql_tree_item_fetches(:order => options[:order]), options)
+    ArchivesItemFetch.paginate_by_sql(self.sql_tree_item_fetches(options), options)
   end
   
   def tree_item_fetches(options={})

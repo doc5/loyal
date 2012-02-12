@@ -80,7 +80,7 @@ a {
 
 #side-panel {
     padding: 10px 10px 10px 750px;
-    font-size: 14px;
+    font-size: 12px;
 
     h4{
         margin: 5px 0px;
@@ -91,6 +91,24 @@ a {
     
         li {
             padding: 2px;
+        }
+    }
+
+    .box{
+
+        .box-title{
+
+        }
+
+        .box-body{
+            li {
+                a {
+                    height: 16px;
+                    line-height: 16px;
+                    overflow: hidden;
+                    display: block;
+                }
+            }
         }
     }
 }
@@ -171,6 +189,11 @@ a {
         }
 
         
+    }
+
+    .pre-next-items{
+        font-size: 12px;
+        text-align: center;
     }
 }
 

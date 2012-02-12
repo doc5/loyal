@@ -24,26 +24,26 @@ module ActsMethods
 #        relation
 # => 相关项目
         def related_items(limit=20)
-          []
-#          @_cache_related_items_hash = {} unless @_cache_related_items_hash.is_a?(Hash)
-#          return @_cache_related_items_hash[limit] unless @_cache_related_items_hash[limit].nil?
-#          
-#          Rails.logger.debug "===============#{limit}================> class: #{self.class.name}"
-#          
-#          begin
-#          @_cache_related_items_hash[limit] = self.more_like_this(
-#            {
-#              :field_names => ['content', 'categories'], 
-#              :analyzer => "RMMSeg::Ferret::Analyzer"
-#            }, 
+          @_cache_related_items_hash = {} unless @_cache_related_items_hash.is_a?(Hash)
+          return @_cache_related_items_hash[limit] unless @_cache_related_items_hash[limit].nil?
+          
+          Rails.logger.debug "===============#{limit}================> class: #{self.class.name}"
+          
+          begin
+          @_cache_related_items_hash[limit] = self.more_like_this(
+            {
+              :field_names => ['content', 'categories'], 
+              :analyzer => "RMMSeg::Ferret::Analyzer"
+            }, 
 #            {:page => 1, :per_page => limit, :lazy => true}
-#          )
-#          
-#          rescue => err
-#            Rails.logger.error "************** error:=>#{err}"            
-#          ensure
-#            return @_cache_related_items_hash[limit]
-#          end          
+            {:page => 1, :per_page => limit}
+          )
+          
+          rescue => err
+            Rails.logger.error "************** error:=>#{err}"            
+          ensure
+            return @_cache_related_items_hash[limit]
+          end          
         end
         
 #        def related_items(limit=10)

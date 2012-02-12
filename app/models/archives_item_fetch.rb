@@ -33,6 +33,51 @@ class ArchivesItemFetch < ActiveRecord::Base
   def first_category
     self.categories.first
   end
+  
+  def nearby_related_items(options={})    
+    options[:per_page] ||= 10
+    options[:compare_opts] ||= 1
+    options[:page] ||= 1
+    case options[:compare_opts]
+    when 1
+      _compare_conditions = "archives_item_fetches.id > #{self.id}"
+      _order_conditions = "id ASC"
+    when -1
+      _compare_conditions = "archives_item_fetches.id < #{self.id}"
+      _order_conditions = "id DESC"
+    end
+    options[:ids] ||= self.categories.collect{|cate| cate.id}
+    options[:offset] ||= ((options[:page] - 1) * options[:per_page])
+    
+    _sql = <<SQL
+      SELECT `archives_item_fetches`.* FROM `archives_item_fetches` 
+      INNER JOIN `archives_item_fetchs_and_archives_categories` ON 
+      `archives_item_fetches`.`id` = `archives_item_fetchs_and_archives_categories`.`item_id` 
+      WHERE `archives_item_fetchs_and_archives_categories`.`category_id` in (#{options[:ids]})
+      AND #{_compare_conditions}
+      ORDER BY #{_order_conditions}
+      LIMIT #{options[:per_page]} OFFSET #{options[:offset]}
+SQL
+    ArchivesItemFetch.find_by_sql(_sql)
+  end
+  
+  def related_items(options={:limit => 10})
+    []
+  end
+  
+  def next_related_item
+    nearby_related_items(:compare_opts => 1).first
+  end
+  
+  def pre_related_item
+    nearby_related_items(:compare_opts => -1).first
+  end
+  
+  
+  
+#  def related_items(limit=20)
+#    
+#  end
   #  ==================================
   
   #  操作===================================================================
