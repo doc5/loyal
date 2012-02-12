@@ -1,11 +1,11 @@
 <%= form_tag www_route(search_path), :method => "get" do %>
-  <%= text_field_tag "query", @query_words || params[:query], :class => "key-words" %>
+  <%= text_field_tag "query", @query_words || params[:q], :class => "key-words" %>
   <%= submit_tag "搜索", :name => nil, :class => "submit-btn", :title => "搜索一下" %>
 <% end %>
 
 <% if false %>
   <form action="<%= www_route(search_path) %>" method = "get">
-    <%= text_field_tag "query", @query_words || params[:query], :class => "key-words" %>
+    <%= text_field_tag "query", @query_words || params[:q], :class => "key-words" %>
     <%= submit_tag "搜索", :name => nil, :class => "submit-btn", :title => "搜索一下" %>
   </form>
 <% end  %>
