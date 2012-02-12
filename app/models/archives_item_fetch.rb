@@ -26,10 +26,18 @@ class ArchivesItemFetch < ActiveRecord::Base
   has_one :first_avatar, :class_name => "ArchivesAvatar", :as => :resource, 
     :order => "position ASC"
   
-  validates_presence_of :title
+  validates_presence_of :title, :content
   validates_uniqueness_of :from_uri, :message =>"已经被占用了"
   
   #  取值==================================
+  def display_pubtime
+    if self.fetch_pubtime.present?
+      self.fetch_pubtime
+    else 
+      self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+    end 
+  end
+  
   def first_category
     self.categories.first
   end
@@ -75,9 +83,9 @@ SQL
   
   
   
-#  def related_items(limit=20)
-#    
-#  end
+  #  def related_items(limit=20)
+  #    
+  #  end
   #  ==================================
   
   #  操作===================================================================
@@ -107,6 +115,41 @@ SQL
       self.fetch_category = fetched_hash[:fetch_category]
       self.content = fetched_hash[:content]
       self.title = fetched_hash[:title]
+      self.fetch_author = fetched_hash[:author]
+      self.save
+      
+    when Website::FetchConfig::SITE_SINA
+      doc = March::Fetch::OpenByUri.open(self.from_uri)
+      fetched_hash[:content] = String.new
+      fetched_hash[:fetch_images] = String.new
+      
+      doc.css("#artibody p").each do |p|
+        _p_text = March::StringTools.clean_html(p.content)
+        fetched_hash[:content] << "<p>#{_p_text}</p>" unless _p_text.start_with?("\n\n.icon_sina, .icon_msn, .icon_fx{ background-position")
+      end
+      
+      _categories = Array.new
+      doc.css("#lo_links a").each do |a|
+        _categories << a.text
+      end
+      
+      doc.css("#artibody .img_wrapper").each do |img|
+        _img = img.css("img").first
+        fetched_hash[:fetch_images] << "<img alt=\"#{_img.attr('alt')}\" title=\"#{_img.attr('title')}\" src=\"#{_img.attr('src')}\"></img>"
+      end
+      
+      fetched_hash[:fetch_category] = _categories.join(";")      
+      fetched_hash[:title] = doc.css("#artibodyTitle").text
+      fetched_hash[:author] = doc.css("#media_name").text
+      fetched_hash[:pubtime] = doc.css("#pub_date").text
+      
+      Rails.logger.debug "pubtime:#{fetched_hash[:pubtime]}||title:#{fetched_hash[:title]}||content:#{fetched_hash[:content]}||"
+      
+      self.fetch_category = fetched_hash[:fetch_category]
+      self.content = fetched_hash[:content]
+      self.fetch_images = fetched_hash[:fetch_images]
+      self.title = fetched_hash[:title]
+      self.fetch_pubtime = fetched_hash[:pubtime]
       self.fetch_author = fetched_hash[:author]
       self.save
     end  

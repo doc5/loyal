@@ -155,7 +155,15 @@ a {
         margin-top: 10px;
 
         p {            
-            text-indent: 2em;
+            /*text-indent: 2em;*/
+        }
+
+        .content-imgs{
+            text-align: center;
+            img {
+                margin: 5px auto;
+                display: block;
+            }
         }
     }
 

@@ -7,14 +7,24 @@
         <%= @archives_item_fetch.title %>
       </h1>
       <div class="detail-info">
-        <%= @archives_item_fetch.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        <%= @archives_item_fetch.display_pubtime %>
+        
         <% @archives_item_fetch.categories.each do |category| %>
           <%= link_to "#{category.name}", 
             archives_route(yuedu123_archives_category_path(:url_name => category.url_name)) %>
         <% end %>
+        
+        来源于:<% if @archives_item_fetch.fetch_author.present? %>
+          <%= @archives_item_fetch.fetch_author %>
+        <% else %>
+          网络
+        <% end %>
       </div>
     </div>
     <div class="main-content">
+      <div class="content-imgs">
+        <%= raw @archives_item_fetch.fetch_images %>
+      </div>
       <%= raw @archives_item_fetch.content %>
     </div>
     

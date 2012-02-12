@@ -18,7 +18,8 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
       t.text :content
       
       t.string :fetch_author
-      t.datetime :fetch_pubtime      
+      t.string :fetch_pubtime      
+      t.text :fetch_images
       t.string :fetch_category, :default => ""
 #      抓取
       t.string :fetch_tag_list, :default => ""      

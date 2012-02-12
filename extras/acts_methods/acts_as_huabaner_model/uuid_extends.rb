@@ -4,7 +4,8 @@ module ActsMethods
       def self.included(base)
         base.extend ActsMethods::ActsAsHuabanerModel::UuidExtends        
       end
-      def acts_as_huabaner_uuid(options = {})            
+      def acts_as_huabaner_uuid(options = {})        
+#        validates_presence_of :uuid    
         validates_uniqueness_of :uuid, :message => "必须唯一"
           
         before_save do |r|
