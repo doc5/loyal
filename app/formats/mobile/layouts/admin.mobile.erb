@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+    <title>Loyal</title>
+    <%= stylesheet_link_tag    "admin" %>
+    <%= javascript_include_tag "admin" %>
+    <%= csrf_meta_tags %>
+    <%= yield :header %>
+    <link rel="shortcut icon" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+    <link rel="Bookmark" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="container">
+      <div>
+        <% if logged_in? %>
+          <%= current_user.email %>
+        <% else %>
+          <%= link_to "Login", sign_in_url %>
+        <% end %>
+      </div>
+
+      <div id="page-messages-contain">
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+      </div>
+
+      <div id="header">
+        <%= link_to "管理首页", admin_route(admin_root_path) %>
+        <%= link_to "图书管理", admin_route(admin_book_root_path) %>
+        <%= link_to "用户管理", admin_route(admin_users_path) %>
+        <%= link_to "角色管理", admin_route(admin_roles_path) %>
+        <%= link_to "全局管理", admin_route(admin_overall_root_path) %>
+        <%= link_to "文档管理", admin_route(admin_archives_root_path) %>
+        <%= link_to "TIP管理", admin_route(admin_tip_root_path) %>
+      </div>
+
+      <div id="main">      
+        <%= yield %>
+      </div>
+
+      <div id="footer">
+
+      </div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+    <title><%= @seo_title %></title>
+    <%= stylesheet_link_tag    "tip" %>
+    <%= javascript_include_tag "tip" %>
+    <%= csrf_meta_tags %>
+    <link rel="shortcut icon" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+    <link rel="Bookmark" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+  </head>
+  <body>   
+    <div id="container">  
+      <div id="header">
+        <%= link_to "首页", tip_route(root_path) %>
+        <% TipCategory.root_categories.each do |category| %>
+          <%= link_to "#{category.name}", tip_category_path(:id => category.id) %>
+        <% end %>
+      </div>
+      <%= yield %>
+    </div>
+  </body>
+</html>

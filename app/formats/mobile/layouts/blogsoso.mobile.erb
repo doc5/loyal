@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>    
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+    <title>个人站长、企业网站推广、网络推广、SEO、IT技术、互联网资讯、网络营销、企业博客、博客大全！ - happy</title>
+
+
+    <%= stylesheet_link_tag "shared/default", :cache => true %>
+    <%= stylesheet_link_tag "themes/blogsoso/default/style", :cache => true %>
+    
+    <%= javascript_include_tag "blogsoso", :cache => true %>    
+    <%= csrf_meta_tags %>
+
+    <meta name="description" content="个人站长、企业网站推广、网络推广、SEO、IT技术、互联网资讯、网络营销、企业博客、博客大全！" /> 
+    <meta name="keywords" content="个人站长、企业网站推广、网络推广、SEO、IT技术、互联网资讯、网络营销、企业博客、博客大全" /> 
+
+    <link rel="shortcut icon" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+    <link rel="Bookmark" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="header">
+      <div class="description content-center">
+        <h1><a href="/" title="精心，精业，精品">Blogsoso</a></h1>
+        <h2>
+          <a href="/" title="精心，精业，精品">精心，精业，精品</a>
+
+        </h2>
+      </div>
+
+      <div class="navigation">   
+        <div class="content-center">   
+          <a href="/">首页</a>
+          <a href="/资讯">资讯</a>
+          <a href="/互联网">互联网</a>
+          <a href="/about.html">关于</a>
+          <a href="/atom.xml" target="_blank">订阅</a>
+
+          <a href="/daohang/">网址导航</a>
+          <a href="/apps/music/google.html" onclick="return openWindow(this, 'apps', 'music', 'google')">google音乐</a>
+          <a href="/apps/radio/douban.html" onclick="return openWindow(this, 'apps', 'radio', 'douban')">豆瓣FM!</a>
+        </div>
+      </div>           
+    </div>
+
+    <div id="main" class="content-center clearfix">
+      <div class="sider">
+        <div class="box">
+
+          <h3>文章分类</h3>
+          <ul>
+
+            <li><a href="/IT民工/">IT民工 (1)</a></li>
+
+            <li><a href="/随笔/">随笔 (1)</a></li>
+
+            <li><a href="/资讯/">资讯 (3)</a></li>
+
+            <li><a href="/互联网/">互联网 (2)</a></li>
+
+
+          </ul>
+        </div>
+        <div class="box text-center">
+          
+        </div>
+      </div>            
+
+      <div class="content">
+        <%= yield %>
+      </div>
+    </div>
+
+    <div id="footer" class="">
+      <div class="footer-line content-center">
+
+      </div>
+      <div class="copyright">
+        blogsoso copyright 2012  &copy; happy
+      </div>
+      <div class="friend-links">                
+        友情链接: <a href="http://www.doc5.com" target='_blank'>doc5首页</a>
+        <a href="http://www.huabaner.net" target='_blank'>花瓣儿网导航</a>
+      </div>
+    </div>
+
+  </body>
+</html>

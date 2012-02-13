@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%= "#{@seo_title} - #{Website::Info.yuedu123_intro}" %></title>
+    
+    <% if false %>
+      <link rel="apple-touch-icon" href=""/>
+    <% end %>
+    
+    <meta name="keywords" content="<%= h @seo_keys %>"/> 
+    <meta name="description" content="<%= h "#{@seo_desc.strip}" %>"/> 
+
+    <link rel="shortcut icon" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+    <link rel="Bookmark" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+    
+    <%= yield :header %>
+    <style type="text/css">
+      body,ul,ol,li,form{margin:0;padding:0;}ul,ol{list-style:none;}img{border:none;}body{background:#fff;font-family:Helvetica,Tahoma,sans-serif;font-size:medium;}h1,h2,h3,div,li,p{margin:0;padding:2px 0;font-size:100%;font-weight:normal;}a{color:#399;text-decoration:none;}a:hover,a:focus,a.current{background:#399;color:#fff;}#doc{padding:0;}#hd{padding:0;color:#cdcdcd;}#hd .top{padding:5px 10px;}#hd .top .home{font-weight:bold;}#hd .top strong{color:#C00;}.nav{background:#e4f7f7;padding:0 10px;color:#cdcdcd;}.nav .welcome{color:#000;}#navsub{color:#999;}#bd{padding:0;}#ft .cr{padding:0 10px;color:#999;}.syserr{padding:0 5px;border:1px solid #ffed00;background:#fffcaa;}.price,.over,.red,.err{color:#f00;}.value{text-decoration:line-through;}.btn{border-width:2px;border-style:solid;border-color:#ffb886 #e1782d #e1782d #ffae75;background:#f83;width:92%;font-size:100%;font-weight:bold;color:#FFF;padding:2px 8px;}.btn-over{border:1px solid #777;background:#777;width:90%;font-size:100%;font-weight:bold;color:#FFF;padding:3px 8px;}.time{color:#999;}.normal{color:#000;}.blk{padding:5px 10px;border-bottom:1px solid #dfdfdf;}.blkn{padding:5px 10px;}.blkc{padding:5px 10px;border-bottom:1px solid #dfdfdf;text-align:center;}.title{text-align:left;}.highlight{padding-left:20px;margin-bottom:10px;list-style-position:outside;list-style-type:disc;}.highlight li{display:list-item;}.city-offline a{color:#999;}.city-offline a:hover{background:#999;color:#fff;}.couponcode{color:#f00;font-size:140%;font-weight:bold;}.address-info{border-top:1px solid #dfdfdf;padding-bottom:5px;}.layout h2{font-weight:bold;}.hotcity p a,.province p a,.cities p a{margin:0 8px 0 0;padding:0;display:inline-block;}a.online{font-weight:bold;}a.offline{color:#666;}a.offline:hover{color:#FFF;background:#999;}.hasallcity a.offline{color:#399;}.hasallcity a.offline:hover{color:#FFF;background:#399;}.hint{color:#666;}.client span{color:#999;}.client .iphone{border-top:1px #CCC solid;border-bottom:1px #ccc solid;margin:6px 0;padding:6px 0;}p.submit{margin-top:15px;}.deal .date{color:#999;}.deal{border-bottom:1px #CCC solid;padding:6px 0;margin-bottom:6px;}.deal strong{color:#F00;}.no{color:#F00;text-align:left;}.center{text-align:center;}.support{color:#64B502;text-align:left;}.rule p{font-weight:700;padding:12px 0;}#content{padding:5px 10px;border-bottom:1px solid #dfdfdf;}#content .section{margin-bottom:5px;}#content .section .title{font-weight:bold;margin-bottom:8px;border-bottom:solid 1px #ccc;padding:3px 0;}#content .back{border-bottom:1px solid #DFDFDF;margin:2px 0 10px;}#miaosha #content .season-title{font-weight:bold;padding:3px 0;}#miaosha #content .match{border-bottom:solid 1px #ccc;margin:5px 0;font-weight:bold;}#miaosha #content .tip{color:#0A96C8;}#miaosha #content .top-title{margin:10px 0;text-align:center;font-size:16px;font-weight:bold;}#miaosha .item{margin:5px 0;text-align:center;}#miaosha .price{margin:3px 0;text-align:center;}#miaosha .price span{margin-right:5px;color:#333;}#miaosha .price .current{color:#F00;}#miaosha .matches ul{list-style:none;padding:5px 10px;}#miaosha .section ul{list-style-type:disc;list-style-position:outside;padding:1px 20px;}#miaosha .section ol{list-style-type:decimal;list-style-position:outside;padding:1px 20px;}#miaosha .deallist .date{color:#999;font-weight:bold;}#miaosha .itemline{border:none;}#miaosha .itemline .item{margin-bottom:10px;padding-bottom:8px;border-bottom:dashed 1px #ccc;}#miaosha .itemline .last{border:none;}#miaosha .price-box span.current-price{color:#c00;}#miaosha .price-box span.origin-price{text-decoration:line-through;}#miaosha .price-box .left-blank{margin-left:6px;}#miaosha .declare{margin-top:8px;}#miaosha .declare .pic{text-align:center;}</style>
+  </head>
+  <body> 
+    <%= yield %>
+  </body>
+</html>

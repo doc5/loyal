@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
+    <title><%= @seo_title %></title>
+    <%= stylesheet_link_tag    "apps" %>
+    <%= javascript_include_tag "apps" %>
+    <%= csrf_meta_tags %>
+    <%= yield :header %>
+    
+    <link rel="shortcut icon" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+    <link rel="Bookmark" href="<%= asset_path("/assets/favicon.ico") %>" type="image/x-icon" />
+  </head>
+  <body>        
+    <%= yield %>
+  </body>
+</html>

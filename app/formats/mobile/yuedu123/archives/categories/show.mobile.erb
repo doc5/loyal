@@ -1,0 +1,17 @@
+<div id="main">
+  <div id="main-panel">
+    <div class="main-info">
+      <%= render :partial => "/yuedu123/archives/categories/path", :locals => {:category => @archives_category} %>
+      
+      <h1>[分类] <%= h @archives_category.name %></h1>
+      
+      <%= render :partial => "/yuedu123/archives/categories/children", :locals => {:category => @archives_category} %>      
+    </div>
+    <div class="main-content">      
+      <%= render :partial => "/yuedu123/archives/fetches/list" %>
+    </div>
+  </div>
+  
+  <div id="side-panel">
+  </div>
+</div>
