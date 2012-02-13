@@ -15,7 +15,7 @@
         <% end %>
 
         来源于:网络
-        
+
         <% if @archives_item_fetch.fetch_author.present? %>
           作者:<%= @archives_item_fetch.fetch_author %>          
         <% end %>        
@@ -61,6 +61,7 @@
       <% end %>
     </div>
     <%= render :partial => "/yuedu123/archives/fetches/related", :locals => {:item => @archives_item_fetch} %>
+    
   </div>
 
 

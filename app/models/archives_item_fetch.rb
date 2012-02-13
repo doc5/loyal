@@ -152,6 +152,37 @@ SQL
       self.fetch_pubtime = fetched_hash[:pubtime]
       self.fetch_author = fetched_hash[:author]
       self.save
+      
+    when Website::FetchConfig::SITE_YUWENDASHI
+      doc = March::Fetch::OpenByUri.open(self.from_uri)
+      fetched_hash[:content] = String.new
+      
+      _table = doc.css(".center_tdbgall tr td table")[0]
+      _ps = _table.css("p")
+      length = _ps.length
+      if length > 1
+        1.upto(_ps.length - 2).each do |i|
+          fetched_hash[:content] += "#{_ps[i]}"
+        end
+      else 
+          _table = doc.css(".main_tdbg_760 table")[0]
+          fetched_hash[:content] = "#{_table.css("font")[0]}"
+      end
+      fetched_hash[:content] = March::StringTools.sanitize(fetched_hash[:content], 'br, p, img') unless fetched_hash[:content].blank?
+      fetched_hash[:content] = March::StringTools.conv_text(fetched_hash[:content], 'gb2312').sub("/*200*200，创建于2010-11-7*/ var cpro_id = 'u270647';", '').sub("<br>", "")
+      
+      fetched_hash[:title] = doc.css("title").text.chomp("-美文欣赏")
+      
+      puts "===================>title:#{fetched_hash[:title]}||#{fetched_hash[:content]}"
+      
+      
+      self.fetch_category = fetched_hash[:fetch_category]
+      self.content = fetched_hash[:content]
+      self.fetch_images = fetched_hash[:fetch_images]
+      self.title = fetched_hash[:title]
+      self.fetch_pubtime = fetched_hash[:pubtime]
+      self.fetch_author = fetched_hash[:author]
+      self.save
     end  
   end
   #  ======================================================================
