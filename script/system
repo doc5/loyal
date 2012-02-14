@@ -73,9 +73,6 @@ def run_database_restore
   #    还原数据库
       _sql_filename = _filename.chomp(".tar.gz") 
       system "cd #{$db_backups_path} && tar -zxvf #{_filename} && mysql -uroot -p #{$db_name} < #{_sql_filename} && rm ./#{_sql_filename}"
-      
-#      _sql_full_path = "#{$db_backups_path}/#{_filename}"
-#      system "cd #{$root_path} && mysql -uroot -p #{$db_name} < #{_sql_full_path}"
       puts "restore #{_filename} to:======> #{$db_name}"
     end
   else

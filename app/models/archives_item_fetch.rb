@@ -115,9 +115,9 @@ SQL
       fetched_hash[:content] = March::StringTools.sanitize(fetched_hash[:content], 'br, p') unless fetched_hash[:content].blank?
               
       self.fetch_category ||= fetched_hash[:fetch_category]
-      self.content ||= fetched_hash[:content]
-      self.title ||= fetched_hash[:title]
-      self.fetch_author ||= fetched_hash[:author]
+      self.content = fetched_hash[:content]
+      self.title = fetched_hash[:title]
+      self.fetch_author = fetched_hash[:author]
       self.save
       
     when Website::FetchConfig::SITE_SINA
@@ -148,11 +148,11 @@ SQL
       Rails.logger.debug "pubtime:#{fetched_hash[:pubtime]}||title:#{fetched_hash[:title]}||content:#{fetched_hash[:content]}||"
       
       self.fetch_category ||= fetched_hash[:fetch_category]
-      self.content ||= fetched_hash[:content]
-      self.fetch_images ||= fetched_hash[:fetch_images]
-      self.title ||= fetched_hash[:title]
-      self.fetch_pubtime ||= fetched_hash[:pubtime]
-      self.fetch_author ||= fetched_hash[:author]
+      self.content = fetched_hash[:content]
+      self.fetch_images = fetched_hash[:fetch_images]
+      self.title = fetched_hash[:title]
+      self.fetch_pubtime = fetched_hash[:pubtime]
+      self.fetch_author = fetched_hash[:author]
       self.save
       
     when Website::FetchConfig::SITE_YUWENDASHI
@@ -176,11 +176,11 @@ SQL
       fetched_hash[:title] = doc.css("title").text.chomp("-美文欣赏")
       
       self.fetch_category ||= fetched_hash[:fetch_category]
-      self.content ||= fetched_hash[:content]
-      self.fetch_images ||= fetched_hash[:fetch_images]
-      self.title ||= fetched_hash[:title]
-      self.fetch_pubtime ||= fetched_hash[:pubtime]
-      self.fetch_author ||= fetched_hash[:author]
+      self.content = fetched_hash[:content]
+      self.fetch_images = fetched_hash[:fetch_images]
+      self.title = fetched_hash[:title]
+      self.fetch_pubtime = fetched_hash[:pubtime]
+      self.fetch_author = fetched_hash[:author]
       self.save
     end  
   end

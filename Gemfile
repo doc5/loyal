@@ -76,7 +76,8 @@ gem 'thin'
 #https://github.com/tomasc/mongo_mapper_acts_as_tree
 gem "mongo_mapper_acts_as_tree"
 
-group :test, :development do
+group :test, :development do  
+  gem "mongrel"
   gem "rspec-rails", "~> 2.6"
   gem "factory_girl_rails"
 end

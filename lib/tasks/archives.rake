@@ -6,6 +6,17 @@
 namespace :archives do  
   namespace :item_fetch do
     namespace :spider do
+      namespace :yuwendashi do
+#        rake archives:item_fetch:spider:yuwendashi:fetch RAILS_ENV=development
+        task :fetch => :environment do
+          puts "--------------start-----------抓取:yuwendashi网站所有文章-------------------------"
+        
+          March::Spider::Yuwendashi.fetch
+        
+          puts "--------------end-----------完成抓取:yuwendashi网站所有文章-------------------------"        
+        end
+      end      
+      
       namespace :duwenzhang do
         
         task :classify_categories => :environment do
