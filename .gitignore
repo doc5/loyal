@@ -21,6 +21,8 @@
 # Ignore the default SQLite database.
 /db/sqlites/*.sqlite3
 /db/sqlites/*.sqlite3-journal
+/db/backups/*.sql
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
