@@ -220,7 +220,7 @@ module March
                       puts "#{link}   --------------------------"
                       begin
                         ArchivesItemFetch.fetch(:from_site => Website::FetchConfig::SITE_DUWENZHANG,
-                          :from_uri => link, :force_update => options[:force_update])                      
+                          :from_uri => link)                      
                       rescue
                         next
                       ensure

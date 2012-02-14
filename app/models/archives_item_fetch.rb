@@ -56,13 +56,15 @@ class ArchivesItemFetch < ActiveRecord::Base
     end
     options[:ids] ||= self.categories.collect{|cate| cate.id}
     options[:offset] ||= ((options[:page] - 1) * options[:per_page])
-    
+    _ids_conditions = <<SQL
+      `archives_item_fetchs_and_archives_categories`.`category_id` in (#{options[:ids]}) AND
+SQL
     _sql = <<SQL
       SELECT `archives_item_fetches`.* FROM `archives_item_fetches` 
       INNER JOIN `archives_item_fetchs_and_archives_categories` ON 
       `archives_item_fetches`.`id` = `archives_item_fetchs_and_archives_categories`.`item_id` 
-      WHERE `archives_item_fetchs_and_archives_categories`.`category_id` in (#{options[:ids]})
-      AND #{_compare_conditions}
+      WHERE #{_ids_conditions if options[:ids].any?}
+      #{_compare_conditions}
       ORDER BY #{_order_conditions}
       LIMIT #{options[:per_page]} OFFSET #{options[:offset]}
 SQL
@@ -112,10 +114,10 @@ SQL
       fetched_hash[:content] = March::StringTools.conv_text(fetched_hash[:content], 'gb2312')
       fetched_hash[:content] = March::StringTools.sanitize(fetched_hash[:content], 'br, p') unless fetched_hash[:content].blank?
               
-      self.fetch_category = fetched_hash[:fetch_category]
-      self.content = fetched_hash[:content]
-      self.title = fetched_hash[:title]
-      self.fetch_author = fetched_hash[:author]
+      self.fetch_category ||= fetched_hash[:fetch_category]
+      self.content ||= fetched_hash[:content]
+      self.title ||= fetched_hash[:title]
+      self.fetch_author ||= fetched_hash[:author]
       self.save
       
     when Website::FetchConfig::SITE_SINA
@@ -145,12 +147,12 @@ SQL
       
       Rails.logger.debug "pubtime:#{fetched_hash[:pubtime]}||title:#{fetched_hash[:title]}||content:#{fetched_hash[:content]}||"
       
-      self.fetch_category = fetched_hash[:fetch_category]
-      self.content = fetched_hash[:content]
-      self.fetch_images = fetched_hash[:fetch_images]
-      self.title = fetched_hash[:title]
-      self.fetch_pubtime = fetched_hash[:pubtime]
-      self.fetch_author = fetched_hash[:author]
+      self.fetch_category ||= fetched_hash[:fetch_category]
+      self.content ||= fetched_hash[:content]
+      self.fetch_images ||= fetched_hash[:fetch_images]
+      self.title ||= fetched_hash[:title]
+      self.fetch_pubtime ||= fetched_hash[:pubtime]
+      self.fetch_author ||= fetched_hash[:author]
       self.save
       
     when Website::FetchConfig::SITE_YUWENDASHI
@@ -173,15 +175,12 @@ SQL
       
       fetched_hash[:title] = doc.css("title").text.chomp("-美文欣赏")
       
-      puts "===================>title:#{fetched_hash[:title]}||#{fetched_hash[:content]}"
-      
-      
-      self.fetch_category = fetched_hash[:fetch_category]
-      self.content = fetched_hash[:content]
-      self.fetch_images = fetched_hash[:fetch_images]
-      self.title = fetched_hash[:title]
-      self.fetch_pubtime = fetched_hash[:pubtime]
-      self.fetch_author = fetched_hash[:author]
+      self.fetch_category ||= fetched_hash[:fetch_category]
+      self.content ||= fetched_hash[:content]
+      self.fetch_images ||= fetched_hash[:fetch_images]
+      self.title ||= fetched_hash[:title]
+      self.fetch_pubtime ||= fetched_hash[:pubtime]
+      self.fetch_author ||= fetched_hash[:author]
       self.save
     end  
   end
@@ -194,14 +193,9 @@ SQL
     
       item_fetch = ArchivesItemFetch.find_by_from_uri(options[:from_uri])
       if item_fetch.nil?
-        item_fetch = ArchivesItemFetch.new(
-          :from_site => options[:from_site],
-          :from_uri => options[:from_uri]
-        )
-      else
-        return unless options[:force_update]
+        item_fetch = ArchivesItemFetch.new(options)
       end
-        
+      
       item_fetch.fetch
     end
   end
