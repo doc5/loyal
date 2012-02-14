@@ -47,15 +47,19 @@ def run_start_server
 end
 
 def run_database_backup
-  _sql_full_path = "#{$db_backups_path}/#{current_time_s}.sql"
+  _sql_file_name = "#{current_time_s}.sql"
+  _sql_full_path = "#{$db_backups_path}/#{_sql_file_name}"
+  _sql_tar_gz = "#{_sql_file_name}.tar.gz"
+  
   system "cd #{$root_path} && mysqldump -uroot -p #{$db_name} > #{_sql_full_path}"
-  puts "backup #{$db_name} to:======> #{_sql_full_path}"
+  system "cd #{$db_backups_path} && tar -zcvf #{_sql_tar_gz} #{_sql_file_name} && rm ./#{_sql_file_name}"
+  puts "backup #{$db_name} to:======> #{_sql_tar_gz}"
 end
 
 def run_database_restore
 #  _filenames = scanf_folder_files($db_backups_path)
   _filenames = Hash.new
-  Dir["#{$db_backups_path}/*.sql"].each_with_index do |name, i|
+  Dir["#{$db_backups_path}/*.gz"].each_with_index do |name, i|
     _filenames[i.to_s] = File.basename(name)
   end
   _filenames.each do |k, v|
@@ -67,9 +71,12 @@ def run_database_restore
     _filename = _filenames[std_gets]
     unless _filename.nil?
   #    还原数据库
-      _sql_full_path = "#{$db_backups_path}/#{_filename}"
-      system "cd #{$root_path} && mysql -uroot -p #{$db_name} < #{_sql_full_path}"
-      puts "restore #{_sql_full_path} to:======> #{$db_name}"
+      _sql_filename = _filename.chomp(".tar.gz") 
+      system "cd #{$db_backups_path} && tar -zxvf #{_filename} && mysql -uroot -p #{$db_name} < #{_sql_filename} && rm ./#{_sql_filename}"
+      
+#      _sql_full_path = "#{$db_backups_path}/#{_filename}"
+#      system "cd #{$root_path} && mysql -uroot -p #{$db_name} < #{_sql_full_path}"
+      puts "restore #{_filename} to:======> #{$db_name}"
     end
   else
     puts "===============没有已经备份的数据库===================="
