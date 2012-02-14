@@ -48,7 +48,7 @@ end
 
 def run_database_backup
   _sql_full_path = "#{$db_backups_path}/#{current_time_s}.sql"
-  system "cd #{$root_path} && mysqldump -uroot -pmysql #{$db_name} > #{_sql_full_path}"
+  system "cd #{$root_path} && mysqldump -uroot -p #{$db_name} > #{_sql_full_path}"
   puts "backup #{$db_name} to:======> #{_sql_full_path}"
 end
 
@@ -68,7 +68,7 @@ def run_database_restore
     unless _filename.nil?
   #    还原数据库
       _sql_full_path = "#{$db_backups_path}/#{_filename}"
-      system "cd #{$root_path} && mysql -uroot -pmysql #{$db_name} < #{_sql_full_path}"
+      system "cd #{$root_path} && mysql -uroot -p #{$db_name} < #{_sql_full_path}"
       puts "restore #{_sql_full_path} to:======> #{$db_name}"
     end
   else
