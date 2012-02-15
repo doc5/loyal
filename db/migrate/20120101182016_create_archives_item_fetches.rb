@@ -27,6 +27,7 @@ class CreateArchivesItemFetches < ActiveRecord::Migration
       t.boolean :fetch_visible, :default => true
 #      发表了
       t.boolean :fetch_published, :default => true
+      
 #      显示来源
       t.boolean :show_from, :default => false
 #      计算出来的标签列表
