@@ -99,7 +99,6 @@ SQL
       'haowen-lizhi',
       'haowen-jingdian',
       'haowen-gaoxiao',
-      'haowen-yingwen',
       'haowen-xiaoyuan'
     ]
   ]
