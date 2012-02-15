@@ -14,7 +14,7 @@ development:
   database: loyal_production
   pool: 5
   username: root
-  password: 123
+  password: mysql
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and

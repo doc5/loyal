@@ -2,28 +2,28 @@ module March
   module Spider
     class Yuwendashi
       CATEGORIE_BASE_CONFIGS = {
-        'qinggan' => {
+        'qingganmeiwen' => {
           :name => "情感美文", 
           :parent => nil,
           :url => "http://www.xiexingcun.com/meiwen/ShowClass.asp?ClassID=1699&page=", 
           :page => 15, #all not
           :apply => true
         },
-        'shenghuo' => {
+        'shenghuomeiwen' => {
           :name => "生活美文", 
           :parent => nil,
           :url => "http://www.xiexingcun.com/meiwen/ShowClass.asp?ClassID=1772&page=", 
           :page => 10, #all not
           :apply => true
         },
-        'wenhua' => {
+        'wenhuameiwen' => {
           :name => "文化美文", 
           :parent => nil,
           :url => "http://www.xiexingcun.com/meiwen/ShowClass.asp?ClassID=1773&page=", 
           :page => 5, 
           :apply => false
         },
-        'zhihui' => {
+        'zhihuimeiwen' => {
           :name => "智慧美文", 
           :parent => nil,
           :url => "http://www.xiexingcun.com/meiwen/ShowClass.asp?ClassID=1700&page=", 
@@ -61,6 +61,36 @@ module March
       }
       
       class << self
+        def classify_categories_map
+          return @_cache_classify_categories_map if defined?@_cache_classify_categories_map
+          @_cache_classify_categories_map = Hash.new
+          CATEGORIE_BASE_CONFIGS.each do |k, config|
+            @_cache_classify_categories_map[config[:name]] = ArchivesCategory.find_by_flag_name("haowen-#{k}")
+          end
+          @_cache_classify_categories_map
+        end
+        
+        def classify_category(item)
+          _category = self.classify_categories_map[item.fetch_category]
+          if _category.present? && !item.category_ids.include?(_category.id)
+            Rails.logger.debug "归类ID:#{item.id}==========> #{_category.name} 更新"
+            item.categories = [_category]
+            item.save
+          else
+            Rails.logger.debug "ID:#{item.id}==========> category 无更新"
+          end
+        end
+#        归类所有的文章
+# => March::Spider::Yuwendashi.classify_categories
+        def classify_categories(options={})          
+          ArchivesItemFetch.find_all_by_from_site(Website::FetchConfig::SITE_YUWENDASHI).each do |item|
+            self.classify_category(item)
+          end
+          true
+        end
+        
+        
+        
         def fetch
           CATEGORIE_BASE_CONFIGS.each do |cate, config|
             fetch_category(:category => cate) if config[:apply]

@@ -15,6 +15,15 @@ namespace :archives do
         
           puts "--------------end-----------完成抓取:yuwendashi网站所有文章-------------------------"        
         end
+        
+#        rake archives:item_fetch:spider:yuwendashi:classify_categories RAILS_ENV=development
+        task :classify_categories => :environment do
+          puts "--------------start-----------归类yuwendashi网站所有文章-------------------------"
+          
+          March::Spider::Yuwendashi.classify_categories
+        
+          puts "--------------end-----------完成归类yuwendashi网站所有文章-------------------------"        
+        end
       end      
       
       namespace :duwenzhang do

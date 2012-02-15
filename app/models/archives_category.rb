@@ -86,9 +86,11 @@ SQL
   
   
   public  
-  scope :filter_on_search_top,
+  scope :filter_on_search_top, :order => "position ASC",
     :conditions => ["flag_name in (?)", 
     [
+      'haowen-wenzhai',
+      'haowen-qingganmeiwen',
       'haowen-aiqing', 
       'haowen-qinqing', 
       'haowen-youqing',
@@ -96,12 +98,16 @@ SQL
       'haowen-zheli',
       'haowen-lizhi',
       'haowen-jingdian',
-      'haowen-gaoxiao'
+      'haowen-gaoxiao',
+      'haowen-yingwen',
+      'haowen-xiaoyuan'
     ]
   ]
-  scope :filter_on_archives_home,
+  scope :filter_on_archives_home, :order => "position ASC",
     :conditions => ["flag_name in (?)", 
     [
+      'haowen-wenzhai',
+      'haowen-qingganmeiwen',
       'haowen-aiqing', 
       'haowen-qinqing', 
       'haowen-youqing',
